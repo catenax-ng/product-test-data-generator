@@ -1,0 +1,36 @@
+server:
+  port: ${TDG_HOST_PORT}
+  servlet:
+    contextPath: /
+    
+springfox:
+  documentation:
+    open-api:
+      v3:
+        path: /api-docs
+
+spring:
+  logging:
+    level.root: INFO
+  jackson:
+    date-format: com.catenax.tdm.RFC3339DateFormat
+    serialization:      write-dates-as-timestamps: false
+  devtools:
+    restart:
+      enabled: true
+      poll-interval: 2s
+      quiet-period: 1s
+      
+vaadin:
+  compatibilityMode: false
+      
+keycloak:
+  public-client: true
+  confidential-port: 0
+  ssl-required: external
+  auth-server-url: ${TDG_IAM_SERVER_URL}
+  realm: ${TDG_IAM_REALM}
+  resource: ${TDG_IAM_RESOURCE}
+  #security-constraints:  #- auth-roles:  #  - tdg_user
+  #- security-collections:  #  - patterns:  #    - /*
+

@@ -1,0 +1,75 @@
+Name: BMWVehicleDemo1;
+Version: 1.0;
+
+Entities:
+	Entity:
+		Name: Dismantler
+		Version: 0.1.1
+		As: Dismantler;
+	Entity:
+		Name: EndOfLife
+		Version: 0.1.1
+		As: EndOfLife;
+	Entity:
+		Name: ManufacturerDocumentation
+		Version: 0.1.1
+		As: ManufacturerDocumentation;
+	Entity:
+		Name: ManufacturerDocumentationSimple
+		Version: 0.1.1
+		As: ManufacturerDocumentationSimple;
+	Entity:
+		Name: Material
+		Version: 0.1.1
+		As: Material;
+	Entity:
+		Name: Nameplate
+		Version: 0.1.1
+		As: Nameplate;
+	Entity:
+		Name: ProductDescription
+		Version: 0.1.1
+		As: ProductDescription;
+	Entity:
+		Name: ProductDescriptionBattery
+		Version: 0.1.1
+		As: ProductDescriptionBattery;
+	Entity:
+		Name: ProductDescriptionVehicle
+		Version: 0.1.1
+		As: ProductDescriptionVehicle;
+	Entity:
+		Name: QualityAlert
+		Version: 0.1.1
+		As: QualityAlert;
+	Entity:
+		Name: ReturnRequest
+		Version: 0.1.1
+		As: ReturnRequest;
+	Entity:
+		Name: TechnicalData
+		Version: 0.1.1
+		As: TechnicalData;
+	Entity:
+		Name: Traceability
+		Version: 0.1.1
+		As: Traceability;
+
+Generate Dismantler times 5 As: dismantlers;
+Generate EndOfLife times 5 As: eols;
+Generate ManufacturerDocumentation times 5 As: docs;
+Generate ManufacturerDocumentationSimple times 5 As: docsSimple;
+Generate Material times 5 As: materials;
+Generate Nameplate times 5 As: nameplates;
+Generate ProductDescription times 5 As: prodDescriptions;
+Generate ProductDescriptionBattery times 5 As: prodDescriptionsBattery;
+Generate ProductDescriptionVehicle times 5 As: prodDescriptionsVehicle;
+Generate QualityAlert times 5 As: alerts;
+Generate ReturnRequest times 5 As: returnRequests;
+Generate TechnicalData times 5 As: techData;
+Generate Traceability times 5 As: trace;
+
+For Each materials As: m 
+Do;
+
+Done;

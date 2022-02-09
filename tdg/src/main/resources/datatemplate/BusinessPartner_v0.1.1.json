@@ -1,0 +1,163 @@
+{
+  "bpn": "BPNL1234567890ZZ",
+  "identifiers": [
+    {
+      "value": "999999",
+      "shortName": "HR",
+      "number": 0,
+      "type": "Handelsregister",
+      "registration": {
+        "hardeningGrade": "GOLD",
+        "issuingAgency": {
+          "value": "",
+          "shortName": "",
+          "number": 0
+        },
+        "status": "ISSUED",
+        "initialRegistration": "2019-01-27T07:33:55.865Z",
+        "lastUpdate": "2022-01-27T07:33:55.865Z"
+      }
+    }
+  ],
+  "names": [
+    {
+      "value": "Test Company",
+      "shortName": "Test",
+      "number": 0,
+      "type": "ACRONYM"
+    }
+  ],
+  "legalForm": {
+    "value": "Aktiengesellschaft",
+    "shortName": "AG",
+    "number": 0,
+    "type": ""
+  },
+  "status": "ACTIVE",
+  "addresses": [
+    {
+      "identifiers": [
+        {
+          "value": "9999",
+          "shortName": "HR",
+          "number": 0,
+          "type": "Handelsregister",
+          "registration": {
+            "hardeningGrade": "GOLD",
+            "issuingAgency": {
+              "value": "None",
+              "shortName": "n/a",
+              "number": 0
+            },
+            "status": "ISSUED",
+            "initialRegistration": "2019-01-27T07:33:55.865Z",
+            "lastUpdate": "2022-01-27T07:33:55.865Z"
+          }
+        }
+      ],
+      "careOf": {
+        "value": "",
+        "shortName": "",
+        "number": 0
+      },
+      "countryCode": "DE",
+      "administrativeAreas": [
+        {
+          "name": "",
+          "codes": [
+            {
+              "value": "",
+              "type": ""
+            }
+          ],
+          "type": "COUNTY"
+        }
+      ],
+      "postCodes": [
+        {
+          "value": "80809",
+          "shortName": "",
+          "number": 0,
+          "type": "CEDEX"
+        }
+      ],
+      "localities": [
+        {
+          "value": "Munich",
+          "shortName": "",
+          "number": 0,
+          "type": "BLOCK"
+        }
+      ],
+      "thoroughfares": [
+        {
+          "value": "",
+          "shortName": "",
+          "number": 0,
+          "type": "INDUSTRIAL_ZONE"
+        }
+      ],
+      "premises": [
+        {
+          "value": "",
+          "shortName": "",
+          "number": 0,
+          "type": "BUILDING"
+        }
+      ],
+      "postalDeliveryPoints": [
+        {
+          "value": "",
+          "shortName": "",
+          "number": 0,
+          "type": "INTERURBAN_DELIVERY_POINT"
+        }
+      ],
+      "type": "BRANCH_OFFICE",
+      "versions": [
+        {
+          "characterSet": "ARABIC",
+          "languageCode": "undefined"
+        }
+      ]
+    }
+  ],
+  "profile": {
+    "classifications": [
+      {
+        "value": "",
+        "shortName": "",
+        "number": 0,
+        "type": "NACE"
+      }
+    ]
+  },
+  "relations": [
+    {
+      "relationClass": "CDQ_HIERARCHY",
+      "type": "CX_LEGAL_SUCCESSOR_OF",
+      "startNode": "",
+      "endNode": "",
+      "startedAt": "2022-01-27T07:33:55.865Z",
+      "endedAt": "2022-01-27T07:33:55.865Z"
+    }
+  ],
+  "types": [
+    "BRAND"
+  ],
+  "bankAccounts": [
+    {
+      "trustScores": [
+        0
+      ],
+      "currencyCode": "UNDEFINED",
+      "internationalBankAccountIdentifier": "000000000",
+      "internationalBankIdentifier": "000000000",
+      "nationalBankAccountIdentifier": "000000000",
+      "nationalBankIdentifier": "000000000"
+    }
+  ],
+  "roles": [
+    ""
+  ]
+}

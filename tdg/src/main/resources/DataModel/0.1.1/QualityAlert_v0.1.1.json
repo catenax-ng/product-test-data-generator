@@ -1,0 +1,24 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean" : {
+        "type" : "boolean"
+      },
+      "urn_bamm_com.catenaX_0.1.1_QualityTypeEnum" : {
+        "type" : "string",
+        "enum" : [ "major", "minor", "critical" ]
+      }
+    }
+  },
+  "properties" : {
+    "qualityAlert" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+    },
+    "qualityType" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_QualityTypeEnum"
+    }
+  },
+  "required" : [ "qualityAlert" ]
+}

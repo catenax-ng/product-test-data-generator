@@ -1,0 +1,42 @@
+Name: SampleTestdataScenario3;
+Version: 1.0;
+
+Entities:
+	Entity:
+		Name: person
+		Version: 1.0
+		As: person;
+	Entity:
+		Name: geo
+		Version: 1.0
+		As: geo;
+	Entity:
+		Name: arrays
+		Version: 1.0
+		As: arrays;
+
+Generate geo times 5 As: coordinates;
+Generate person times 6 As: people;
+Generate arrays times 7 As: list;
+
+# generate instance of person and modify random values #
+Instance person As: george;
+Set george.firstName = "George";
+Set george.lastName = "From the Jungle";
+Set george.age = 22;
+
+# modify existing items in array #
+For Each people As: p 
+Do;
+	Set p.age = Random Number between 18 and 67;
+Done;
+
+For Each coordinates As: coordinate 
+Do;
+	Instance person As: p;
+	Set p.lastName = Random LastName;
+	Set p.firstName = Get coordinate.latitude;
+	Set p.age = Random Number between 18 and 67;
+Done;
+
+

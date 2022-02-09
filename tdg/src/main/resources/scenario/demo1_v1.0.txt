@@ -1,0 +1,36 @@
+Name: SampleTestdataScenario3;
+Version: 1.0;
+
+Entities:
+	Entity:
+		Name: person
+		Version: 1.0
+		As: person;
+	Entity:
+		Name: address
+		Version: 1.0
+		As: address;
+	Entity:
+		Name: employee
+		Version: 1.0
+		As: employee;
+	Entity:
+		Name: customer
+		Version: 1.0
+		As: customer;
+		
+Generate person times 10 As: people;
+
+For Each people As: p 
+Do;
+	Instance employee As: e;
+	Set e.name = p.firstName + " " + p.lastName;
+	
+	Instance customer As: c;
+	Set c.first_name = p.firstName;
+	Set c.last_name = p.lastName;
+	
+	Var age = Random Number between 18 and 67;
+	Set e.age = age;
+	Set p.age = age;
+Done;

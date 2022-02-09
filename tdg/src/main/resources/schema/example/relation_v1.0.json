@@ -1,0 +1,14 @@
+{
+  "$id": "https://example.com/schemas/relation",
+
+  "type": "object",
+  "properties": {
+    "parent": { "$ref": "#/$defs/name" },
+    "child": { "$ref": "#/$defs/name" }
+  },
+  "required": ["parent", "child"],
+
+  "$defs": {
+    "name": { "type": "string" }
+  }
+}

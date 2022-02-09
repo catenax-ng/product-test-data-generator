@@ -1,0 +1,226 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_org.idtwin_1.0.0_PropertyBoolean" : {
+        "type" : "boolean"
+      },
+      "urn_bamm_org.idtwin_1.0.0_DocumentIdCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "documentDomainId" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "valueId" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "isPrimary" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_PropertyBoolean"
+            }
+          },
+          "required" : [ "documentDomainId", "valueId" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_MultiLanguageProperty" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "patternProperties" : {
+            "^.*$" : {
+              "type" : "string"
+            }
+          }
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_PropertyString" : {
+        "type" : "string"
+      },
+      "urn_bamm_org.idtwin_1.0.0_DocumentClassificationCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "classId" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "className" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_MultiLanguageProperty"
+            },
+            "documentClassificationSystem" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_PropertyString"
+            }
+          },
+          "required" : [ "classId", "className" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_ReferenceElementSet" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Language" : {
+        "type" : "string"
+      },
+      "urn_bamm_org.idtwin_1.0.0_LanguageSet" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "language" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Language"
+            }
+          },
+          "required" : [ "language" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_DocumentVersionId" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp" : {
+        "type" : "string",
+        "pattern" : "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?"
+      },
+      "InReview" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "InReview" ]
+          }
+        },
+        "required" : [ "status" ]
+      },
+      "Released" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "Released" ]
+          }
+        },
+        "required" : [ "status" ]
+      },
+      "urn_bamm_org.idtwin_1.0.0_StatusValueCharacteristic" : {
+        "type" : "object",
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/InReview"
+        }, {
+          "$ref" : "#/components/schemas/Released"
+        } ]
+      },
+      "urn_bamm_org.idtwin_1.0.0_Role" : {
+        "type" : "string",
+        "enum" : [ "Author", "Customer", "Supplier", "Manufacturer", "Responsible" ]
+      },
+      "urn_bamm_org.idtwin_1.0.0_OrganizationName" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_ResourcePath" : {
+        "type" : "string",
+        "format" : "uri"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_MimeType" : {
+        "type" : "string"
+      },
+      "urn_bamm_org.idtwin_1.0.0_DigitalFiles" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "value" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_ResourcePath"
+            },
+            "mimeType" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MimeType"
+            }
+          },
+          "required" : [ "value", "mimeType" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_DocumentVersions" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "languages" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_LanguageSet"
+            },
+            "documentVersionId" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_DocumentVersionId"
+            },
+            "title" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_MultiLanguageProperty"
+            },
+            "summary" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_MultiLanguageProperty"
+            },
+            "keyWords" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_MultiLanguageProperty"
+            },
+            "setDate" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp"
+            },
+            "statusValue" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_StatusValueCharacteristic"
+            },
+            "role" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_Role"
+            },
+            "organizationOfficialName" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_OrganizationName"
+            },
+            "organizationName" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_OrganizationName"
+            },
+            "digitalFiles" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_DigitalFiles"
+            }
+          },
+          "required" : [ "languages", "documentVersionId", "title", "summary", "setDate", "statusValue", "role", "organizationOfficialName", "organizationName", "digitalFiles" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_Documents" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "documentId" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_DocumentIdCharacteristic"
+            },
+            "documentClassifications" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_DocumentClassificationCharacteristic"
+            },
+            "documentEntities" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_ReferenceElementSet"
+            },
+            "documentVersions" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_DocumentVersions"
+            }
+          },
+          "required" : [ "documentId", "documentClassifications" ]
+        },
+        "uniqueItems" : true
+      }
+    }
+  },
+  "properties" : {
+    "documents" : {
+      "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_Documents"
+    }
+  },
+  "required" : [ "documents" ]
+}

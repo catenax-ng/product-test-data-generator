@@ -1,0 +1,15 @@
+Name: BMWVehicleDemo1;
+Version: 1.0;
+
+Entities:
+	Entity:
+		Name: Material
+		Version: 0.1.1
+		As: Material;
+
+Generate Material times 5 As: materials;
+
+For Each materials As: m 
+Do;
+
+Done;

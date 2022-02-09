@@ -1,0 +1,14 @@
+{
+	"first_name": "Allan",
+	"last_name": "Ginsburg",
+	"billing_address": {
+		"street_address": "Rice 5th Av.",
+		"city": "Brunswick",
+		"state": "New York"
+	},
+	"shipping_address": {
+		"street_address": "Thompson St. 1",
+		"city": "South Newport",
+		"state": "New York"
+	}
+}

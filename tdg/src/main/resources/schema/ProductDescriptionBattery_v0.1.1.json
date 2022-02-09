@@ -1,0 +1,29 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenaX_0.1.1_Capacity" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenaX_0.1.1_PerformanceIndicatorCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "electricCapacityMin" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_Capacity"
+          },
+          "electricCapacityMax" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_Capacity"
+          }
+        },
+        "required" : [ "electricCapacityMin", "electricCapacityMax" ]
+      }
+    }
+  },
+  "properties" : {
+    "performanceIndicator" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_PerformanceIndicatorCharacteristic"
+    }
+  },
+  "required" : [ "performanceIndicator" ]
+}

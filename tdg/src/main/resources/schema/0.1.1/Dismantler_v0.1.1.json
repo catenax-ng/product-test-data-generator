@@ -1,0 +1,64 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax_0.1.1_DisassemblyStatus" : {
+        "type" : "string",
+        "enum" : [ "assembled", "disassembled" ]
+      },
+      "urn_bamm_com.catenax_0.1.1_HealthStatus" : {
+        "type" : "string",
+        "enum" : [ "in running condition", "repair required", "broken", "not tested", "incomplete" ]
+      },
+      "urn_bamm_com.catenax_0.1.1_RecyclingStatus" : {
+        "type" : "string",
+        "enum" : [ "recycled", "not recycled" ]
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp" : {
+        "type" : "string",
+        "pattern" : "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean" : {
+        "type" : "boolean"
+      },
+      "urn_bamm_com.catenax_0.1.1_LastMileage" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.1.1_SparePartQuality" : {
+        "type" : "string",
+        "enum" : [ "A", "B", "C", "N" ]
+      }
+    }
+  },
+  "properties" : {
+    "disassemblyStatus" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_DisassemblyStatus"
+    },
+    "healthStatus" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_HealthStatus"
+    },
+    "recyclingStatus" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_RecyclingStatus"
+    },
+    "dateOfAdmissionGMT" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp"
+    },
+    "certificateOfDestruction" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+    },
+    "lastMileage" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_LastMileage"
+    },
+    "dateOfScrappingGMT" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp"
+    },
+    "sparePartQuality" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_SparePartQuality"
+    },
+    "dateOfDissamblygGMT" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp"
+    }
+  },
+  "required" : [ "disassemblyStatus", "healthStatus", "recyclingStatus", "dateOfAdmissionGMT", "certificateOfDestruction" ]
+}

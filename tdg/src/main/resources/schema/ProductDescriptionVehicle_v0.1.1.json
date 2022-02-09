@@ -1,0 +1,32 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenaX_0.1.1_VariantCharacteristic" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenaX_0.1.1_EquipmentCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "variantNumber" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_VariantCharacteristic"
+          },
+          "variantDescription" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_VariantCharacteristic"
+          },
+          "variantGroup" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_VariantCharacteristic"
+          }
+        },
+        "required" : [ "variantNumber", "variantDescription", "variantGroup" ]
+      }
+    }
+  },
+  "properties" : {
+    "equipmentvariants" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_EquipmentCharacteristic"
+    }
+  },
+  "required" : [ "equipmentvariants" ]
+}

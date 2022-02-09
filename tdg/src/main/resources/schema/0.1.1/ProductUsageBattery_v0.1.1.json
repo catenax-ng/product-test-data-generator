@@ -1,0 +1,40 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax_0.1.1_PercentOfSomething" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.1.1_NumberOfCycles" : {
+        "type" : "number",
+        "maximum" : 9223372036854775807,
+        "minimum" : -9223372036854775808
+      },
+      "urn_bamm_com.catenax_0.1.1_Voltage" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.1.1_Current" : {
+        "type" : "number"
+      }
+    }
+  },
+  "properties" : {
+    "stateOfCharge" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_PercentOfSomething"
+    },
+    "numberOfChargingCycles" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_NumberOfCycles"
+    },
+    "voltage" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_Voltage"
+    },
+    "residualCurrentHazard" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_Current"
+    },
+    "numberOfChargingCyclesAsPlanned" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_NumberOfCycles"
+    }
+  },
+  "required" : [ "stateOfCharge", "numberOfChargingCycles", "voltage", "residualCurrentHazard", "numberOfChargingCyclesAsPlanned" ]
+}

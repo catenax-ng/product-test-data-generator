@@ -1,0 +1,60 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenaX_0.1.1_MaterialName" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenaX_0.1.1_MaterialType" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenaX_0.1.1_AggregateStates" : {
+        "type" : "string",
+        "enum" : [ "gas", "liquid", "solid" ]
+      },
+      "urn_bamm_com.catenaX_0.1.1_MaterialAbbreviation" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenaX_0.1.1_Classification" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenaX_0.1.1_Value" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean" : {
+        "type" : "boolean"
+      },
+      "urn_bamm_com.catenaX_0.1.1_Percentage" : {
+        "type" : "number"
+      }
+    }
+  },
+  "properties" : {
+    "materialName" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_MaterialName"
+    },
+    "materialType" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_MaterialType"
+    },
+    "aggregateState" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_AggregateStates"
+    },
+    "materialAbbreviation" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_MaterialAbbreviation"
+    },
+    "classificationName" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_Classification"
+    },
+    "classificationValue" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_Value"
+    },
+    "recyclingStatus" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+    },
+    "recyclingPercentage" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.1.1_Percentage"
+    }
+  },
+  "required" : [ "materialName", "materialType", "aggregateState" ]
+}

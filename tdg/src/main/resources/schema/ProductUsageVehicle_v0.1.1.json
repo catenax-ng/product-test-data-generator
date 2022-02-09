@@ -1,0 +1,30 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax_0.1.1_Mileage" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.1.1_Identifier" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp" : {
+        "type" : "string",
+        "pattern" : "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?"
+      }
+    }
+  },
+  "properties" : {
+    "mileage" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_Mileage"
+    },
+    "KBA" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_Identifier"
+    },
+    "firstRegistration" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp"
+    }
+  },
+  "required" : [ "mileage", "KBA", "firstRegistration" ]
+}

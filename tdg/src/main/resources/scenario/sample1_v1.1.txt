@@ -1,0 +1,19 @@
+Name: SampleTestdataScenario1;
+Version: 1.0;
+Entities:
+	Entity:
+		Name: person
+		Version: 1.0
+		As: p;
+	Entity:
+		Name: geo
+		Version: 1.0
+		As: g;
+	Entity:
+		Name: arrays
+		Version: 1.0
+		As: a;
+
+Generate g times 5;
+Generate p times 6;
+Generate a times 7;

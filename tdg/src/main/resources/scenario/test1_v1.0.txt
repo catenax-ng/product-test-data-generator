@@ -1,0 +1,25 @@
+Name: Test1;
+Version: 1.0;
+
+Entities:
+	Entity:
+		Name: person
+		Version: 1.0
+		As: person;
+	Entity:
+		Name: address
+		Version: 1.0
+		As: address;
+	Entity:
+		Name: employee
+		Version: 1.0
+		As: employee;
+	Entity:
+		Name: customer
+		Version: 1.0
+		As: customer;
+	
+Instance customer As: c2 from template customer1 1.0;	
+Instance customer As: c1;
+Instance customer As: c3 from template customer1 1.0;
+

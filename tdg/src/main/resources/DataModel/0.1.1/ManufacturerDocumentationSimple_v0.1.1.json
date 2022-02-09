@@ -1,0 +1,77 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_org.idtwin_1.0.0_DocumentIdCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "documentDomainId" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "valueId" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            }
+          },
+          "required" : [ "documentDomainId", "valueId" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_MultiLanguageProperty" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "patternProperties" : {
+            "^.*$" : {
+              "type" : "string"
+            }
+          }
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_DocumentClassificationCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "classId" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "className" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_MultiLanguageProperty"
+            }
+          },
+          "required" : [ "classId", "className" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_Documents" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "documentId" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_DocumentIdCharacteristic"
+            },
+            "documentClassifications" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_DocumentClassificationCharacteristic"
+            }
+          },
+          "required" : [ "documentId", "documentClassifications" ]
+        },
+        "uniqueItems" : true
+      }
+    }
+  },
+  "properties" : {
+    "documents" : {
+      "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_Documents"
+    }
+  },
+  "required" : [ "documents" ]
+}

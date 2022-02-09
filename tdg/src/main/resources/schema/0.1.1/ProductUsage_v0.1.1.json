@@ -1,0 +1,20 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax_0.1.1_LifeSpan" : {
+        "type" : "number"
+      }
+    }
+  },
+  "properties" : {
+    "lifeSpan" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_LifeSpan"
+    },
+    "lifeSpanAsPlanned" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.1.1_LifeSpan"
+    }
+  },
+  "required" : [ "lifeSpan", "lifeSpanAsPlanned" ]
+}

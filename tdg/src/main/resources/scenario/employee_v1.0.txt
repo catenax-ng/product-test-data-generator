@@ -1,0 +1,10 @@
+Name: EmployeeTest;
+Version: 1.0;
+
+Entities:
+	Entity:
+		Name: employee
+		Version: 1.0
+		As: employee;
+
+Var x = "test employee";

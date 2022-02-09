@@ -1,0 +1,23 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax_0.0.1_BPN" : {
+        "type" : "string"
+      }
+    }
+  },
+  "properties" : {
+    "bpn" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_BPN"
+    },
+    "name" : {
+    	"type" : "string"
+    },
+    "parent" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_BPN"
+    }
+  },
+  "required" : [ "BPN" ]
+}

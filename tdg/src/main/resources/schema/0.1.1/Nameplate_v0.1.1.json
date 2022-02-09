@@ -1,0 +1,163 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText" : {
+        "type" : "object",
+        "patternProperties" : {
+          "^.*$" : {
+            "type" : "string"
+          }
+        }
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "office" : {
+        "type" : "object",
+        "properties" : { },
+        "required" : [ ]
+      },
+      "secretary" : {
+        "type" : "object",
+        "properties" : { },
+        "required" : [ ]
+      },
+      "substitute" : {
+        "type" : "object",
+        "properties" : { },
+        "required" : [ ]
+      },
+      "home" : {
+        "type" : "object",
+        "properties" : { },
+        "required" : [ ]
+      },
+      "urn_bamm_org.idtwin_1.0.0_TypeOfEmailAddressEnum" : {
+        "type" : "object",
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/office"
+        }, {
+          "$ref" : "#/components/schemas/secretary"
+        }, {
+          "$ref" : "#/components/schemas/substitute"
+        }, {
+          "$ref" : "#/components/schemas/home"
+        } ]
+      },
+      "urn_bamm_org.idtwin_1.0.0_EmailSetCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "emailAddress" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "typeOfEmailAddress" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_TypeOfEmailAddressEnum"
+            }
+          },
+          "required" : [ "emailAddress" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_org.idtwin_1.0.0_AddressCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "department" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "street" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "zipcode" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "poBox" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "zipCodeOfPoBox" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "cityTown" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "stateCountry" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "nationalCode" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+          },
+          "email" : {
+            "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_EmailSetCharacteristic"
+          }
+        },
+        "required" : [ "street", "zipcode", "cityTown", "nationalCode" ]
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp" : {
+        "type" : "string",
+        "pattern" : "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_MimeType" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_ResourcePath" : {
+        "type" : "string",
+        "format" : "uri"
+      },
+      "urn_bamm_org.idtwin_1.0.0_FileCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "mimeType" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MimeType"
+          },
+          "filePath" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_ResourcePath"
+          }
+        },
+        "required" : [ "mimeType", "filePath" ]
+      },
+      "urn_bamm_org.idtwin_1.0.0_MarkingSetCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "markingName" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "markingFile" : {
+              "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_FileCharacteristic"
+            }
+          },
+          "required" : [ "markingName", "markingFile" ]
+        },
+        "uniqueItems" : true
+      }
+    }
+  },
+  "properties" : {
+    "manufacturerName" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+    },
+    "manufacturerProductDesignation" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+    },
+    "address" : {
+      "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_AddressCharacteristic"
+    },
+    "manufacturerProductFamily" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MultiLanguageText"
+    },
+    "serialNumber" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+    },
+    "yearOfConstruction" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp"
+    },
+    "markings" : {
+      "$ref" : "#/components/schemas/urn_bamm_org.idtwin_1.0.0_MarkingSetCharacteristic"
+    }
+  },
+  "required" : [ "manufacturerName", "manufacturerProductDesignation", "address", "manufacturerProductFamily", "yearOfConstruction" ]
+}

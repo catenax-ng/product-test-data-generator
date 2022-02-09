@@ -1,0 +1,159 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_MimeType" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_ResourcePath" : {
+        "type" : "string",
+        "format" : "uri"
+      },
+      "urn_bamm_com.catenaX_0.0.1_Logo" : {
+        "type" : "object",
+        "properties" : {
+          "mimeType" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MimeType"
+          },
+          "value" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_ResourcePath"
+          }
+        },
+        "required" : [ "mimeType", "value" ]
+      },
+      "urn_bamm_com.catenaX_0.0.1_MultiLanguageProperty" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "patternProperties" : {
+            "^.*$" : {
+              "type" : "string"
+            }
+          }
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_com.catenaX_0.0.1_ProductImages" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "mimeType" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_MimeType"
+            },
+            "value" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_ResourcePath"
+            }
+          },
+          "required" : [ "mimeType", "value" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_com.catenaX_0.0.1_GeneralInformation" : {
+        "type" : "object",
+        "properties" : {
+          "manufacturerName" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "manufacturerLogo" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_Logo"
+          },
+          "manufacturerProductDesignation" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_MultiLanguageProperty"
+          },
+          "manufacturerPartNumber" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "manufacturerOrderCode" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "productImages" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_ProductImages"
+          }
+        },
+        "required" : [ "manufacturerName", "manufacturerProductDesignation", "manufacturerPartNumber", "manufacturerOrderCode", "productImages" ]
+      },
+      "urn_bamm_com.catenaX_0.0.1_ProductClassifications" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "productClassificationSystem" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "classificationSystemVersion" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "productClassId" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            }
+          },
+          "required" : [ "productClassificationSystem", "productClassId" ]
+        }
+      },
+      "urn_bamm_com.catenaX_0.0.1_Weight" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenaX_0.0.1_TechnicalProperties" : {
+        "type" : "object",
+        "properties" : {
+          "weight" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_Weight"
+          }
+        },
+        "required" : [ "weight" ]
+      },
+      "urn_bamm_com.catenaX_0.0.1_TextStatementSet" : {
+        "type" : "array",
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "patternProperties" : {
+              "^.*$" : {
+                "type" : "string"
+              }
+            }
+          },
+          "uniqueItems" : true
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp" : {
+        "type" : "string",
+        "pattern" : "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?"
+      },
+      "urn_bamm_com.catenaX_0.0.1_FurtherInformation" : {
+        "type" : "object",
+        "properties" : {
+          "textStatements" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_TextStatementSet"
+          },
+          "validDate" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Timestamp"
+          }
+        },
+        "required" : [ "validDate" ]
+      }
+    }
+  },
+  "properties" : {
+    "generalInformation" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_GeneralInformation"
+    },
+    "productClassifications" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_ProductClassifications"
+    },
+    "technicalProperties" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_TechnicalProperties"
+    },
+    "furtherInformation" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenaX_0.0.1_FurtherInformation"
+    }
+  },
+  "required" : [ "generalInformation", "technicalProperties" ]
+}
