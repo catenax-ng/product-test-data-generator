@@ -12,6 +12,13 @@
 
 package com.catenax.tdm.client.api;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.catenax.tdm.client.ApiCallback;
 import com.catenax.tdm.client.ApiClient;
 import com.catenax.tdm.client.ApiException;
@@ -20,15 +27,8 @@ import com.catenax.tdm.client.Configuration;
 import com.catenax.tdm.client.Pair;
 import com.catenax.tdm.client.ProgressRequestBody;
 import com.catenax.tdm.client.ProgressResponseBody;
-import com.catenax.tdm.client.model.ErrorModelNamenamespacejavaLangNameError;
+import com.catenax.tdm.client.model.TestDataScenario.ScriptTypeEnum;
 import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class TestdataScenarioInstanceApi {
     private ApiClient apiClient;
@@ -200,11 +200,13 @@ public class TestdataScenarioInstanceApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call instantiateTestdataScenarioRawUsingPOSTCall(String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call instantiateTestdataScenarioRawUsingPOSTCall(ScriptTypeEnum scriptType, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
         String localVarPath = "/catena-x/tdm/1.1/testdatascenario/instance/adhoc";
+        
+        localVarPath += "?scriptType=" + scriptType.toString();
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -242,9 +244,9 @@ public class TestdataScenarioInstanceApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call instantiateTestdataScenarioRawUsingPOSTValidateBeforeCall(String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call instantiateTestdataScenarioRawUsingPOSTValidateBeforeCall(ScriptTypeEnum scriptType, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = instantiateTestdataScenarioRawUsingPOSTCall(body, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = instantiateTestdataScenarioRawUsingPOSTCall(scriptType, body, progressListener, progressRequestListener);
         return call;
 
         
@@ -260,8 +262,8 @@ public class TestdataScenarioInstanceApi {
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Object instantiateTestdataScenarioRawUsingPOST(String body) throws ApiException {
-        ApiResponse<Object> resp = instantiateTestdataScenarioRawUsingPOSTWithHttpInfo(body);
+    public Object instantiateTestdataScenarioRawUsingPOST(ScriptTypeEnum scriptType, String body) throws ApiException {
+        ApiResponse<Object> resp = instantiateTestdataScenarioRawUsingPOSTWithHttpInfo(scriptType, body);
         return resp.getData();
     }
 
@@ -272,8 +274,8 @@ public class TestdataScenarioInstanceApi {
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Object> instantiateTestdataScenarioRawUsingPOSTWithHttpInfo(String body) throws ApiException {
-        com.squareup.okhttp.Call call = instantiateTestdataScenarioRawUsingPOSTValidateBeforeCall(body, null, null);
+    public ApiResponse<Object> instantiateTestdataScenarioRawUsingPOSTWithHttpInfo(ScriptTypeEnum scriptType, String body) throws ApiException {
+        com.squareup.okhttp.Call call = instantiateTestdataScenarioRawUsingPOSTValidateBeforeCall(scriptType, body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -286,7 +288,7 @@ public class TestdataScenarioInstanceApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call instantiateTestdataScenarioRawUsingPOSTAsync(String body, final ApiCallback<Object> callback) throws ApiException {
+    public com.squareup.okhttp.Call instantiateTestdataScenarioRawUsingPOSTAsync(ScriptTypeEnum scriptType, String body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -307,7 +309,7 @@ public class TestdataScenarioInstanceApi {
             };
         }
 
-        com.squareup.okhttp.Call call = instantiateTestdataScenarioRawUsingPOSTValidateBeforeCall(body, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = instantiateTestdataScenarioRawUsingPOSTValidateBeforeCall(scriptType, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

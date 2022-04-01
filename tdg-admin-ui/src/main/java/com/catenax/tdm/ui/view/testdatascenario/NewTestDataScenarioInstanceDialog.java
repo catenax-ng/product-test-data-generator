@@ -2,8 +2,10 @@ package com.catenax.tdm.ui.view.testdatascenario;
 
 import com.catenax.tdm.client.ApiException;
 import com.catenax.tdm.client.model.TestDataScenario;
+import com.catenax.tdm.client.model.TestDataScenario.ScriptTypeEnum;
 import com.catenax.tdm.rest.TDGClient;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -24,7 +26,7 @@ public class NewTestDataScenarioInstanceDialog extends Dialog {
 	protected TextField fInstance = new TextField("instance");	
 	protected TextField fName = new TextField("name");
 	protected TextField fVersion = new TextField("version");
-	
+
 	public NewTestDataScenarioInstanceDialog(TDGClient client, TestDataScenario scenario) {
 		this.client = client;
 		this.scenario = scenario;

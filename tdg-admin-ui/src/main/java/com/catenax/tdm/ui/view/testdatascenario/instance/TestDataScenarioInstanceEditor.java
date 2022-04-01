@@ -1,9 +1,12 @@
 package com.catenax.tdm.ui.view.testdatascenario.instance;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.catenax.tdm.client.ApiException;
+import com.catenax.tdm.client.model.DataTemplate;
 import com.catenax.tdm.ui.dialog.YesNoDialog;
 import com.catenax.tdm.ui.view.AbstractEditor;
 import com.catenax.tdm.util.JsonUtil;
@@ -37,7 +40,10 @@ public class TestDataScenarioInstanceEditor extends AbstractEditor<TestDataScena
 			String json = JsonUtil.prettyPrint(JsonUtil.toJson((LinkedTreeMap<?,?>)o));
 			
 			this.aceEditor.setValue(json);
+			this.aceEditor.setMode(AceMode.json);
 			this.setDownloadableContent(json);
+			
+			this.setDetailTitle(this.selected.toString());
 		} catch (ApiException e) {
 			e.printStackTrace();
 		}
@@ -45,14 +51,25 @@ public class TestDataScenarioInstanceEditor extends AbstractEditor<TestDataScena
 
 	@Override
 	protected void loadData() {
-		ArrayList<TestDataScenarioInstance> items = new ArrayList<>();
+		this.items = new ArrayList<>();
 		try {
 			List<Object> raw = (List<Object>) this.getClient().getTestdataScenarioInstanceApi().listTestdataScenarioInstancesUsingGET("*", "*", "*");
 			
 			for(Object o : raw) {
 				TestDataScenarioInstance i = new TestDataScenarioInstance(o);
-				items.add(i);
+				this.items.add(i);
 			}
+			
+			ArrayList<TestDataScenarioInstance> list = new ArrayList<>();
+			list.addAll(items);
+			Collections.sort(list, new Comparator<TestDataScenarioInstance>() {
+				@Override
+				public int compare(TestDataScenarioInstance o1, TestDataScenarioInstance o2) {
+					return o1.toString().compareTo(o2.toString());
+				}
+			});
+			
+			items = list;
 		} catch (ApiException e) {
 			e.printStackTrace();
 		}

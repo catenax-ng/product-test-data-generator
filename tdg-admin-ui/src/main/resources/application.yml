@@ -1,4 +1,5 @@
 server:
+  address: ${TDG_HOST_NAME}
   port: ${TDG_HOST_PORT}
   servlet:
     contextPath: /

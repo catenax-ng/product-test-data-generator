@@ -1,7 +1,10 @@
 package com.catenax.tdm.ui.view.testdatascenario;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Encoder;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.json.JSONObject;
 
@@ -42,8 +45,13 @@ public class TestDataScenarioEditor extends AbstractEditor<TestDataScenario> {
 		btnRun.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
 			@Override
 			public void onComponentEvent(ClickEvent<Button> event) {
-				String code = aceEditor.getValue();				
-				runScript(code);
+				dlContainer.removeAll();
+				String code = aceEditor.getValue();	
+				ScriptTypeEnum st = ScriptTypeEnum.DSL;
+				if(selected != null) {
+					st = selected.getScriptType();
+				}
+				runScript(st, code);
 			}
 		});
 		
@@ -61,15 +69,35 @@ public class TestDataScenarioEditor extends AbstractEditor<TestDataScenario> {
 
 	@Override
 	protected void selectItem(TestDataScenario scenario) {
-		selected = scenario;
+		this.selected = scenario;
+		System.out.println("Select Item: " + selected.getName() + " " + selected.getScriptType());
 		this.itemList.setValue(scenario);
-		aceEditor.setValue(_fixContent(scenario.getContent()));
-		dlContainer.removeAll();
+		
+		if(scenario == null || scenario.getScriptType() == null || scenario.getScriptType().equals(ScriptTypeEnum.DSL)) {
+			this.aceEditor.setMode(AceMode.text);
+		} else if(scenario.getScriptType().equals(ScriptTypeEnum.JAVASCRIPT)) {
+			this.aceEditor.setMode(AceMode.javascript);
+		}
+		
+		this.setDetailTitle(this.selected.toString());
+		
+		this.aceEditor.setValue(_fixContent(scenario.getContent()));
+		this.dlContainer.removeAll();
 	}
 
 	@Override
 	protected void loadData() {
-		this.itemList.setItems(this.getClient().getTestScenarioDefinitions());
+		ArrayList<TestDataScenario> list = new ArrayList<>();
+		list.addAll(this.getClient().getTestScenarioDefinitions());
+		Collections.sort(list, new Comparator<TestDataScenario>() {
+			@Override
+			public int compare(TestDataScenario o1, TestDataScenario o2) {
+				return o1.toString().compareTo(o2.toString());
+			}
+		});
+		
+		items = list;
+		this.itemList.setItems(items);
 	}
 
 	@Override
@@ -144,7 +172,7 @@ public class TestDataScenarioEditor extends AbstractEditor<TestDataScenario> {
 		}
 	}
 	
-	private void runScript(String code) {
+	private void runScript(ScriptTypeEnum scriptType, String code) {
 		try {
 			clearDownloadableContent();
 			
@@ -152,7 +180,8 @@ public class TestDataScenarioEditor extends AbstractEditor<TestDataScenario> {
 			
 			String script = new String(encoder.encode(code.getBytes()));
 
-			Object result = getClient().getTestdataScenarioInstanceApi().instantiateTestdataScenarioRawUsingPOST(script);
+			System.out.println("Run Script: " + scriptType + " -> " + script);
+			Object result = getClient().getTestdataScenarioInstanceApi().instantiateTestdataScenarioRawUsingPOST(scriptType, script);
 
 			LinkedTreeMap<?,?> ltm = (LinkedTreeMap<?,?>) result;
 			Gson gson = new Gson();

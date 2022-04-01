@@ -1,7 +1,12 @@
 package com.catenax.tdm.ui.view.datatemplate;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import com.catenax.tdm.client.ApiException;
 import com.catenax.tdm.client.model.DataTemplate;
+import com.catenax.tdm.client.model.TestDataScenario;
 import com.catenax.tdm.ui.dialog.YesNoDialog;
 import com.catenax.tdm.ui.view.AbstractEditor;
 
@@ -20,12 +25,26 @@ public class DataTemplateEditor extends AbstractEditor<DataTemplate> {
 		if(scenario != null) {
 			this.selected = scenario;
 			this.aceEditor.setValue(prettyPrintJs(_fixContent(scenario.getContent())));
+			this.aceEditor.setMode(AceMode.json);
+			this.setDetailTitle(this.selected.toString());
 		}
 	}
 
 	@Override
 	protected void loadData() {
-		this.itemList.setItems(this.getClient().getDataTemplates());
+		items = this.getClient().getDataTemplates();
+		
+		ArrayList<DataTemplate> list = new ArrayList<>();
+		list.addAll(items);
+		Collections.sort(list, new Comparator<DataTemplate>() {
+			@Override
+			public int compare(DataTemplate o1, DataTemplate o2) {
+				return o1.toString().compareTo(o2.toString());
+			}
+		});
+		
+		items = list;
+		this.itemList.setItems(items);
 	}
 
 	@Override

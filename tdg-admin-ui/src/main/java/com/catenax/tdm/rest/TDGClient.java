@@ -10,6 +10,7 @@ import com.catenax.tdm.client.api.TestdataScenarioApi;
 import com.catenax.tdm.client.api.TestdataScenarioInstanceApi;
 import com.catenax.tdm.client.model.DataTemplate;
 import com.catenax.tdm.client.model.TestDataScenario;
+import com.catenax.tdm.client.model.TestDataScenario.ScriptTypeEnum;
 import com.google.gson.internal.LinkedTreeMap;
 
 public class TDGClient {
@@ -51,8 +52,8 @@ public class TDGClient {
 			// System.out.println(response);
 			List<Object> items = (List<Object>) response;
 			for(Object o : items) {
-				System.out.println(o.getClass().getCanonicalName());
-				// System.out.println(o);
+				// System.out.println(o.getClass().getCanonicalName());
+				System.out.println("ScenarioItem: " + o.toString());
 				LinkedTreeMap ltm = (LinkedTreeMap) o;
 				
 				TestDataScenario scenario = new TestDataScenario();
@@ -61,7 +62,17 @@ public class TDGClient {
 				scenario.setVersion(ltm.get("version").toString());
 				scenario.setContent(ltm.get("content").toString());
 				
-				System.out.println("Found Scenario: " + scenario.getName());
+				String scriptType = ltm.get("scriptType").toString();
+				System.out.println("ScriptType: " + scriptType);
+				
+				if("JavaScript".equals(scriptType)) {
+					scenario.setScriptType(ScriptTypeEnum.JAVASCRIPT);
+				} else {
+					scenario.setScriptType(ScriptTypeEnum.DSL);
+				}
+				
+				
+				// System.out.println("Found Scenario: " + scenario.getName());
 				
 				result.add(scenario);
 				
@@ -87,7 +98,7 @@ public class TDGClient {
 			Object response =  this.getDataTemplateApi().getDataTemplatesUsingGET("*", "*");
 			
 			for(Object o : ((List<Object>) response)) {
-				System.out.println(o.getClass().getCanonicalName());
+				// System.out.println(o.getClass().getCanonicalName());
 				// System.out.println(o);
 				LinkedTreeMap ltm = (LinkedTreeMap) o;
 				
@@ -97,7 +108,7 @@ public class TDGClient {
 				templ.setVersion(ltm.get("version").toString());
 				templ.setContent(ltm.get("content").toString());
 				
-				System.out.println("Found Template: " + templ.getName());
+				// System.out.println("Found Template: " + templ.getName());
 				
 				result.add(templ);
 				

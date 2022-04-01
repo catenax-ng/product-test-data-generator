@@ -95,13 +95,21 @@ public class AppLayoutBasic extends AppLayout {
 		Tab tabTemplates = new Tab(VaadinIcon.COINS.create(), new Span("Test Data Templates"));
 		Div divTemplates = generateTemplates();
 		tabsToPages.put(tabTemplates, divTemplates);
+		
+		Tab tabMetamodel = new Tab(VaadinIcon.BAR_CHART.create(), new Span("Meta Models"));
+		Div divMetamodel = generateMetaModels();
+		tabsToPages.put(tabMetamodel, divMetamodel);
+		
+		Tab tabFunctions = new Tab(VaadinIcon.BAR_CHART.create(), new Span("Functions"));
+		Div divFunctions = generateFunctions();
+		tabsToPages.put(tabFunctions, divFunctions);
 
 		// -------------------------------------------
-		content = new Div(divCockpit, divScenarios, divScenarioInstances, divTemplates);
+		content = new Div(divCockpit, divScenarios, divScenarioInstances, divTemplates, divMetamodel, divFunctions);
 		content.setSizeFull();
 		// -------------------------------------------
 
-		tabs = new Tabs(tabCockpit, tabScenarios, tabScenarioInstances, tabTemplates);
+		tabs = new Tabs(tabCockpit, tabScenarios, tabScenarioInstances, tabTemplates, tabMetamodel, tabFunctions);
 		tabs.setOrientation(Tabs.Orientation.VERTICAL);
 		tabs.addSelectedChangeListener(new ComponentEventListener<Tabs.SelectedChangeEvent>() {
 			@Override
@@ -146,6 +154,20 @@ public class AppLayoutBasic extends AppLayout {
 	
 	private Div generateScenarioInstances() {
 		TestDataScenarioInstanceEditor ui = new TestDataScenarioInstanceEditor();
+		ui.setVisible(false);
+		
+		return ui;
+	}
+	
+	private Div generateMetaModels() {
+		Div ui = new Div();
+		ui.setVisible(false);
+		
+		return ui;
+	}
+	
+	private Div generateFunctions() {
+		Div ui = new Div();
 		ui.setVisible(false);
 		
 		return ui;

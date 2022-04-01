@@ -1,9 +1,11 @@
 package com.catenax.tdm.ui.dialog;
 
 import com.catenax.tdm.client.model.TestDataScenario;
+import com.catenax.tdm.client.model.TestDataScenario.ScriptTypeEnum;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -24,6 +26,9 @@ public abstract class CreateDialog<T> extends Dialog {
 	
 	protected TextField fName = new TextField("name");
 	protected TextField fVersion = new TextField("version");
+	
+	protected ComboBox<ScriptTypeEnum> fScriptTypeCombo = new ComboBox<TestDataScenario.ScriptTypeEnum>("Script Type");
+	// protected ScriptTypeEnum fScriptType = TestDataScenario.ScriptTypeEnum.DSL;
 	
 	public CreateDialog() {
 		createHeader();
