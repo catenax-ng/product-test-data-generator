@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+	<header>
+		<title>Grammar Documenation</title>
+		<style type="text/css" media="screen">
+		    #editor { 
+		        position: absolute;
+		        top: 0;
+		        right: 0;
+		        bottom: 0;
+		        left: 0;
+		    }
+		</style>
+	</header>
+	<body>
+		<h1>Grammar Documenation</h1>
+		<div>
+			<div id="editor"></div>
+		</div>
+		<script src="../../lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		    var editor = ace.edit("editor");
+		    editor.setTheme("ace/theme/github");
+		    editor.session.setMode("ace/mode/javascript");
+		    editor.setReadOnly(true);
+		</script>
+	</body>
+</html>
