@@ -3,7 +3,7 @@ package com.catenax.tdm.scripting;
 import javax.script.Bindings;
 import javax.script.ScriptEngineManager;
 
-import org.fluttercode.datafactory.impl.DataFactory;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +14,7 @@ import com.catenax.tdm.resource.TDMResourceLoader;
 import com.catenax.tdm.scenario.TestDataScenarioFactory;
 import com.catenax.tdm.testdata.TestDataFactory;
 import com.catenax.tdm.testdata.TestDataGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ScriptEngine {
 
@@ -21,12 +22,25 @@ public class ScriptEngine {
 	
 	private static final TestDataFactory dataFactory = new TestDataFactory();
 
-	private javax.script.ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+	private static final ScriptEngineManager ENGINE_MANAGER = getEngineManager();
+	private javax.script.ScriptEngine engine = null;
 
 	private MetamodelRepository metamodelRepository;
 	private TestDataGenerator testdataGenerator;
 	private TestDataScenarioFactory scenarioFactory;
 	private DataTemplateRepository dataTemplateRepository;
+	
+	private static final ScriptEngineManager getEngineManager() {
+		ScriptEngineManager result = new ScriptEngineManager();
+		
+		return result;
+	}
+	
+	private static final javax.script.ScriptEngine getScriptEngine() {
+		javax.script.ScriptEngine result = ENGINE_MANAGER.getEngineByName("nashorn");
+		
+		return result;
+	}
 
 	public ScriptEngine(MetamodelRepository metamodelRepository, TestDataGenerator testdataGenerator) {
 		this.metamodelRepository = metamodelRepository;
@@ -36,6 +50,8 @@ public class ScriptEngine {
 	}
 
 	private Bindings createBindings() {
+		this.engine = getScriptEngine();
+		
 		Bindings b = this.engine.createBindings();
 
 		b.put("log", log);
@@ -44,6 +60,13 @@ public class ScriptEngine {
 		b.put("scenario", this.scenarioFactory);		
 		b.put("dataFactory", dataFactory);
 		b.put("rand", dataFactory);
+		
+		
+		ObjectMapper om = new ObjectMapper();
+		b.put("om", om);
+		
+		JSONObject js = null;
+		
 
 		return b;
 	}

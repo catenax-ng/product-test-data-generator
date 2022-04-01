@@ -1,0 +1,90 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_Capacity" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_PerformanceIndicatorCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "electricCapacityMin" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_Capacity"
+          },
+          "electricCapacityMax" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_Capacity"
+          }
+        },
+        "required" : [ "electricCapacityMin", "electricCapacityMax" ]
+      },
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_BatteryType" : {
+        "type" : "string",
+        "enum" : [ "HVB", "LVB" ]
+      },
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_Percentage" : {
+        "type" : "number"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_LifecyclePhases" : {
+        "type" : "string",
+        "enum" : [ "as specified by OEM", "as specified by other", "as recieved by dismantling" ]
+      },
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_MinStateOfHealthCharacterisitc" : {
+        "type" : "object",
+        "properties" : {
+          "minimalStateOfHealthValue" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_Percentage"
+          },
+          "specificatorId" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "minimalStateOfHealthPhase" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_LifecyclePhases"
+          }
+        },
+        "required" : [ "minimalStateOfHealthValue", "specificatorId", "minimalStateOfHealthPhase" ]
+      },
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_DateTimestamp" : {
+        "type" : "string",
+        "format" : "date"
+      },
+      "urn_bamm_com.catenax.battery.product_description_1.0.0_CurrentState" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "currentStateOfHealthValue" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_Percentage"
+            },
+            "currentStateOfHealthTimestamp" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_DateTimestamp"
+            },
+            "currentStateOfHealthPhase" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_LifecyclePhases"
+            }
+          },
+          "required" : [ "currentStateOfHealthValue", "currentStateOfHealthTimestamp", "currentStateOfHealthPhase" ]
+        },
+        "uniqueItems" : true
+      }
+    }
+  },
+  "properties" : {
+    "performanceIndicator" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_PerformanceIndicatorCharacteristic"
+    },
+    "type" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_BatteryType"
+    },
+    "minimalStateOfHealth" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_MinStateOfHealthCharacterisitc"
+    },
+    "currentStateOfHealth" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.battery.product_description_1.0.0_CurrentState"
+    }
+  },
+  "required" : [ "performanceIndicator", "type", "minimalStateOfHealth", "currentStateOfHealth" ]
+}

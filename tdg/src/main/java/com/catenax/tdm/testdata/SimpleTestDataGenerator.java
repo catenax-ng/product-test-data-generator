@@ -28,6 +28,7 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 	@Override
 	public Object generateObject(String name, JSONObject pDefinition, JSONObject jsonSchema) {
 		// log.info(" => Generate for attribute '" + name + "' := " + pDefinition);
+		// log.info("RESOLVE attr '" + name + "' (" + jsonSchema.getString("$id") + ")");}
 
 		Object result = null;
 
@@ -83,9 +84,8 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 	}
 
 	private Object resolveAllOf(String name, JSONObject pDefinition, JSONObject jsonSchema) {
-		if (true)
-			return null;
-
+		// TODO max recursion loop, e. g. AAS 3.0
+		
 		Object result;
 		JSONArray types = pDefinition.getJSONArray("allOf");
 
@@ -96,10 +96,13 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 		for (Object t : types.toList()) {
 			Object o = generateObject(name, new JSONObject((Map) t), jsonSchema);
 
-			if (o instanceof JSONObject) {
+			if (o != null && o instanceof JSONObject) {
 				JSONObject jo = (JSONObject) o;
 				for (String key : jo.keySet()) {
-					rs.put(key, jo.get(key));
+					Object val = jo.get(key);
+					if(val != null) {
+						rs.put(key, val);
+					}
 				}
 			}
 		}

@@ -1,0 +1,31 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax.physical_dimension_1.0.0_MillimetreCharacteristic" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.physical_dimension_1.0.0_KilogramCharacteristic" : {
+        "type" : "number"
+      }
+    }
+  },
+  "properties" : {
+    "length" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.physical_dimension_1.0.0_MillimetreCharacteristic"
+    },
+    "width" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.physical_dimension_1.0.0_MillimetreCharacteristic"
+    },
+    "height" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.physical_dimension_1.0.0_MillimetreCharacteristic"
+    },
+    "diameter" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.physical_dimension_1.0.0_MillimetreCharacteristic"
+    },
+    "weight" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.physical_dimension_1.0.0_KilogramCharacteristic"
+    }
+  }
+}

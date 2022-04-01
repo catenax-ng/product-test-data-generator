@@ -1,21 +1,43 @@
 package com.catenax.tdm.testdata;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
+import java.util.UUID;
 
 import org.fluttercode.datafactory.AddressDataValues;
 import org.fluttercode.datafactory.ContentDataValues;
 import org.fluttercode.datafactory.NameDataValues;
 import org.fluttercode.datafactory.impl.DataFactory;
 
+import com.fasterxml.jackson.databind.util.ISO8601Utils;
+
 public class TestDataFactory {
 	
-	private DataFactory df = new DataFactory();
+	private static final String UUID_PREFIX = "urn:uuid:";
+	// "2022-02-04T14:48:54"
+	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-ddTHH:mm:ss";
+	private static final int VAN_LENGTH = 115;
 	
+	private DataFactory df = new DataFactory();
+		
 	public TestDataFactory() {
 		
+	}
+	
+	public String getAny(String ... str) {
+		String result = "";
+		
+		int r = this.getNumberBetween(0, str.length);
+		result = str[r];
+		
+		return result;
+	}
+	
+	public String getPattern(String pattern) {
+		return RandomString.fromPattern(pattern);
 	}
 
 	public <T> T getItem(List<T> items) {
@@ -101,9 +123,56 @@ public class TestDataFactory {
 	public int getNumberBetween(int min, int max) {
 		return this.df.getNumberBetween(min, max);
 	}
+	
+	public String formatDate(Date date) {
+		String result = "";
+		
+		try {
+			if(date != null) {
+				result = ISO8601Utils.format(date, true);
+			}
+		} catch (Exception e) {
+			result = date.toGMTString();
+		}
+		
+		return result;
+	}
+	
+	public String formatDate(Date date, String format) {
+		String result = "";
+		
+		try {
+			SimpleDateFormat df = new SimpleDateFormat(format);
+			result = df.format(date);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			result = date.toGMTString();
+		}
+		
+		return result;
+	}
+	
+	public Date getToday() {
+		return getNow();
+	}
+	
+	public Date getNow() {
+		return new Date();
+	}
+	
+	public Date getPastDate(int daysInThePast) {
+		Date minDate = this.getToday();
+		LocalDateTime ldt = LocalDateTime.ofInstant(minDate.toInstant(), ZoneId.of("UTC"));
+		ldt = ldt.minusDays((Integer.valueOf(daysInThePast)).longValue());
+		minDate = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
+		
+		return this.getDateBetween(minDate, this.getToday());
+	}
 
 	public Date getDate(int year, int month, int day) {
-		return this.df.getDate(getBirthDate(), day, day);
+		// return this.df.getDate(getBirthDate(), day, day);
+		LocalDateTime ldt = LocalDateTime.of(year, month, day, 0, 0);
+		return Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
 	}
 
 	public Date getDate(Date baseDate, int minDaysFromDate, int maxDaysFromDate) {
@@ -177,6 +246,32 @@ public class TestDataFactory {
 	public NameDataValues getNameDataValues() {
 		return this.df.getNameDataValues();
 	}
+	
+	public String getUuid() {
+		String result = null;
+		
+		UUID uuid = UUID.randomUUID();
+		result = UUID_PREFIX + uuid.toString();
+		
+		return result;
+	}
+	
+	public String getVan() {
+		String result = "";
+		
+		// result = this.getRandomChars(VAN_LENGTH) + "=";
+		for(int i = 0; i < VAN_LENGTH; i++) {
+			String c = this.getRandomChar() + "";
+			if(this.getNumberBetween(0, 2) == 0) {
+				c = c.toUpperCase();
+			}
+			result += c;
+		}
+		
+		result += "=";
+		
+		return result;
+	}
 
 	public void randomize(int seed) {
 		this.df.randomize(seed);
@@ -192,6 +287,25 @@ public class TestDataFactory {
 
 	public void setContentDataValues(ContentDataValues contentDataValues) {
 		this.df.setContentDataValues(contentDataValues);
+	}
+	
+	public String getSerialNo(int len) {
+		String result = this.getNumberText(len);
+
+		return result;
+	}
+	
+	public String getSerialNoNum(int len) {
+		String result = this.getNumberText(len);
+
+		return result;
+	}
+	
+	public String getSerialNoAlphaNum(int len) {
+		// TODO: alpha numeric
+		String result = this.getNumberText(len);
+
+		return result;
 	}
 
 

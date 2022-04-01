@@ -15,7 +15,7 @@ public class ResourceMetamodelRepository implements MetamodelRepository {
 
 	private ObjectMapper objectMapper = buildObjectMapper();
 
-	private static String basedir = "schema";
+	private static String BASEDIR = "schema";
 
 	private ObjectMapper buildObjectMapper() {
 		ObjectMapper om = new ObjectMapper();
@@ -90,7 +90,8 @@ public class ResourceMetamodelRepository implements MetamodelRepository {
 
 	@Override
 	public String getMetamodelAsString(String pMetamodel, String pVersion) throws Exception {
-		String fname = basedir + "/" + pMetamodel + "_v" + pVersion + ".json";
+		String fname = BASEDIR + "/" + pMetamodel + "_v" + pVersion + ".json";
+		// log.info("LOAD MetaModel: " + fname);
 		String result = TDMResourceLoader.resourceToString(fname);
 		
 		JSONObject schema = new JSONObject(result);

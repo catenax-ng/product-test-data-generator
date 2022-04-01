@@ -1,0 +1,58 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax_0.0.1_LifeSpan" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.0.1_PercentOfSomething" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.0.1_Mileage" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.0.1_NumberOfCycles" : {
+        "type" : "number",
+        "maximum" : 9223372036854775807,
+        "minimum" : -9223372036854775808
+      },
+      "urn_bamm_com.catenax_0.0.1_Voltage" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax_0.0.1_Current" : {
+        "type" : "number"
+      }
+    }
+  },
+  "properties" : {
+    "lifeSpan" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_LifeSpan"
+    },
+    "stateOfHealth" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_PercentOfSomething"
+    },
+    "stateOfCharge" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_PercentOfSomething"
+    },
+    "mileage" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_Mileage"
+    },
+    "numberOfChargingCycles" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_NumberOfCycles"
+    },
+    "voltage" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_Voltage"
+    },
+    "residualCurrentHazard" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_Current"
+    },
+    "lifeSpanAsPlanned" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_LifeSpan"
+    },
+    "numberOfChargingCyclesAsPlanned" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_NumberOfCycles"
+    }
+  },
+  "required" : [ "lifeSpan", "stateOfHealth", "stateOfCharge", "mileage", "numberOfChargingCycles", "voltage", "residualCurrentHazard", "lifeSpanAsPlanned", "numberOfChargingCyclesAsPlanned" ]
+}

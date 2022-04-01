@@ -19,8 +19,9 @@ import com.catenax.tdm.metamodel.MetamodelRepository;
 import com.catenax.tdm.model.DataTemplate;
 import com.catenax.tdm.resource.TDMResourceLoader;
 import com.catenax.tdm.testdata.TestDataGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.catenax.tdm.testdata.blueprint.VehicleBlueprintGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class TestDataScenarioFactory {
 
@@ -44,9 +45,15 @@ public class TestDataScenarioFactory {
 	public static boolean AUTOFIX_ID = true;
 	public static String CX_SCHEMA_PREFIX = "https://catenax.com/schema/";
 	
+	private boolean autoAddTestdata = true;
+	
 	public TestDataScenarioFactory(MetamodelRepository metamodelRepository, TestDataGenerator testdataGenerator) {
 		this.metamodelRepository = metamodelRepository;
 		this.testdataGenerator = testdataGenerator;
+	}
+	
+	public DataTemplateRepository getDataTemplateRepository() {
+		return this.dataTemplateRepository;
 	}
 	
 	public Object getResult(boolean includeGraphQL) {		
@@ -167,35 +174,89 @@ public class TestDataScenarioFactory {
 		
 		return result;
 	}
-	
+
 	public JSONObject generateTestData(JSONObject definition) throws Exception {
-		Schema schema = SchemaLoader.load(definition);
-		
-		JSONObject properties = definition.getJSONObject("properties");
-		Map<String, Object> p = new HashMap<>();
-		
-		for(String key : properties.keySet()) {
-			Object attr = this.testdataGenerator.generateObject(key, properties.getJSONObject(key), definition);
-			p.put(key, attr);
-		}
-		
-		JSONObject o = new JSONObject(p);
-		
-		if(Config.VALIDATE) {
-			try {
-				schema.validate(o);
-			} catch (Exception e) {				
-				if(Config.VALIDATE_EXIT) {
-					throw e;
-				} else {
-					log.info(e.getMessage());
+		return generateTestData(definition, definition);
+	}
+	
+	public JSONObject generateTestData(JSONObject definition, JSONObject all) throws Exception {
+		JSONObject result = new JSONObject();
+
+		if(definition != null && definition.has("properties")) {
+			JSONObject properties = definition.getJSONObject("properties");
+			Map<String, Object> p = new HashMap<>();
+			
+			for(String key : properties.keySet()) {
+				JSONObject val = properties.getJSONObject(key);
+				Object attr = this.testdataGenerator.generateObject(key, val, all);
+				p.put(key, attr);
+			}
+			
+			JSONObject o = new JSONObject(p);
+			
+			if(Config.VALIDATE) {
+				try {
+					Schema schema = SchemaLoader.load(all);
+					schema.validate(o);
+				} catch (Exception e) {				
+					if(Config.VALIDATE_EXIT) {
+						throw e;
+					} else {
+						log.info(e.getMessage());
+					}
+				}
+			}
+			
+			if(this.autoAddTestdata) addResult(o, definition);
+
+			result = o;
+		} else {
+			// WORKAROUND for rare cases, e. g. AAS 3.0
+
+			if(definition.has("allOf")) {
+				JSONObject x = definition.getJSONArray("allOf").getJSONObject(0);
+				if(x.has("$ref")) {
+					String val = x.getString("$ref");
+					String[] sp = val.split("/");
+					
+					JSONObject def = definition;
+					for(int i = 1; i < sp.length; i++) {
+						def = def.getJSONObject(sp[i]);
+					}
+
+					result = generateTestData(def, all);
 				}
 			}
 		}
+
+		return result;
+	}
+	
+	public JSONObject generateFromTemplate(String namespace, String templateName, String templateVersion) throws Exception {
+		// JSONObject o = this.generateTestData(definition);
+		JSONObject definition = new JSONObject();
+		definition.put("$id", namespace);
+		definition.put("$schema", namespace);
 		
-		addResult(o, definition);
+		JSONObject temp = null;
 		
-		return o;
+		Optional<DataTemplate> dt = this.dataTemplateRepository.findByNameAndVersion(templateName, templateVersion);
+		if(dt.isPresent()) {
+			temp = new JSONObject(dt.get().getContent());
+		} else {
+			// TODO: from resources
+			try {
+				String fname = "datatemplate/" + templateName + "_v" + templateVersion + ".json";
+				String result = TDMResourceLoader.resourceToString(fname);
+				temp = new JSONObject(result);
+			} catch (Exception e) {
+				temp = new JSONObject();
+				log.error(e.getMessage(), e);
+			} 
+		}
+
+		if(this.autoAddTestdata) addResult(temp, definition);
+		return temp;
 	}
 	
 	public JSONObject generateTestData(JSONObject definition, String templateName, String templateVersion) throws Exception {
@@ -222,6 +283,44 @@ public class TestDataScenarioFactory {
 		
 		return o;
 	}
+	
+	public JSONObject getTestDataContainerDefinition() {
+		JSONObject definition = new JSONObject();
+		definition.put("$id", "https://catenax.com/schema/TestDataContainer/1.0.0");
+		return definition;
+	}
+	
+	public JSONObject generateTestDataContainer() {
+		JSONObject result = new JSONObject();
+
+		addResult(result, getTestDataContainerDefinition());
+		return result;
+	}
+	
+	public JSONObject generateTestDataContainer(String catenaXId) {
+		JSONObject result = generateTestDataContainer();
+		
+		result.put(VehicleBlueprintGenerator.DEFAULT_ID_FIELD, catenaXId);
+		
+		return result;
+	}
+	
+	public void addToContainer(JSONObject container, JSONObject content, JSONObject definition) {
+		String id = definition.getString("$id");
+		JSONArray arr = new JSONArray();
+		
+		if(container.has(id)) {
+			arr = container.getJSONArray(id);
+		}
+		
+		arr.put(content);
+		
+		container.put(id, arr);
+	}
+	
+	public void setAutoAddTestdata(boolean autoAdd) {
+		this.autoAddTestdata = autoAdd;
+	}
 
 	public JSONArray generateTestData(JSONObject definition, int count) throws Exception {
 		List<JSONObject> instances = new ArrayList<>();
@@ -235,6 +334,23 @@ public class TestDataScenarioFactory {
 		return a;
 	}
 	
+	public JSONObject getEmptyObject() {
+		JSONObject result = new JSONObject();
+		
+		return result;
+	}
+	
+	public JSONArray getEmptyArray() {
+		JSONArray result = new JSONArray();
+		
+		return result;
+	}
+	
+	public JSONArray generateFromVehicleTemplate(String name, String version) {
+		VehicleBlueprintGenerator blueprintGenerator = new VehicleBlueprintGenerator(this);
+		return blueprintGenerator.generateFromVehicleTemplate(name, version);
+	}
+
 	public void validate(JSONObject object, JSONObject definition) {
 		Schema schema = SchemaLoader.load(definition);
 		schema.validate(object);
@@ -242,8 +358,15 @@ public class TestDataScenarioFactory {
 	
 	public JSONObject clone(JSONObject object, JSONObject definition) {
 		JSONObject result = new JSONObject(object.toMap());
-		addResult(result, definition);
+		if(this.autoAddTestdata) addResult(result, definition);
 		return result;
+	}
+	
+	public void addResult(JSONArray array, JSONObject definition) {
+		array.forEach(item -> {
+		    JSONObject object = (JSONObject) item;
+		    addResult(object, definition);
+		});
 	}
 	
 	public void addResult(JSONObject object, JSONObject definition) {
@@ -269,10 +392,12 @@ public class TestDataScenarioFactory {
 			list.add(object);
 		} else {
 			ObjectMapper om = new ObjectMapper();
+			om.setConfig(om.getSerializationConfig()
+					.with(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS));
 			
 			try {
 				String pp = definition.toString(); // om.writerWithDefaultPrettyPrinter().writeValueAsString(definition);
-				log.error("Failed to retrieve id element for " + pp);
+				// log.error("Failed to retrieve id element for " + pp);
 			} catch (Exception e) {
 				// TODO
 				e.printStackTrace();

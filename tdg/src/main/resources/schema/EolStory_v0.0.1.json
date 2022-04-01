@@ -1,0 +1,58 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_com.catenax_0.0.1_DisassemblyStatus" : {
+        "type" : "string",
+        "enum" : [ "assembled", "disassembled" ]
+      },
+      "urn_bamm_com.catenax_0.0.1_VehicleHealthStatus" : {
+        "type" : "string",
+        "enum" : [ "in running condition", "repair required", "broken" ]
+      },
+      "urn_bamm_com.catenax_0.0.1_RecyclingStatusCharacteristic" : {
+        "type" : "string",
+        "enum" : [ "recycled", "not recycled" ]
+      },
+      "urn_bamm_com.catenax_0.0.1_RecyclingProcessCharacteristic" : {
+        "type" : "string",
+        "enum" : [ "process1", "process2", "process3" ]
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean" : {
+        "type" : "boolean"
+      },
+      "urn_bamm_com.catenax_0.0.1_BuildPositionEnumeration" : {
+        "type" : "string",
+        "enum" : [ "left", "right", "front", "back" ]
+      },
+      "urn_bamm_com.catenax_0.0.1_Weight" : {
+        "type" : "number"
+      }
+    }
+  },
+  "properties" : {
+    "disassemblyStatus" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_DisassemblyStatus"
+    },
+    "vehicleHealthStatus" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_VehicleHealthStatus"
+    },
+    "recyclingStatus" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_RecyclingStatusCharacteristic"
+    },
+    "recyclingProcess" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_RecyclingProcessCharacteristic"
+    },
+    "crashHistory" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+    },
+    "buildPosition" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_BuildPositionEnumeration"
+    },
+    "weightScrap" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax_0.0.1_Weight"
+    }
+  },
+  "required" : [ "disassemblyStatus", "vehicleHealthStatus", "recyclingStatus", "recyclingProcess", "crashHistory", "buildPosition", "weightScrap" ]
+}

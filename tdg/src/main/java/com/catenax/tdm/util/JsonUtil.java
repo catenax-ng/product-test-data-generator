@@ -10,6 +10,8 @@ public class JsonUtil {
 				.replaceAll("\\\\r", "")
 				.replaceAll("\\\\u0027", "'")
 				.replaceAll("\\\\u003d", "=")
+				.replaceAll("\\\\u003c", "<")
+				.replaceAll("\\\\u003e", ">")
 				.replaceAll("\\\\\"", "\"")
 		;
 		

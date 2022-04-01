@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Decoder;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +41,8 @@ import com.catenax.tdm.scenario.TestDataScenarioService;
 import com.catenax.tdm.scripting.ScriptEngine;
 import com.catenax.tdm.testdata.TestDataGenerator;
 import com.catenax.tdm.util.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
@@ -86,6 +87,26 @@ public class CatenaXApiController implements CatenaXApi {
 		log.info("-= Post initialize ApiController ...");
 		this.scriptEngine.setDataTemplateRepository(this.dataTemplateRepository);
 		log.info("-= done =-");
+	}
+	
+	private String _jsonToString(Object o) {
+		String result = o.toString();
+
+		if(o instanceof JSONObject) {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.setConfig(mapper.getSerializationConfig()
+			   .with(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY)
+			);
+			
+			try {
+				result = mapper.writerWithDefaultPrettyPrinter()
+						.writeValueAsString(o);
+			} catch (Exception e) {
+				// log.error(e.getMessage());
+			}
+		}
+		
+		return result;
 	}
 	
 	/*
@@ -198,7 +219,7 @@ public class CatenaXApiController implements CatenaXApi {
 							log.info("schema validation ok for : " + o);
 						}
 					} catch (Exception e) {
-						log.error("cannot validate result: " + o);
+						log.error("cannot validate result: " + e.getMessage());
 					}
 				} else {
 					log.error("no valid schema found: " + jsonSchema);
@@ -208,7 +229,7 @@ public class CatenaXApiController implements CatenaXApi {
 			}
 
 			JSONArray a = new JSONArray(instances);
-			String result = a.toString();
+			String result = this._jsonToString(a);
 
 			return new ResponseEntity<String>(result, HttpStatus.OK);
 		} catch (Exception e) {
@@ -272,6 +293,15 @@ public class CatenaXApiController implements CatenaXApi {
 	@Override
 	public ResponseEntity<TestDataScenario> updateTestdataScenario(TestDataScenario data) {
 		isUser();
+		
+		
+		String content = data.getContent();
+		content = JsonUtil.fixContent(content);
+		data.setContent(content);
+		
+		log.info("Save:");
+		log.info(content);
+		
 		TestDataScenario result = this.testDataScenarioRepository.save(data);
 		return new ResponseEntity<TestDataScenario>(result, HttpStatus.OK);
 	}
@@ -287,10 +317,14 @@ public class CatenaXApiController implements CatenaXApi {
 			Optional<TestDataScenario> tds = this.testDataScenarioRepository.findByNameAndVersion(scenario, version);
 			if (tds.isPresent()) {
 				result = tds.get();
+				
+				String c = JsonUtil.fixContent(content);
+				log.info("Save:");
+				log.info(content);
 
 				result.setScriptStatus(scriptStatus);
 				result.setScriptType(scriptType);
-				result.setContent(content);
+				result.setContent(c);
 
 				this.testDataScenarioRepository.save(result);
 			} else {
@@ -405,7 +439,7 @@ public class CatenaXApiController implements CatenaXApi {
 	private boolean use_base64 = true;
 
 	@Override
-	public ResponseEntity<String> instantiateTestdataScenarioRaw(String script) {
+	public ResponseEntity<String> instantiateTestdataScenarioRaw(TestDataScenarioType scriptType, String script) {
 		String result = "";
 		
 		try {
@@ -426,6 +460,8 @@ public class CatenaXApiController implements CatenaXApi {
 				// log.info("orig: " + script);
 				log.info("x := '" + x + "'");
 				code = new String(decoder.decode(x.getBytes()));
+				
+				code= JsonUtil.fixContent(code);
 			}
 			
 			log.info(code);
@@ -434,11 +470,11 @@ public class CatenaXApiController implements CatenaXApi {
 			tds.setName("unnamed");
 			tds.setVersion("0");
 			tds.setScriptStatus(TestDataScenarioStatus.PRODUCTIVE);
-			tds.setScriptType(TestDataScenarioType.DSL);
+			tds.setScriptType(scriptType);
 			tds.setContent(code);
 			
 			log.info("EXECUTE: " + code);
-
+			/*
 			TestDataScenarioExecutor executor = TestDataScenarioService
 					.parseScenarioFromString(code);
 			
@@ -450,10 +486,30 @@ public class CatenaXApiController implements CatenaXApi {
 			// log.info("RESULT: " + result);
 			
 			return new ResponseEntity<String>(result, HttpStatus.OK);
+			*/
+			if (tds.getScriptType() == TestDataScenarioType.DSL) {
+				TestDataScenarioExecutor executor = TestDataScenarioService
+						// .parseScenarioFromResource("scenario/" + scenario + "_v" + version + ".txt");
+						.parseScenarioFromString(tds.getContent());
+
+				executor.setMetamodelRepository(this.metamodelRepository);
+				executor.setTestdataGenerator(testdataGenerator);
+
+				result = executor.execute(this.scriptEngine, false);
+				// result = this.saveTestdataScenarioInstance(tds, name, result);
+				return new ResponseEntity<String>(result, HttpStatus.OK);
+			} else if (tds.getScriptType() == TestDataScenarioType.JavaScript) {
+				result = this._jsonToString(this.scriptEngine.executeScript(code, false));
+				// result = this.saveTestdataScenarioInstance(tds, name, result);
+				
+				// log.info("Result: " + result);
+				return new ResponseEntity<String>(result, HttpStatus.OK);
+			}
 		} catch(Exception e) {
 			log.error(e.getMessage());
 			return new ResponseEntity<String>("ERROR: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		return new ResponseEntity<String>("ERROR: unknown script", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override

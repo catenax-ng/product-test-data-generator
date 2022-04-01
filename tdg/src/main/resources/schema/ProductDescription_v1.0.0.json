@@ -1,0 +1,119 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_EquipmentVariantCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "code" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "description" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "group" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            }
+          },
+          "required" : [ "code", "description" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_DateTimestamp" : {
+        "type" : "string",
+        "format" : "date"
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_CubicCapacity" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_EnginePower" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_EngineCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "size" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_CubicCapacity"
+          },
+          "power" : {
+            "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_EnginePower"
+          }
+        },
+        "required" : [ "size", "power" ]
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_Distance" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_LifecyclePhases" : {
+        "type" : "string",
+        "enum" : [ "as maintained by workshop", "as recieved by dismantling" ]
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_MileageCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "mileageDistance" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_Distance"
+            },
+            "mileagePhase" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_LifecyclePhases"
+            },
+            "mileageTimestamp" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_DateTimestamp"
+            }
+          },
+          "required" : [ "mileageDistance", "mileagePhase", "mileageTimestamp" ]
+        },
+        "uniqueItems" : true
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_FuelType" : {
+        "type" : "string",
+        "enum" : [ "Unbekannt", "Diesel", "Benzin", "Vielstoff", "Elektro", "Flüssiggas", "Benzin/Flüssiggas", "Benzin/komp.Erdgas", "Hybr.Benzin/E", "Erdgas NG", "Hybr.Diesel/E", "Wasserstoff", "Hybr.Wasserst./E", "Wasserstoff/Benzin", "Wasserst./Benzin/E", "BZ/Wasserstoff", "BZ/Benzin", "BZ/Methanol", "BZ/Ethanol", "Hybr.Vielstoff/E", "Methan", "Benzin/Methan", "Hybr.Erdgas/E", "Benzin/Ethanol", "Hybr.Flüssiggas/E", "Hybr.B/E ext.aufl.", "Hybr.D/E ext.aufl.", "Hybr.LPG/E ext.aufl.", "Hybr.W/E ext.aufl.", "Hybr.V/E ext.aufl.", "Hybr.NG/E ext.aufl.", "Hybr.Wod.B/Eext.aufl", "Wasserstoff/NG", "Hybr.W/NG/E ext.aufl", "Ethanol", "Hybr.BZ/W/E", "Hybr.BZ/W/E ext. aufl.", "Zweistoff LNG/Diesel", "Verflüssigtes Erdgas (LNG)", "Andere" ]
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_Weight" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.vehicle.product_description_1.0.0_KbaVariant" : {
+        "type" : "string",
+        "enum" : [ "Limousine", "Schräghecklimousine", "Kombilimousine", "Coupé", "Kabrio-Limousine", "Cabrio-Limousine", "Mehrzweckfahrzeug", "Pkw-Pick-up", "Van", "Pick-up" ]
+      }
+    }
+  },
+  "properties" : {
+    "equipmentVariants" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_EquipmentVariantCharacteristic"
+    },
+    "productionDateGMT" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_DateTimestamp"
+    },
+    "engine" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_EngineCharacteristic"
+    },
+    "mileage" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_MileageCharacteristic"
+    },
+    "fuel" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_FuelType"
+    },
+    "emptyWeight" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_Weight"
+    },
+    "vehicleModel" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+    },
+    "bodyVariant" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.vehicle.product_description_1.0.0_KbaVariant"
+    },
+    "anonymisedIdentifier" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+    }
+  },
+  "required" : [ "equipmentVariants", "productionDateGMT", "engine", "mileage", "fuel", "emptyWeight", "vehicleModel", "bodyVariant", "anonymisedIdentifier" ]
+}

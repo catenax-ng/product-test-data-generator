@@ -1,0 +1,383 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "bpn": {
+            "type": "string"
+        },
+        "identifiers": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Identifier"
+            }
+        },
+        "names": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/LegalForm"
+            }
+        },
+        "legalForm": {
+            "$ref": "#/definitions/LegalForm"
+        },
+        "status": {
+            "type": "string"
+        },
+        "addresses": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Address"
+            }
+        },
+        "profile": {
+            "$ref": "#/definitions/Profile"
+        },
+        "relations": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Relation"
+            }
+        },
+        "types": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "bankAccounts": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/BankAccount"
+            }
+        },
+        "roles": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "addresses",
+        "bankAccounts",
+        "bpn",
+        "identifiers",
+        "legalForm",
+        "names",
+        "profile",
+        "relations",
+        "roles",
+        "status",
+        "types"
+    ],
+       
+    "definitions": {
+        "Address": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "identifiers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Identifier"
+                    }
+                },
+                "careOf": {
+                    "$ref": "#/definitions/LegalForm"
+                },
+                "countryCode": {
+                    "type": "string"
+                },
+                "administrativeAreas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdministrativeArea"
+                    }
+                },
+                "postCodes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LegalForm"
+                    }
+                },
+                "localities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LegalForm"
+                    }
+                },
+                "thoroughfares": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LegalForm"
+                    }
+                },
+                "premises": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LegalForm"
+                    }
+                },
+                "postalDeliveryPoints": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LegalForm"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                },
+                "versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Version"
+                    }
+                }
+            },
+            "required": [
+                "administrativeAreas",
+                "careOf",
+                "countryCode",
+                "identifiers",
+                "localities",
+                "postCodes",
+                "postalDeliveryPoints",
+                "premises",
+                "thoroughfares",
+                "type",
+                "versions"
+            ],
+            "title": "Address"
+        },
+        "AdministrativeArea": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "codes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Code"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "codes",
+                "name",
+                "type"
+            ],
+            "title": "AdministrativeArea"
+        },
+        "Code": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "value"
+            ],
+            "title": "Code"
+        },
+        "Identifier": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "shortName": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "registration": {
+                    "$ref": "#/definitions/Registration"
+                }
+            },
+            "required": [
+                "number",
+                "shortName",
+                "type",
+                "value"
+            ],
+            "title": "Identifier"
+        },
+        "Registration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "hardeningGrade": {
+                    "type": "string"
+                },
+                "issuingAgency": {
+                    "$ref": "#/definitions/LegalForm"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "initialRegistration": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "lastUpdate": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "hardeningGrade",
+                "initialRegistration",
+                "issuingAgency",
+                "lastUpdate",
+                "status"
+            ],
+            "title": "Registration"
+        },
+        "LegalForm": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "shortName": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "number",
+                "shortName",
+                "value"
+            ],
+            "title": "LegalForm"
+        },
+        "Version": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "characterSet": {
+                    "type": "string"
+                },
+                "languageCode": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "characterSet",
+                "languageCode"
+            ],
+            "title": "Version"
+        },
+        "BankAccount": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "trustScores": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "currencyCode": {
+                    "type": "string"
+                },
+                "internationalBankAccountIdentifier": {
+                    "type": "string"
+                },
+                "internationalBankIdentifier": {
+                    "type": "string"
+                },
+                "nationalBankAccountIdentifier": {
+                    "type": "string"
+                },
+                "nationalBankIdentifier": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "currencyCode",
+                "internationalBankAccountIdentifier",
+                "internationalBankIdentifier",
+                "nationalBankAccountIdentifier",
+                "nationalBankIdentifier",
+                "trustScores"
+            ],
+            "title": "BankAccount"
+        },
+        "Profile": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "classifications": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Identifier"
+                    }
+                }
+            },
+            "required": [
+                "classifications"
+            ],
+            "title": "Profile"
+        },
+        "Relation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "relationClass": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "startNode": {
+                    "type": "string"
+                },
+                "endNode": {
+                    "type": "string"
+                },
+                "startedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "endedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "endNode",
+                "endedAt",
+                "relationClass",
+                "startNode",
+                "startedAt",
+                "type"
+            ],
+            "title": "Relation"
+        }
+    }
+}

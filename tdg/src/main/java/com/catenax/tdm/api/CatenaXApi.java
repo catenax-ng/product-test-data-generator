@@ -17,6 +17,7 @@ import com.catenax.tdm.deo.TestDataScenarioInstanceStatus;
 import com.catenax.tdm.model.DataTemplate;
 import com.catenax.tdm.model.TestDataScenario;
 import com.catenax.tdm.model.TestDataScenario.TestDataScenarioStatus;
+import com.catenax.tdm.model.TestDataScenario.TestDataScenarioType;
 
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +27,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 
 @Validated
@@ -148,6 +148,7 @@ public interface CatenaXApi {
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.POST)
 	ResponseEntity<String> instantiateTestdataScenarioRaw(
+			@Parameter(in = ParameterIn.QUERY, description = "", required = false, schema = @Schema()) @RequestParam(value = "scriptType") TestDataScenarioType scriptType,
 			@RequestBody String script
 			);
 	

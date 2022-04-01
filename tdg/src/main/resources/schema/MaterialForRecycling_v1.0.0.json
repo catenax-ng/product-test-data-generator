@@ -1,0 +1,64 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenax.material_for_recycling_1.0.0_MaterialClass" : {
+        "type" : "string"
+      },
+      "urn_bamm_com.catenax.material_for_recycling_1.0.0_Weight" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.material_for_recycling_1.0.0_AggregateState" : {
+        "type" : "string",
+        "enum" : [ "solid", "liquid", "gasenous" ]
+      },
+      "urn_bamm_com.catenax.material_for_recycling_1.0.0_Percentage" : {
+        "type" : "number"
+      },
+      "urn_bamm_com.catenax.material_for_recycling_1.0.0_ComponentCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "weight" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.material_for_recycling_1.0.0_Weight"
+            },
+            "aggregateState" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.material_for_recycling_1.0.0_AggregateState"
+            },
+            "recycledContent" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.material_for_recycling_1.0.0_Percentage"
+            },
+            "materialAbbreviation" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "materialClass" : {
+              "$ref" : "#/components/schemas/urn_bamm_com.catenax.material_for_recycling_1.0.0_MaterialClass"
+            },
+            "materialName" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            }
+          },
+          "required" : [ "materialClass", "materialName" ]
+        },
+        "uniqueItems" : true
+      }
+    }
+  },
+  "properties" : {
+    "materialName" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+    },
+    "materialClass" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.material_for_recycling_1.0.0_MaterialClass"
+    },
+    "component" : {
+      "$ref" : "#/components/schemas/urn_bamm_com.catenax.material_for_recycling_1.0.0_ComponentCharacteristic"
+    }
+  },
+  "required" : [ "component" ]
+}
