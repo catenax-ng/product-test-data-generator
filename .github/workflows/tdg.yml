@@ -32,7 +32,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  PROJECT: catenax
+  PROJECT: catenax/testdatagenerator
   IMAGE_NAME: tdg
   
 jobs:
