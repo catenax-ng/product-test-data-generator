@@ -29,13 +29,9 @@ on:
     branches:
       - main
 
-defaults:
-    run:
-        working-directory: ./tdg-admin-ui
-        
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: tdg-admin-ui
   
 jobs:
   ########################################
