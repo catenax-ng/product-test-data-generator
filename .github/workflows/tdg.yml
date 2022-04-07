@@ -31,7 +31,7 @@ on:
 
 defaults:
     run:
-        working-directory: ./tdg
+        working-directory: tdg
         
 env:
   REGISTRY: ghcr.io
