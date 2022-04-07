@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  tdmapp:
+    image: 'springbootapp:latest'
+    build:
+      context: .
+    container_name: tdmapp
+    environment:
+      - TDM_API_KEY=${API_KEY}
+      - TDM_HOST_SECURE=${HOST_SECURE}
+      - TDM_HOST_NAME=${HOST_NAME}
+      - TDM_HOST_PORT=${HOST_PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PWD=${DB_PWD}
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

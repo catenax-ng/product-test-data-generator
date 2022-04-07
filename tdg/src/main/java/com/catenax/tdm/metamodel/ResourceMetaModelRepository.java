@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import com.catenax.tdm.resource.TDMResourceLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ResourceMetamodelRepository implements MetamodelRepository {
+public class ResourceMetaModelRepository implements MetaModelResourceRepository {
 
-	private static final Logger log = LoggerFactory.getLogger(ResourceMetamodelRepository.class);
+	private static final Logger log = LoggerFactory.getLogger(ResourceMetaModelRepository.class);
 
 	private ObjectMapper objectMapper = buildObjectMapper();
 

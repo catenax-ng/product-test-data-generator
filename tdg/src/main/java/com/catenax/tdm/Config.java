@@ -4,8 +4,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.catenax.tdm.metamodel.MetamodelRepository;
-import com.catenax.tdm.metamodel.SemanticMetamodelRepository;
+import com.catenax.tdm.metamodel.MetaModelResourceRepository;
+import com.catenax.tdm.metamodel.SemanticMetaModelRepository;
 import com.catenax.tdm.scripting.ScriptEngine;
 import com.catenax.tdm.testdata.SimpleTestDataGenerator;
 import com.catenax.tdm.testdata.TestDataGenerator;
@@ -19,8 +19,8 @@ public class Config {
 	public static Boolean VALIDATE_EXIT = false;
 	
 	@Bean
-	public MetamodelRepository metamodelRepository() {
-		MetamodelRepository mr = new SemanticMetamodelRepository();
+	public MetaModelResourceRepository metamodelRepository() {
+		MetaModelResourceRepository mr = new SemanticMetaModelRepository();
 		
 		return mr;
 	}

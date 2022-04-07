@@ -1,12 +1,17 @@
 package com.catenax.tdm.scenario;
 
+import java.util.Optional;
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.catenax.tdm.metamodel.MetamodelRepository;
+import com.catenax.tdm.dao.MetaModelRepository;
+import com.catenax.tdm.metamodel.MetaModelResourceRepository;
+import com.catenax.tdm.model.MetaModel;
 import com.catenax.tdm.scenario.TestDataScenarioParser.AssignContext;
 import com.catenax.tdm.scenario.TestDataScenarioParser.ConcatContext;
 import com.catenax.tdm.scenario.TestDataScenarioParser.DeclareContext;
@@ -34,9 +39,40 @@ public class TestDataScenarioExecutor extends TestDataScenarioBaseListener {
 	private String version = "<none>";
 	
 	private StringBuilder script = new StringBuilder("");
-	
-	private MetamodelRepository metamodelRepository;
+
+	private MetaModelResourceRepository metamodelRepository;
 	private TestDataGenerator testdataGenerator;
+	
+	protected class CombinedMetamodelRepository implements MetaModelResourceRepository {
+		// Class to get metamodel either from db or from resource (fallback)
+		private MetaModelRepository mm1;
+		private MetaModelResourceRepository mm2;
+		
+		public CombinedMetamodelRepository(MetaModelRepository dbMetaModelRepository, MetaModelResourceRepository metamodelRepository) {
+			this.mm1 = dbMetaModelRepository;
+			this.mm2 = metamodelRepository;
+		}
+
+		@Override
+		public String getMetamodelAsString(String pMetamodel, String pVersion) throws Exception {
+			String result = null;
+			
+			Optional<MetaModel> mmo = mm1.findByNameAndVersion(pMetamodel, pVersion);
+			if(mmo.isPresent()) {
+				result = mmo.get().getContent();
+			} else {
+				result = mm2.getMetamodelAsString(pMetamodel, pVersion);
+			}
+			
+			return result;
+		}
+
+		@Override
+		public JSONObject getMetamodel(String pMetamodel, String pVersion) throws Exception {
+			return new JSONObject(getMetamodelAsString(pMetamodel, pVersion));
+		}
+		
+	}
 
 	public String execute(ScriptEngine engine, boolean includeGraphQL) {
 		log.info("Execute TestDataScenario: '" + name + "' version " + version + " ...");
@@ -54,8 +90,10 @@ public class TestDataScenarioExecutor extends TestDataScenarioBaseListener {
 		return result;
 	}
 
-	public void setMetamodelRepository(MetamodelRepository metamodelRepository) {
-		this.metamodelRepository = metamodelRepository;
+	public void setMetamodelRepository(MetaModelRepository dbMetaModelRepository, MetaModelResourceRepository metamodelRepository) {
+		// this.dbMetaModelRepository = dbMetaModelRepository;
+		// this.metamodelRepository = metamodelRepository;
+		this.metamodelRepository = new CombinedMetamodelRepository(dbMetaModelRepository, metamodelRepository);
 	}
 	
 	public void setTestdataGenerator(TestDataGenerator testdataGenerator) {

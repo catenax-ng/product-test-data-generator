@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.catenax.tdm.metamodel.MetamodelRepository;
+import com.catenax.tdm.metamodel.MetaModelResourceRepository;
 
 public class SimpleTestDataGenerator implements TestDataGenerator {
 
@@ -23,7 +23,7 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 	private static final DataFactory dataFactory = new DataFactory();
 
 	@Autowired
-	private MetamodelRepository metamodelRepository;
+	private MetaModelResourceRepository metamodelRepository;
 
 	@Override
 	public Object generateObject(String name, JSONObject pDefinition, JSONObject jsonSchema) {

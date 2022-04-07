@@ -17,7 +17,7 @@
 # If you intend to use the test data generator in new branches/workspaces/landscapes, see the comments marked 
 # ADAPT HERE TO ADD NEW WORKSPACES
 
-name: TestDataGenerator
+name: TestDataGeneratorUI
 
 on: 
   push:
@@ -43,7 +43,7 @@ jobs:
       - name: Set variables
         id: setvars
         run: |
-            if [[ "${{github.repository}}" == catenax/tractusx ]]; then
+            if [[ "${{github.repository}}" == catenax/TestDataGenerator ]]; then
               if [[ "${{github.ref}}" == refs/heads/main ]]; then
                 echo "Determined INTEGRATION"
                 echo "::set-output name=workspace::int"
@@ -86,7 +86,7 @@ jobs:
 
       # Substitute placeholders in application properties file before build
       - name: Configure application properties
-        working-directory: ./data/tdm/generator/src/main/resources
+        working-directory: ./tdg-admin-ui/src/main/resources
         env: 
           DB_USER: ${{ secrets.CATENAX_USER }}@catenax${{needs.environment.outputs.workspace}}database
           DB_PWD: ${{ secrets.CATENAX_PASSWORD }}
@@ -100,12 +100,12 @@ jobs:
 
       # Add test data files to add HERE
       - name: Patch content from private repo into resource folder by invoking git clone
-        working-directory: ./data/tdm/generator/src/main/resources
+        working-directory: ./tdg-admin-ui/src/main/resources
         run: |
           git clone https://${{secrets.TESTDATA_ACCESSTOKEN}}:x-oauth-basic@github.com/catenax/testdata.git          
 
       - name: Build with Maven
-        working-directory: ./data/tdm/generator
+        working-directory: ./tdg-admin-ui
         run: |
           mvn clean package -DskipTests
 
@@ -122,7 +122,7 @@ jobs:
           password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
 
       - name: Build and push docker image for test data generator
-        working-directory: ./data/tdm/generator
+        working-directory: ./tdg-admin-ui
         run: |
           docker build -f src/main/docker/Dockerfile -t catenaxacr.azurecr.io/tractusx/tdmapp${{needs.environment.outputs.workspace}}:${{ github.run_id }} .
           docker push catenaxacr.azurecr.io/tractusx/tdmapp${{needs.environment.outputs.workspace}}:${{ github.run_id }}

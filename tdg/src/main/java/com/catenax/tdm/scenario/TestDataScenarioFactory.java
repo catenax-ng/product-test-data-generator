@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.catenax.tdm.Config;
 import com.catenax.tdm.dao.DataTemplateRepository;
-import com.catenax.tdm.metamodel.MetamodelRepository;
+import com.catenax.tdm.metamodel.MetaModelResourceRepository;
 import com.catenax.tdm.model.DataTemplate;
 import com.catenax.tdm.resource.TDMResourceLoader;
 import com.catenax.tdm.testdata.TestDataGenerator;
@@ -31,7 +31,7 @@ public class TestDataScenarioFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(TestDataScenarioFactory.class);
 
-	private MetamodelRepository metamodelRepository;
+	private MetaModelResourceRepository metamodelRepository;
 	private TestDataGenerator testdataGenerator;
 	private DataTemplateRepository dataTemplateRepository;
 	
@@ -46,8 +46,10 @@ public class TestDataScenarioFactory {
 	public static String CX_SCHEMA_PREFIX = "https://catenax.com/schema/";
 	
 	private boolean autoAddTestdata = true;
+	private boolean autoAddAas = false;
+	private Optional<DataTemplate> aasTemplate = null;
 	
-	public TestDataScenarioFactory(MetamodelRepository metamodelRepository, TestDataGenerator testdataGenerator) {
+	public TestDataScenarioFactory(MetaModelResourceRepository metamodelRepository, TestDataGenerator testdataGenerator) {
 		this.metamodelRepository = metamodelRepository;
 		this.testdataGenerator = testdataGenerator;
 	}
@@ -321,6 +323,16 @@ public class TestDataScenarioFactory {
 	public void setAutoAddTestdata(boolean autoAdd) {
 		this.autoAddTestdata = autoAdd;
 	}
+	
+	
+	public void disableAas() {
+		this.autoAddAas = false;
+	}
+	
+	public void setAutoAddAas(String templateName, String templateVersion) {
+		this.autoAddAas = true;
+		this.aasTemplate = this.getDataTemplateRepository().findByNameAndVersion(templateName, templateVersion);
+	}
 
 	public JSONArray generateTestData(JSONObject definition, int count) throws Exception {
 		List<JSONObject> instances = new ArrayList<>();
@@ -407,6 +419,10 @@ public class TestDataScenarioFactory {
 
 	public void setDataTemplateRepository(DataTemplateRepository dataTemplateRepository) {
 		this.dataTemplateRepository = dataTemplateRepository;
+	}
+
+	public Optional<DataTemplate> getAasTemplate() {
+		return aasTemplate;
 	}
 
 }

@@ -26,11 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.catenax.tdm.Config;
 import com.catenax.tdm.dao.DataTemplateRepository;
+import com.catenax.tdm.dao.MetaModelRepository;
 import com.catenax.tdm.dao.TestDataScenarioInstanceRepository;
 import com.catenax.tdm.dao.TestDataScenarioRepository;
 import com.catenax.tdm.deo.TestDataScenarioInstanceStatus;
-import com.catenax.tdm.metamodel.MetamodelRepository;
+import com.catenax.tdm.metamodel.MetaModelResourceRepository;
 import com.catenax.tdm.model.DataTemplate;
+import com.catenax.tdm.model.MetaModel;
 import com.catenax.tdm.model.TestDataScenario;
 import com.catenax.tdm.model.TestDataScenario.TestDataScenarioStatus;
 import com.catenax.tdm.model.TestDataScenario.TestDataScenarioType;
@@ -41,7 +43,6 @@ import com.catenax.tdm.scenario.TestDataScenarioService;
 import com.catenax.tdm.scripting.ScriptEngine;
 import com.catenax.tdm.testdata.TestDataGenerator;
 import com.catenax.tdm.util.JsonUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -57,7 +58,7 @@ public class CatenaXApiController implements CatenaXApi {
 	private final HttpServletRequest request;
 
 	@Autowired
-	private MetamodelRepository metamodelRepository;
+	private MetaModelResourceRepository metaModelResourceRepository;
 
 	@Autowired
 	private TestDataGenerator testdataGenerator;
@@ -73,6 +74,9 @@ public class CatenaXApiController implements CatenaXApi {
 
 	@Autowired
 	private DataTemplateRepository dataTemplateRepository;
+	
+	@Autowired
+	private MetaModelRepository metaModelRepository;
 
 	@org.springframework.beans.factory.annotation.Autowired
 	public CatenaXApiController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -167,17 +171,17 @@ public class CatenaXApiController implements CatenaXApi {
 	}
 	
 
-	@Override
-	public ResponseEntity<String> getModelDescription(String model, String version) {
+	private ResponseEntity<String> getModelDescription(String model, String version) {
 		try {
 			isUser();
-			String result = this.metamodelRepository.getMetamodelAsString(model, version);
+			String result = this.metaModelResourceRepository.getMetamodelAsString(model, version);
 			return new ResponseEntity<String>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 
 	@Override
 	public ResponseEntity<String> getTestdata(String pModel, String pVersion, Integer pCount) {
@@ -237,6 +241,115 @@ public class CatenaXApiController implements CatenaXApi {
 			e.printStackTrace();
 			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@Override
+	public ResponseEntity<List<MetaModel>> getMetaModels(String name, String version) {
+		isUser();
+		List<MetaModel> result = new ArrayList<>();
+		String wildcard = "*";
+		if ((wildcard.equals(name) && wildcard.equals(version)) || (name == null && version == null)) {
+			result = this.metaModelRepository.findAll();
+		} else if (wildcard.equals(name) && version != null) {
+			Optional<List<MetaModel>> o = this.metaModelRepository.findAllByVersion(version);
+			if (o.isPresent()) {
+				result = o.get();
+			}
+		} else if (name != null && wildcard.equals(version)) {
+			Optional<List<MetaModel>> o = this.metaModelRepository.findAllByName(name);
+			if (o.isPresent()) {
+				result = o.get();
+			}
+		} else {
+			Optional<MetaModel> tds = this.metaModelRepository.findByNameAndVersion(name, version);
+			if (tds.isPresent()) {
+				result.add(tds.get());
+			} else {
+				String content = getModelDescription(name, version).getBody();
+				try {
+					if(content != null && content.strip().length() > 0) {
+						MetaModel mm = new MetaModel(); // this.objectMapper.readValue(str, TestDataScenario.class);
+						mm.setName(name);
+						mm.setVersion(version);
+						mm.setContent(content);
+						
+						result.add(mm);	
+					}
+				} catch (Exception e) {
+					log.error("cannot find MetaModel with name '" + name + "' version " + version);
+					return new ResponseEntity<List<MetaModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+			}
+		}
+		return new ResponseEntity<List<MetaModel>>(result, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<MetaModel> createMetaModel(@Valid MetaModel metaModel) {
+		return updateMetaModel(metaModel);
+	}
+
+	@Override
+	public ResponseEntity<MetaModel> updateMetaModel(@Valid MetaModel metaModel) {
+		try {
+			Optional<MetaModel> mmo = this.metaModelRepository.findByNameAndVersion(metaModel.getName(), metaModel.getVersion());
+			if(mmo.isPresent()) {
+				MetaModel mm = mmo.get();
+				mm.setContent(metaModel.getContent());
+				mm = this.metaModelRepository.save(mm);
+				return new ResponseEntity<MetaModel>(mm, HttpStatus.OK);
+			} else {
+				MetaModel mm = this.metaModelRepository.save(metaModel);
+				return new ResponseEntity<MetaModel>(mm, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		return new ResponseEntity<MetaModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<MetaModel> updateMetaModelContent(String name, String version, @Valid String content) {
+		try {
+			Optional<MetaModel> mmo = this.metaModelRepository.findByNameAndVersion(name, version);
+			if(mmo.isPresent()) {
+				MetaModel mm = mmo.get();
+				mm.setContent(content);
+				mm = this.metaModelRepository.save(mm);
+				return new ResponseEntity<MetaModel>(mm, HttpStatus.OK);
+			} else {
+				// comfort function: create metamodel even if non existent yet
+				MetaModel mm = new MetaModel();
+				mm.setName(name);
+				mm.setVersion(version);
+				mm.setContent(content);
+				mm = this.metaModelRepository.save(mm);
+				return new ResponseEntity<MetaModel>(mm, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		return new ResponseEntity<MetaModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<Boolean> deleteMetaModel(String name, String version) {
+		try {
+			isUser();
+
+			Optional<MetaModel> mmo = this.metaModelRepository.findByNameAndVersion(name, version);
+			boolean result = false;
+			
+			if(mmo.isPresent()) {
+				this.metaModelRepository.delete(mmo.get());
+				result = true;
+			} 
+			
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
@@ -407,7 +520,7 @@ public class CatenaXApiController implements CatenaXApi {
 								// .parseScenarioFromResource("scenario/" + scenario + "_v" + version + ".txt");
 								.parseScenarioFromString(tds.getContent());
 
-						executor.setMetamodelRepository(this.metamodelRepository);
+						executor.setMetamodelRepository(this.metaModelRepository, this.metaModelResourceRepository);
 						executor.setTestdataGenerator(testdataGenerator);
 
 						result = executor.execute(this.scriptEngine, includeGraphQL);
@@ -492,7 +605,7 @@ public class CatenaXApiController implements CatenaXApi {
 						// .parseScenarioFromResource("scenario/" + scenario + "_v" + version + ".txt");
 						.parseScenarioFromString(tds.getContent());
 
-				executor.setMetamodelRepository(this.metamodelRepository);
+				executor.setMetamodelRepository(this.metaModelRepository, this.metaModelResourceRepository);
 				executor.setTestdataGenerator(testdataGenerator);
 
 				result = executor.execute(this.scriptEngine, false);

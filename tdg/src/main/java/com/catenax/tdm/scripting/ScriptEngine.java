@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.catenax.tdm.dao.DataTemplateRepository;
-import com.catenax.tdm.metamodel.MetamodelRepository;
+import com.catenax.tdm.metamodel.MetaModelResourceRepository;
 import com.catenax.tdm.model.TestDataScenario;
 import com.catenax.tdm.resource.TDMResourceLoader;
 import com.catenax.tdm.scenario.TestDataScenarioFactory;
@@ -25,9 +25,9 @@ public class ScriptEngine {
 	private static final ScriptEngineManager ENGINE_MANAGER = getEngineManager();
 	private javax.script.ScriptEngine engine = null;
 
-	private MetamodelRepository metamodelRepository;
+	private MetaModelResourceRepository metamodelRepository;
 	private TestDataGenerator testdataGenerator;
-	private TestDataScenarioFactory scenarioFactory;
+	// private TestDataScenarioFactory scenarioFactory;
 	private DataTemplateRepository dataTemplateRepository;
 	
 	private static final ScriptEngineManager getEngineManager() {
@@ -42,11 +42,11 @@ public class ScriptEngine {
 		return result;
 	}
 
-	public ScriptEngine(MetamodelRepository metamodelRepository, TestDataGenerator testdataGenerator) {
+	public ScriptEngine(MetaModelResourceRepository metamodelRepository, TestDataGenerator testdataGenerator) {
 		this.metamodelRepository = metamodelRepository;
 		this.testdataGenerator = testdataGenerator;
 
-		this.scenarioFactory = new TestDataScenarioFactory(metamodelRepository, testdataGenerator);
+		// this.scenarioFactory = new TestDataScenarioFactory(metamodelRepository, testdataGenerator);
 	}
 
 	private Bindings createBindings() {
@@ -56,17 +56,14 @@ public class ScriptEngine {
 
 		b.put("log", log);
 		b.put("metamodel", this.metamodelRepository);
-		b.put("generator", this.testdataGenerator);
-		b.put("scenario", this.scenarioFactory);		
+		b.put("generator", this.testdataGenerator);		
 		b.put("dataFactory", dataFactory);
 		b.put("rand", dataFactory);
 		
 		
 		ObjectMapper om = new ObjectMapper();
 		b.put("om", om);
-		
-		JSONObject js = null;
-		
+
 
 		return b;
 	}
@@ -82,16 +79,20 @@ public class ScriptEngine {
 	public Object executeScript(String script, boolean includeGraphQL) throws Exception {
 		String content = null;
 		try {
+			TestDataScenarioFactory scenarioFactory = new TestDataScenarioFactory(this.metamodelRepository, this.testdataGenerator);
+			scenarioFactory.setDataTemplateRepository(this.dataTemplateRepository);
+			
 			Bindings bindings = this.createBindings();
+			bindings.put("scenario", scenarioFactory);
 
 			content = TDMResourceLoader.resourceToString("TestDataScenarioScriptTemplate.js").replace("${script}",
 					script);
 
 			log.info("Execute Script: " + content);
 
-			this.scenarioFactory.flush();
+			scenarioFactory.flush();
 			engine.eval(content, bindings);
-			return this.scenarioFactory.getResult(includeGraphQL);
+			return scenarioFactory.getResult(includeGraphQL);
 		} catch (Exception e) {
 			log.error(content);
 			e.printStackTrace();
@@ -101,7 +102,7 @@ public class ScriptEngine {
 
 	public void setDataTemplateRepository(DataTemplateRepository dataTemplateRepository) {
 		this.dataTemplateRepository = dataTemplateRepository;
-		this.scenarioFactory.setDataTemplateRepository(dataTemplateRepository);
+		// this.scenarioFactory.setDataTemplateRepository(dataTemplateRepository);
 	}
 
 }

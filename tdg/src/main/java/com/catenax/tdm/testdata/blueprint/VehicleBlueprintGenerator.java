@@ -122,6 +122,32 @@ public class VehicleBlueprintGenerator {
 				JSONObject gc = generateChild(item, parent, itemContainer, null);
 				result.put(gc);
 				this.takenCatenaXIds.put(cxId, itemContainer);
+				
+				if(scenario.getAasTemplate() != null) {
+					JSONObject aas = null;					
+					JSONObject aasDef = null;
+					
+					String content = scenario.getAasTemplate().get().getContent();
+					
+					try {
+						// log.info("GRRRRRRRRRRRR");
+						aas = new JSONObject(content);
+						aasDef = new JSONObject();					
+						aasDef.put("$id", "https://catenax.com/schema/AAS/3.0");
+						
+						JSONObject subModelTemplate = new JSONObject(aas.getJSONArray("submodelDescriptors").get(0).toString());
+						aas.remove("submodelDescriptors");
+						
+						JSONArray subModels = new JSONArray();
+						
+						aas.put("submodelDescriptors", subModels);
+						scenario.addToContainer(itemContainer, aas, aasDef);
+					} catch (Exception e) {
+						log.error(e.getMessage());
+						// log.error(content);
+						// log.error("AAS: " + aas + " // " + aasDef);
+					}
+				}
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());

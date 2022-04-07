@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.catenax.tdm.deo.TestDataScenarioInstanceStatus;
 import com.catenax.tdm.model.DataTemplate;
+import com.catenax.tdm.model.MetaModel;
 import com.catenax.tdm.model.TestDataScenario;
 import com.catenax.tdm.model.TestDataScenario.TestDataScenarioStatus;
 import com.catenax.tdm.model.TestDataScenario.TestDataScenarioType;
@@ -31,6 +32,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @Validated
 public interface CatenaXApi {
+	/*
 	@Operation(summary = "get metamodel schema description", description = "Retrieve Metamodel Schema", tags = { "Metamodel" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Metamodel Schema", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
@@ -42,7 +44,7 @@ public interface CatenaXApi {
 			@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("model") String model,
 			@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("version") String version
 			);
-	
+	*/
 	
 	@Operation(summary = "Generate test data for schema", description = "Generate test data for schema", tags = { "Testdata" })
 	@ApiResponses(value = {
@@ -270,6 +272,72 @@ public interface CatenaXApi {
 			@Parameter(in = ParameterIn.PATH, description = "", schema = @Schema()) @PathVariable("version") String version
 			);
 	
+	/* MetaModel */
+	
+	@Operation(summary = "Get MetaModel(s)", description = "Get MetaModel(s)", tags = { "Meta Model" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
+			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel/{name}/{version}", 
+			produces = {MediaType.APPLICATION_JSON_VALUE},
+			method = RequestMethod.GET)
+	ResponseEntity<List<MetaModel>> getMetaModels(
+			@Parameter(in = ParameterIn.PATH, description = "", schema = @Schema()) @PathVariable("name") String name,
+			@Parameter(in = ParameterIn.PATH, description = "", schema = @Schema()) @PathVariable("version") String version
+			);
+	
+	@Operation(summary = "Create MetaModel", description = "Create MetaModel", tags = { "Meta Model" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
+			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel", 
+			produces = {MediaType.APPLICATION_JSON_VALUE},
+			method = RequestMethod.POST)
+	ResponseEntity<MetaModel> createMetaModel(
+			@ApiParam(value = "", required=true ) 
+			@Valid @RequestBody MetaModel metaModel
+			);
+	
+	@Operation(summary = "Update MetaModel", description = "Update MetaModel", tags = { "Meta Model" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
+			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel", 
+			produces = {MediaType.APPLICATION_JSON_VALUE},
+			method = RequestMethod.PUT)
+	ResponseEntity<MetaModel> updateMetaModel(
+			@ApiParam(value = "", required=true ) 
+			@Valid @RequestBody MetaModel metaModel
+			);
+	
+	@Operation(summary = "Update MetaModel content", description = "Update MetaModel content", tags = { "Meta Model" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
+			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel/{name}/{version}/content", 
+			produces = {MediaType.APPLICATION_JSON_VALUE},
+			method = RequestMethod.PUT)
+	ResponseEntity<MetaModel> updateMetaModelContent(
+			@Parameter(in = ParameterIn.PATH, description = "", schema = @Schema()) @PathVariable("name") String name,
+			@Parameter(in = ParameterIn.PATH, description = "", schema = @Schema()) @PathVariable("version") String version,
+			@ApiParam(value = "", required=true ) 
+			@Valid @RequestBody String content
+			);
+	
+	
+	@Operation(summary = "Delete MetaModel", description = "Delete MetaModel", tags = { "Meta Model" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Data Template", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
+			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel/{name}/{version}", 
+			produces = {MediaType.APPLICATION_JSON_VALUE},
+			method = RequestMethod.DELETE)
+	ResponseEntity<Boolean> deleteMetaModel(
+			@Parameter(in = ParameterIn.PATH, description = "", schema = @Schema()) @PathVariable("name") String name,
+			@Parameter(in = ParameterIn.PATH, description = "", schema = @Schema()) @PathVariable("version") String version
+			);
+	
+	// Test Server Function
 	@Operation(summary = "Test function", description = "Test function", tags = { "Test" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),

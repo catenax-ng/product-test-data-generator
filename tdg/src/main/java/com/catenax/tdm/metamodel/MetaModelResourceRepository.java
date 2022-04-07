@@ -2,7 +2,7 @@ package com.catenax.tdm.metamodel;
 
 import org.json.JSONObject;
 
-public interface MetamodelRepository {
+public interface MetaModelResourceRepository {
 	
 	public String getMetamodelAsString(String pMetamodel, String pVersion) throws Exception;
 

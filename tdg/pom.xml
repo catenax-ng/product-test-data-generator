@@ -139,6 +139,7 @@
 				<version>${javadoc-version}</version>
 				<configuration>
 					<show>private</show>
+					<reportOutputDirectory>${project.reporting.outputDirectory}/../../../documentation/tdg/javadoc</reportOutputDirectory>
 					<destDir>doc</destDir>
 				</configuration>
 			</plugin>
@@ -169,6 +170,51 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>com.catenax.tdm.api.CatenaXApi</locations>
+                            <schemes>http,https</schemes>
+                            <host>sample.com</host>
+                            <basePath>/api</basePath>
+                            <info>
+                                <title>Swagger Maven Plugin Spring MVC working example</title>
+                                <version>v1</version>
+                                <description>Working sample of Spring MVC annotations</description>
+                                <termsOfService>
+                                    http://www.github.com
+                                </termsOfService>
+                                <contact>
+                                    <email>your@email.com</email>
+                                    <name>Name Surname</name>
+                                    <url>http</url>
+                                </contact>
+                                <license>
+                                    <url>http://www.license.com</url>
+                                    <name>License name</name>
+                                </license>
+                            </info>
+                            <outputFormats>json,yaml</outputFormats>
+                            <outputPath>${basedir}/swagger/document.html</outputPath>
+                            <swaggerDirectory>${basedir}/swagger/swagger-ui</swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 		</plugins>
 	</build>

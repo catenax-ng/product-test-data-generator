@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class SemanticMetamodelRepository extends ResourceMetamodelRepository {
+public class SemanticMetaModelRepository extends ResourceMetaModelRepository {
 
-	private static final Logger log = LoggerFactory.getLogger(SemanticMetamodelRepository.class);
+	private static final Logger log = LoggerFactory.getLogger(SemanticMetaModelRepository.class);
 
 	private ObjectMapper objectMapper = buildObjectMapper();
 
