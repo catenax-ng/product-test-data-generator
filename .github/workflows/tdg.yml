@@ -90,13 +90,6 @@ jobs:
         working-directory: ./tdg
         run: |
           mvn clean package -DskipTests
-          
-      - name: Login to Docker Registry
-        uses: azure/docker-login@v1
-        with:
-          login-server: catenaxacr.azurecr.io
-          username: catenaxacr
-          password: ${{secrets.AZURE_REGISTRY_PASSWORD}}
 
       - name: Build and push docker image for test data generator
         working-directory: ./tdg
