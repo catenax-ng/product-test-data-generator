@@ -94,5 +94,5 @@ jobs:
       - name: Build and push docker image for test data generator
         working-directory: ./tdg
         run: |
-          docker build -f src/main/docker/Dockerfile -t catenaxacr.azurecr.io/tractusx/tdmapp${{needs.environment.outputs.workspace}}:${{ github.run_id }} .
+          docker build -f src/main/docker/Dockerfile -t catenaxacr.azurecr.io/tractusx/tdg${{needs.environment.outputs.workspace}}:${{ github.run_id }} .
 

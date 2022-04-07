@@ -26,6 +26,8 @@ on:
       - 'tdg-admin-ui/**'
       # this workflow file
       - '.github/workflows/tdg-admin-ui.yml'
+    branches:
+      - main
     
 jobs:
   ########################################
@@ -60,7 +62,7 @@ jobs:
   #########################################################################################
   
   deploy:
-    name: Deploy Test Data Generator
+    name: Build Test Data Generator
     runs-on: ubuntu-latest
     # rely on the first job
     needs: environment
@@ -71,10 +73,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up JDK 11
+      - name: Set up JDK 12
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
+          java-version: '12'
           distribution: 'adopt'
 
       - name: Cache maven packages
@@ -84,53 +86,12 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # Substitute placeholders in application properties file before build
-      - name: Configure application properties
-        working-directory: ./tdg-admin-ui/src/main/resources
-        env: 
-          DB_USER: ${{ secrets.CATENAX_USER }}@catenax${{needs.environment.outputs.workspace}}database
-          DB_PWD: ${{ secrets.CATENAX_PASSWORD }}
-          DB_HOST: catenax${{needs.environment.outputs.workspace}}database.postgres.database.azure.com
-          DB_PORT: 5432
-          DB_NAME: tdmdb
-        run: |
-          envsubst < application.properties > application.properties.tmp
-          rm application.properties
-          mv application.properties.tmp application.properties
-
-      # Add test data files to add HERE
-      - name: Patch content from private repo into resource folder by invoking git clone
-        working-directory: ./tdg-admin-ui/src/main/resources
-        run: |
-          git clone https://${{secrets.TESTDATA_ACCESSTOKEN}}:x-oauth-basic@github.com/catenax/testdata.git          
-
       - name: Build with Maven
         working-directory: ./tdg-admin-ui
         run: |
           mvn clean package -DskipTests
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-      - name: Login to ACR
-        uses: azure/docker-login@v1
-        with:
-          login-server: catenaxacr.azurecr.io
-          username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
-          password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
-
       - name: Build and push docker image for test data generator
         working-directory: ./tdg-admin-ui
         run: |
-          docker build -f src/main/docker/Dockerfile -t catenaxacr.azurecr.io/tractusx/tdmapp${{needs.environment.outputs.workspace}}:${{ github.run_id }} .
-          docker push catenaxacr.azurecr.io/tractusx/tdmapp${{needs.environment.outputs.workspace}}:${{ github.run_id }}
-
-      - name: Deploy TDM to Azure Container Instances
-        run: |
-          if [[ "${{needs.environment.outputs.workspace}}" == int ]]; then
-            az container create --resource-group shared-services-rg --name tdmgeneratorint --image catenaxacr.azurecr.io/tractusx/tdmapp${{needs.environment.outputs.workspace}}:${{ github.run_id }} --restart-policy OnFailure --environment-variables TDM_HOST_SECURE=false TDM_HOST_NAME=tdmgeneratorint.germanywestcentral.azurecontainer.io TDM_HOST_PORT=8080 TDM_API_KEY=${{ secrets.TDM_APIKEY_INT }} --ports 8080 --dns-name-label tdmgeneratorint --registry-password ${{ secrets.AZURE_REGISTRY_PASSWORD }} --registry-username ${{ secrets.AZURE_REGISTRY_USERNAME }} --cpu 2 --memory 3.5
-          else
-            az container create --resource-group shared-services-rg --name tdmgeneratordev --image catenaxacr.azurecr.io/tractusx/tdmapp${{needs.environment.outputs.workspace}}:${{ github.run_id }} --restart-policy OnFailure --environment-variables TDM_HOST_SECURE=false TDM_HOST_NAME=tdmgeneratordev.germanywestcentral.azurecontainer.io TDM_HOST_PORT=8080 TDM_API_KEY=${{ secrets.TDM_APIKEY_DEV }} --ports 8080 --dns-name-label tdmgeneratordev --registry-password ${{ secrets.AZURE_REGISTRY_PASSWORD }} --registry-username ${{ secrets.AZURE_REGISTRY_USERNAME }} --cpu 2 --memory 3.5
-          fi
+          docker build -f src/main/docker/Dockerfile -t catenaxacr.azurecr.io/tractusx/tdg-admin-ui${{needs.environment.outputs.workspace}}:${{ github.run_id }} .
