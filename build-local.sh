@@ -6,19 +6,19 @@ export hostname="192.168.1.229"
 cd tdg
 pwd
 
-#mvn clean package
+mvn clean package
 
 image="$repo/tdg:main"
-#docker build -f ./src/main/docker/Dockerfile -t $image .
+docker build -f ./src/main/docker/Dockerfile -t $image .
 
 cd ..
 cd tdg-admin-ui
 pwd
 
-#mvn clean package
+mvn clean package
 
 image="$repo/tdg-admin-ui:main"
-#docker build -f ./src/main/docker/Dockerfile -t $image .
+docker build -f ./src/main/docker/Dockerfile -t $image .
 
 cd ..
 
