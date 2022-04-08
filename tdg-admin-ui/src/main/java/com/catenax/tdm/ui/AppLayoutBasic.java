@@ -8,11 +8,13 @@ import org.slf4j.LoggerFactory;
 
 import com.catenax.tdm.Env;
 import com.catenax.tdm.security.SecurityUtils;
+import com.catenax.tdm.ui.view.AbstractEditor;
 import com.catenax.tdm.ui.view.datatemplate.DataTemplateEditor;
 import com.catenax.tdm.ui.view.testdatascenario.TestDataScenarioEditor;
 import com.catenax.tdm.ui.view.testdatascenario.instance.TestDataScenarioInstanceEditor;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Anchor;
@@ -22,6 +24,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.Tabs.SelectedChangeEvent;
@@ -46,7 +49,7 @@ public class AppLayoutBasic extends AppLayout {
 		title.getStyle().set("padding", "15px");
 		title.getStyle().set("font-size", "var(--lumo-font-size-l)").set("margin", "0");
 
-		this.tabs = generateTabs();
+		generateTabs();
 		
 		String logoutUrl = Env.get(Env.TDG_IAM_SERVER_URL, null) + "/realms/" + Env.get(Env.TDG_IAM_REALM, null) + 
 				"/protocol/openid-connect/logout?redirect_uri=" +
@@ -66,16 +69,25 @@ public class AppLayoutBasic extends AppLayout {
         Image img = new Image("https://catena-x.net/fileadmin/user_upload/logos/logo.svg", "Catena-X");
         img.setHeight("44px");
 
-		this.addToDrawer(tabs);
+		this.addToDrawer(this.tabs);
 		this.addToNavbar(toggle, img, title, right);
-		this.setContent(content);
 		
-		
+		this.setContent(this.content);
+		/*
+		Page page = UI.getCurrent().getPage();
+		page.addBrowserWindowResizeListener(event -> {
+			log.info("Resize");
+			
+			String w = "";
+			String h = "";
+			
+		    content.setWidth(w);
+		    content.setHeight(h);
+		});
+		*/
 	}
 
-	private Tabs generateTabs() {
-		Tabs tabs = new Tabs();
-
+	private void generateTabs() {
 		// Cockpit
 		Tab tabCockpit = new Tab(VaadinIcon.BAR_CHART.create(), new Span("Cockpit"));
 		Div divCockpit = generateCockpit();
@@ -96,6 +108,7 @@ public class AppLayoutBasic extends AppLayout {
 		Div divTemplates = generateTemplates();
 		tabsToPages.put(tabTemplates, divTemplates);
 		
+		// Metamodel editor
 		Tab tabMetamodel = new Tab(VaadinIcon.BAR_CHART.create(), new Span("Meta Models"));
 		Div divMetamodel = generateMetaModels();
 		tabsToPages.put(tabMetamodel, divMetamodel);
@@ -105,11 +118,11 @@ public class AppLayoutBasic extends AppLayout {
 		tabsToPages.put(tabFunctions, divFunctions);
 
 		// -------------------------------------------
-		content = new Div(divCockpit, divScenarios, divScenarioInstances, divTemplates, divMetamodel, divFunctions);
-		content.setSizeFull();
+		content = new Div(/*divCockpit, */divScenarios, divScenarioInstances, divTemplates/*, divMetamodel, divFunctions*/);
+		// content.setSizeFull();
 		// -------------------------------------------
 
-		tabs = new Tabs(tabCockpit, tabScenarios, tabScenarioInstances, tabTemplates, tabMetamodel, tabFunctions);
+		tabs = new Tabs(/*tabCockpit, */tabScenarios, tabScenarioInstances, tabTemplates/*, tabMetamodel, tabFunctions*/);
 		tabs.setOrientation(Tabs.Orientation.VERTICAL);
 		tabs.addSelectedChangeListener(new ComponentEventListener<Tabs.SelectedChangeEvent>() {
 			@Override
@@ -118,29 +131,37 @@ public class AppLayoutBasic extends AppLayout {
 			}
 		});
 
-		return tabs;
+		tabs.setSelectedTab(tabScenarios);
 	}
 
 	private void selectTab(SelectedChangeEvent event) {
 		Tab tab = event.getSelectedTab();
+		selectTab(tab);
+	}
+	
+	private void selectTab(Tab tab) {
 		log.info("Select Tab '" + tab.toString() + "'");
 
 		tabsToPages.values().forEach(page -> page.setVisible(false));
 		if (tabsToPages.containsKey(tabs.getSelectedTab())) {
 			Component selectedPage = tabsToPages.get(tabs.getSelectedTab());
 			selectedPage.setVisible(true);
+			if(selectedPage instanceof AbstractEditor) {
+				((AbstractEditor) selectedPage).resize();
+			}
 		}
 	}
 
 	private Div generateCockpit() {
 		Div result = new Div();
-
+		result.setVisible(false);
+		
 		return result;
 	}
 
 	private Div generateScenarios() {
 		TestDataScenarioEditor ui = new TestDataScenarioEditor();
-		ui.setVisible(false);
+		ui.setVisible(true);
 
 		return ui;
 	}

@@ -1,2 +1,13 @@
 /node_modules/
 /.settings/
+/.classpath
+/.npmrc
+/.project
+/package.json
+/pnpm-lock.yaml
+/pnpmfile.js
+/target/
+/tsconfig.json
+/types.d.ts
+/webpack.config.js
+/webpack.generated.js

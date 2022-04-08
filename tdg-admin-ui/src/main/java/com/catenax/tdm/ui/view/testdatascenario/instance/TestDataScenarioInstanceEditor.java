@@ -26,6 +26,8 @@ public class TestDataScenarioInstanceEditor extends AbstractEditor<TestDataScena
 		this.aceEditor.setReadOnly(true);
 		this.getRightToolbar().removeAll();
 		this.aceEditor.setMode(AceMode.json);
+		
+		this.btnNew.setVisible(false);
 	}
 
 	@Override

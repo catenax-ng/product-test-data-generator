@@ -17,14 +17,17 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasValue.ValueChangeEvent;
 import com.vaadin.flow.component.HasValue.ValueChangeListener;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Page;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.server.InputStreamFactory;
 import com.vaadin.flow.server.StreamRegistration;
@@ -39,15 +42,22 @@ public abstract class AbstractEditor<T> extends Div {
 	
 	private static final Logger log = LoggerFactory.getLogger(AbstractEditor.class);
 
-	private static final String LABEL_DOWNLOAD = "Download JSON";
+	private static final String LABEL_DOWNLOAD = "Download Testdata (JSON)";
 
 	private static final long serialVersionUID = 1608298132734019198L;
 	
 	private TDGClient client = null;
+	
+	protected Div master = new Div();
+	protected Div detail = new Div();
+	protected Div detailMaster = new Div();
+
+	protected SplitLayout splitLayout = new SplitLayout(master, detailMaster);
+	
 	protected AceEditor aceEditor = null;
 	protected AceEditor aceResult = null;
 	protected HorizontalLayout toolbar = new HorizontalLayout();
-	protected VerticalLayout dlContainer = new VerticalLayout();
+	protected Span dlContainer = new Span();
 	protected T selected = null;
 	
 	protected List<T> items = new ArrayList<T>();
@@ -65,6 +75,8 @@ public abstract class AbstractEditor<T> extends Div {
 	protected abstract  void deleteSelection();
 	
 	protected abstract void saveCurrent();
+	
+	protected Button btnNew = new Button(VaadinIcon.PLUS.create());
 	
 	private CreateDialog<T> dialog = null;
 	
@@ -92,55 +104,19 @@ public abstract class AbstractEditor<T> extends Div {
 	protected void init() {
 		client = new TDGClient();
 		
-		VerticalLayout vl = new VerticalLayout();
-
-		int h = 700;
+		// this.setSizeFull();
+		
+		// this.splitLayout.setSizeFull();
+		this.splitLayout.setSplitterPosition(25);
 		
 		Button btnSave = new Button(VaadinIcon.DISC.create());
-		Button btnNew = new Button(VaadinIcon.PLUS.create());
+		
 		Button btnDelete = new Button(VaadinIcon.MINUS.create());
 		Button btnRefresh = new Button(VaadinIcon.REFRESH.create());
 		
 		btnSave.setText("Save");
 		btnNew.setText("New");
 		btnDelete.setText("Delete");
-		
-		
-		// toolbar.add(btnSave, btnRun, btnNew, btnDelete);
-		
-		HorizontalLayout l = new HorizontalLayout();
-		//l.setWidth((w + 50) + "px");
-		//l.setHeight((h + 10) + "px");
-		
-		
-
-		itemList.setHeight(h + "px");
-		itemList.setWidth("300px");
-
-		aceEditor = new AceEditor();
-		aceEditor.setValue("");
-
-		aceEditor.setTheme(AceTheme.github); //eclipse);
-		// aceEditor.setMode(AceMode.javascript);
-		aceEditor.setMode(AceMode.text);
-
-		aceEditor.setFontSize(14);
-		aceEditor.setSoftTabs(false);
-		aceEditor.setTabSize(4);
-		aceEditor.setWidth("800px");
-		aceEditor.setHeight(h + "px");
-
-		
-		aceResult = new AceEditor();
-		aceResult.setWidth("1100px");
-		aceResult.setHeight("500px");
-		aceResult.setReadOnly(true);
-		aceResult.setVisible(false);
-		
-		vl.add(toolbar);
-		vl.add(l);
-		vl.add(aceResult);
-		// vl.add(dlContainer);
 		
 		this.leftToolbar = new HorizontalLayout(btnNew, btnDelete, btnRefresh);
 		this.rightToolbar = new HorizontalLayout(btnSave);
@@ -156,15 +132,45 @@ public abstract class AbstractEditor<T> extends Div {
 		
 		dlContainer.setHeight(editorTitle.getHeight());
 		
+		itemList.setSizeFull();
+		
+		// Content Editor
+		aceEditor = new AceEditor();
+		aceEditor.setValue("");
+
+		aceEditor.setTheme(AceTheme.github); //eclipse);
+		// aceEditor.setMode(AceMode.javascript);
+		aceEditor.setMode(AceMode.text);
+
+		aceEditor.setFontSize(14);
+		aceEditor.setSoftTabs(false);
+		aceEditor.setTabSize(4);
+		//aceEditor.setWidth("800px");
+		//aceEditor.setHeight(h + "px");
+		
+		//aceEditor.setSizeFull();
+		
+		this.searchBox.setPrefixComponent(VaadinIcon.SEARCH.create());
+
+		// element composition
+		master.add(this.leftToolbar);
+		master.add(this.searchBox);
+		master.add(this.itemList);
+		
 		HorizontalLayout hlTop = new HorizontalLayout();
 		hlTop.add(editorTitle);
 		hlTop.add(dlContainer);
 		
-		l.add(new VerticalLayout(leftToolbar, search, itemList));
-		l.add(new VerticalLayout(rightToolbar, hlTop, aceEditor));
+		detailMaster.add(this.rightToolbar);
 		
-		this.add(vl);
+		detailMaster.add(this.detail);	
+		detail.add(hlTop);
+		detail.add(this.aceEditor);
 		
+		
+		add(this.splitLayout);
+		
+		// initialize actions
 		itemList.addValueChangeListener(new ValueChangeListener<ValueChangeEvent<T>>() {
 
 			@Override
@@ -230,7 +236,28 @@ public abstract class AbstractEditor<T> extends Div {
 			}
 		});
 		
+		// handle resize
+		Page page = UI.getCurrent().getPage();
+		page.addBrowserWindowResizeListener(event -> {
+			resize();
+		});
+		
+		resize();
+		// load entities from database
 		loadData();
+	}
+	
+	public void resize() {
+		// TODO dynamic resize
+		log.info("Resize");
+
+		aceEditor.setWidth("95%");
+		aceEditor.setHeight("600px");
+		
+		itemList.setWidth("100%");
+		itemList.setHeight("600px");
+
+		this.splitLayout.setWidth("1400px");
 	}
 	
 	protected void setDetailTitle(String title) {
@@ -327,6 +354,7 @@ public abstract class AbstractEditor<T> extends Div {
 			Anchor anchor = new Anchor(streamRegistration.getResource(), LABEL_DOWNLOAD);
 			anchor.setTarget("_blank");
 			
+			// dlContainer.add(VaadinIcon.DOWNLOAD.create());
 			dlContainer.add(anchor);
 		} catch (Exception e) {
 			e.printStackTrace();

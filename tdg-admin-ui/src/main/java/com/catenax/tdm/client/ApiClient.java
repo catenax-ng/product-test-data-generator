@@ -136,6 +136,8 @@ public class ApiClient {
        defaultHeaderMap.put(HEADER_API_KEY, API_KEY);
         
         authentications = Collections.unmodifiableMap(authentications);
+        
+        this.setReadTimeout(60000);
     }
 
     /**

@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  db:
+    image: 'mongo:latest'
+    container_name: db
+    environment:
+      - MONGO_INITDB_DATABASE=${TDG_DB_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${TDG_DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${TDG_DB_PASSWORD}
+    expose:
+      - 27017
+    ports:
+      - '27017-27019:27017-27019'
+    volumes:
+      - ../db-template:/db-template
+
+    
+  tdg:
+    image: 'ghcr.io/catenax/testdatagenerator/tdg:main'
+    build:
+      context: .
+    container_name: tdg
+    environment:
+      - TDG_API_KEY=${TDG_API_KEY}
+      - TDG_HOST_SECURE=${TDG_HOST_SECURE}
+      - TDG_HOST_NAME=${TDG_HOST_NAME}
+      - TDG_HOST_PORT=${TDG_HOST_PORT}
+      - TDG_DB_HOSTNAME=${TDG_DB_HOSTNAME}
+      - TDG_DB_PORT=${TDG_DB_PORT}
+      - TDG_DB_NAME=${TDG_DB_NAME}
+      - TDG_DB_USERNAME=${TDG_DB_USERNAME}
+      - TDG_DB_PASSWORD=${TDG_DB_PASSWORD}
+    ports:
+      - ${TDG_HOST_PORT}:${TDG_HOST_PORT}
+    restart: unless-stopped
+    
+  tdg-admin-ui:
+    image: 'ghcr.io/catenax/testdatagenerator/tdg-admin-ui:main'
+    build:
+      context: .
+    container_name: tdg-admin-ui
+    environment:
+      - TDG_HOST_SECURE=${TDG_ADMIN_HOST_SECURE}
+      - TDG_HOST_NAME=${TDG_ADMIN_HOST_NAME}
+      - TDG_HOST_PORT=${TDG_ADMIN_HOST_PORT}
+      - TDG_API_HOST_SECURE=${TDG_HOST_SECURE}
+      - TDG_API_HOST_NAME=${TDG_HOST_NAME}
+      - TDG_API_HOST_PORT=${TDG_HOST_PORT}
+      - TDG_API_KEY=${TDG_API_KEY}
+      - TDG_IAM_SERVER_URL=${TDG_IAM_SERVER_URL}
+      - TDG_IAM_REALM=${TDG_IAM_REALM}
+      - TDG_IAM_RESOURCE=${TDG_IAM_RESOURCE}
+    ports:
+      - ${TDG_ADMIN_HOST_PORT}:${TDG_ADMIN_HOST_PORT}
+    restart: unless-stopped
+

@@ -53,37 +53,24 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         /*
-        http.authorizeRequests()
-        .antMatchers("/tdg-admin").fullyAuthenticated() //.hasAuthority("tdg_user")
-        .anyRequest().permitAll();
-        */
-        // http.authorizeRequests().antMatchers("/**").authenticated(); // .anyRequest().permitAll();
-        // http.authorizeRequests().antMatchers("/**").anonymous().anyRequest().permitAll();
-        http.authorizeRequests()
-        	//.antMatchers("/").permitAll()
-        	//.antMatchers("/**").authenticated().anyRequest().permitAll()
-        	
-        	
+        http.authorizeRequests()        	
 			//.antMatchers("/").permitAll()
-			//.antMatchers("/tdg-admin").authenticated().anyRequest().permitAll()
-        	.antMatchers("/**").authenticated().anyRequest().permitAll()
+        	.antMatchers("/").permitAll()
+			.antMatchers("/tdg-admin").authenticated().anyRequest().permitAll()
+        	// .antMatchers("/**").authenticated().anyRequest().permitAll()
         	.and()
         	.csrf().disable()
-        	/*
-            .formLogin()
-                .loginPage("/account/login")
-                .failureUrl("/account/login?error=true")
-                .defaultSuccessUrl("/account/admin/")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .and()
-            .logout().permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
-                .and()
-                */
             .exceptionHandling()
                 .accessDeniedPage("/error") ///access-denied")
+                */
+        
+        http.authorizeRequests()
+            .antMatchers("/tdg-admin").authenticated()
+            .antMatchers("/**").permitAll()
+            .and()
+        	.csrf().disable()
+            ;
         ;
+        
     }
 }

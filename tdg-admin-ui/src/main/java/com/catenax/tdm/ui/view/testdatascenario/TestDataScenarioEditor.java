@@ -180,7 +180,6 @@ public class TestDataScenarioEditor extends AbstractEditor<TestDataScenario> {
 			
 			String script = new String(encoder.encode(code.getBytes()));
 
-			System.out.println("Run Script: " + scriptType + " -> " + script);
 			Object result = getClient().getTestdataScenarioInstanceApi().instantiateTestdataScenarioRawUsingPOST(scriptType, script);
 
 			LinkedTreeMap<?,?> ltm = (LinkedTreeMap<?,?>) result;
@@ -190,16 +189,11 @@ public class TestDataScenarioEditor extends AbstractEditor<TestDataScenario> {
 			ObjectMapper om = new ObjectMapper();
 			
 			Object jsObj = new JSONObject(js); // om.readValue(js, JSONArray.class);	
-			System.out.println(jsObj.toString());
 
 			String res = om.writerWithDefaultPrettyPrinter().writeValueAsString(om.readTree(jsObj.toString()));
-			System.out.println(res);
-			aceResult.setValue(res);
-			
 			setDownloadableContent(res);
 		} catch (Exception e) {
 			e.printStackTrace();
-			aceResult.setValue("ERROR: " + e.getMessage());
 		}
 	}
 	
