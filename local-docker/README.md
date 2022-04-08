@@ -3,9 +3,7 @@
 3. After instances have started on docker, cmd into db container and execute /db-template/import.sh to fill database with test content
 
 
-1.1 Setup simple keycloak with docker 
-1.1.1 modify keycloak.sh according to your environment and run the script
-1.1.2 configure your keycloak user and client as you wish and modify build-local.sh (top-level) accordingly
+Setup simple keycloak with docker: modify keycloak.sh according to your environment and run the script, run and configure your keycloak user and client as you wish and modify build-local.sh (top-level) accordingly
 
 Prerequisites for build: 
 JDK >= 12, 

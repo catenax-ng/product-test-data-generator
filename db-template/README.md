@@ -1,1 +1,1 @@
-Example database content content for local dev-build
+Example database content for local dev-build
