@@ -100,6 +100,8 @@ public class VehicleBlueprintGenerator {
 	public JSONArray generateParent(GenerationItem item, GenerationItem parent) {
 		JSONArray result = new JSONArray();
 		try {
+			ObjectMapper om = new ObjectMapper();
+			
 			for (int i = 0; i < item.getCount(); i++) {
 				String cxId = null;
 				
@@ -123,22 +125,60 @@ public class VehicleBlueprintGenerator {
 				result.put(gc);
 				this.takenCatenaXIds.put(cxId, itemContainer);
 				
-				if(scenario.getAasTemplate() != null) {
+				if(scenario.getAasTemplate() != null && "SerialPartTypization".equals(item.getModelName())) {
 					JSONObject aas = null;					
 					JSONObject aasDef = null;
 					
 					String content = scenario.getAasTemplate().get().getContent();
 					
 					try {
-						// log.info("GRRRRRRRRRRRR");
 						aas = new JSONObject(content);
 						aasDef = new JSONObject();					
 						aasDef.put("$id", "https://catenax.com/schema/AAS/3.0");
 						
+						String descr = gc.getJSONObject("partTypeInformation").getString("nameAtManufacturer");
+						
+						String ident = cxId;
+						String ids = descr.toLowerCase().replaceAll(" ", "_") + ".asm";
+						
+						aas.put("identification", ident);
+						aas.put("idShort", ids);
+						
+						String gaId = cxId.replaceAll("urn:uuid:", "urn:twin:com.tsystems#");
+						
+						aas.getJSONObject("globalAssetId").remove("value");
+						aas.getJSONObject("globalAssetId").put("value", new JSONArray());
+						aas.getJSONObject("globalAssetId").getJSONArray("value").put(gaId);
+
+						aas.getJSONArray("description").getJSONObject(0).put("text", descr);
+						//log.info("Description: " + aas.get("description").getClass().getCanonicalName());
+						
+						JSONObject specificAssetTemplate1 = new JSONObject(aas.getJSONArray("specificAssetIds").get(0).toString());
+						JSONObject specificAssetTemplate2 = new JSONObject(aas.getJSONArray("specificAssetIds").get(1).toString());
+						aas.remove("specificAssetIds");
+						
+						JSONArray specificAssets = new JSONArray();
+						
+						String v1 = gc.getJSONArray("localIdentifiers").getJSONObject(2).getString("value");
+						String v2 = gc.getJSONArray("localIdentifiers").getJSONObject(1).getString("value");
+						
+						specificAssetTemplate1.put("value", v1);
+						specificAssetTemplate2.put("value", v2);
+						
+						specificAssets.put(specificAssetTemplate1);
+						specificAssets.put(specificAssetTemplate2);
+						
+						aas.put("specificAssetIds", specificAssets);
+						
 						JSONObject subModelTemplate = new JSONObject(aas.getJSONArray("submodelDescriptors").get(0).toString());
-						aas.remove("submodelDescriptors");
+						// aas.remove("submodelDescriptors");
 						
 						JSONArray subModels = new JSONArray();
+						
+						for(GenerationItem gi : item.getChildren()) {
+							SubmodelDescriptor sd = SubmodelDescriptor.create(gi, gc);
+							subModels.put(new JSONObject(om.writeValueAsString(sd)));
+						}
 						
 						aas.put("submodelDescriptors", subModels);
 						scenario.addToContainer(itemContainer, aas, aasDef);
