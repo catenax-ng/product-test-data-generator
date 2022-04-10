@@ -36,18 +36,25 @@ public class SubmodelDescriptor {
 		result.setIdentification(ident);
 	    result.setIdShort(idShort);
 		
-		Value sid = result.new Value("urn:bamm:com.catenax." + semantic + ":1.0.0");
+	    String sidStr = "urn:bamm:com.catenax." + semantic + ":1.0.0";
+		Value sid = result.new Value(sidStr);
 	    result.getSemanticId().add(sid);
 	    
 	    ProtocolInformation pi = result.new ProtocolInformation();
 	    
-	    String edc = "edc://offer-trace-" + idShort + "/shells/" + item.getString("catenaXId") + "/aas/" + idShort;
+	    // Old Connector mock url
+	    // String edc = "edc://offer-trace-" + idShort + "/shells/" + item.getString("catenaXId") + "/aas/" + idShort;
+	    
+	    // Version improved on 09.04.2022
+	    String bpn = item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value");
+	    String model = sidStr;
+	    String edc = "http://provider.connector:port/" + bpn + "/" + model + "/submodel?content=value&extent=WithBLOBValue";
 	    
 	    pi.setEndpointAddress(edc);
 	    pi.setEndpointProtocol("AAS/SUBMODEL");
 	    pi.setEndpointProtocolVersion("1.0RC02");
 	    
-	    String url = "https://" + item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value") + ".connector"; 
+	    String url = "https://" + bpn + ".connector"; 
 	    Endpoint ep = result.new Endpoint(url, pi);
 	    result.getEndpoints().add(ep);
 

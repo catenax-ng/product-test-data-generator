@@ -125,6 +125,7 @@ public class VehicleBlueprintGenerator {
 				result.put(gc);
 				this.takenCatenaXIds.put(cxId, itemContainer);
 				
+				// Generate AAS Template
 				if(scenario.getAasTemplate() != null && "SerialPartTypization".equals(item.getModelName())) {
 					JSONObject aas = null;					
 					JSONObject aasDef = null;
