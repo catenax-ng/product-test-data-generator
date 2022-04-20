@@ -51,23 +51,60 @@ spec:
               protocol: TCP
           env:
             - name: TDG_API_KEY
-              value: SPEEDBOAT
+              value: "SPEEDBOAT"
             - name: TDG_HOST_SECURE
               value: "false"
             - name: TDG_HOST_NAME
-              value: tdg
+              value: "tdg"
             - name: TDG_HOST_PORT
               value: "8080"
             - name: TDG_DB_HOSTNAME
-              value: db
+              value: "db"
             - name: TDG_DB_PORT
               value: "27017"
             - name: TDG_DB_NAME
-              value: tdg
+              value: "tdg"
             - name: TDG_DB_USERNAME
-              value: admin
+              value: "admin"
             - name: TDG_DB_PASSWORD
-              value: admin
+              value: "admin"
           command: [ "echo", "SUCCESS FROM TDG" ]
+          
+        - name: tdg-admin-ui
+          image: ghcr.io/catenax/testdatagenerator/tdg-admin-ui:main
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: TDG_HOST_SECURE
+              value: "false"
+            - name: TDG_HOST_NAME
+              value: "tdg"
+            - name: TDG_HOST_PORT
+              value: "8090"
+            - name: TDG_API_KEY
+              value: "SPEEDBOAT"
+            - name: TDG_API_SECURE
+              value: "false"
+            - name: TDG_API_HOST_NAME
+              value: "tdg"
+            - name: TDG_API_HOST_PORT
+              value: "8080"
+            - name: TDG_IAM_SERVER_URL
+              value: "http://iam:9001/auth"
+            - name: TDG_IAM_RESOURCE
+              value: "tdg-ui"
+            - name: TDG_IAM_REALM
+              value: "master"
+          command: [ "echo", "SUCCESS FROM TDG ADMIN UI" ]
 
               
