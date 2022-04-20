@@ -28,6 +28,7 @@ on:
       - '.github/workflows/tdg-admin-ui.yml'
     branches:
       - main
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
