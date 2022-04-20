@@ -43,7 +43,7 @@ public class TestDataScenarioFactory {
 	private JSONObject graphQL = new JSONObject();
 	
 	public static boolean AUTOFIX_ID = true;
-	public static String CX_SCHEMA_PREFIX = "https://catenax.com/schema/";
+	public static String CX_SCHEMA_PREFIX = "https://catenax.io/schema/";
 	
 	private boolean autoAddTestdata = true;
 	private boolean autoAddAas = false;
@@ -288,7 +288,7 @@ public class TestDataScenarioFactory {
 	
 	public JSONObject getTestDataContainerDefinition() {
 		JSONObject definition = new JSONObject();
-		definition.put("$id", "https://catenax.com/schema/TestDataContainer/1.0.0");
+		definition.put("$id", CX_SCHEMA_PREFIX + "TestDataContainer/1.0.0");
 		return definition;
 	}
 	

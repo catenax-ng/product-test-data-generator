@@ -20,7 +20,7 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 
 	private static final Logger log = LoggerFactory.getLogger(SimpleTestDataGenerator.class);
 
-	private static final DataFactory dataFactory = new DataFactory();
+	private static final TestDataFactory dataFactory = new TestDataFactory();
 
 	@Autowired
 	private MetaModelResourceRepository metamodelRepository;
@@ -347,6 +347,9 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 			case "email":
 				result = dataFactory.getEmailAddress();
 				break;
+			case "mail":
+				result = dataFactory.getEmailAddress();
+				break;
 			case "date":
 
 				break;
@@ -397,6 +400,12 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 				break;
 			case "name":
 				result = dataFactory.getFirstName() + " " + dataFactory.getLastName();
+				break;
+			case "mail":
+				result = dataFactory.getEmailAddress();
+				break;
+			case "email":
+				result = dataFactory.getEmailAddress();
 				break;
 			default:
 				result = dataFactory.getRandomChars(min, max);
