@@ -28,6 +28,7 @@ on:
       - '.github/workflows/tdg.yml'
     branches:
       - main
+  workflow_dispatch:
 
 
 env:
