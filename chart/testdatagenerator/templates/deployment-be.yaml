@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "testdatagenerator.fullname" . }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "testdatagenerator.fullname" . }}-tdg-app
+  template:
+    metadata:
+      labels:
+        app: {{ template "testdatagenerator.fullname" . }}-tdg-app
+    spec:
+      containers:
+        - name: tdg
+          image: ghcr.io/catenax/testdatagenerator/tdg:main
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            {{ if .Values.mongo.enabled }}
+              - name: MONGO
+                values: <chartspezifisch>
+            {{ else }}
+            {{ end }}
+            - name: TDG_API_KEY
+              value: "SPEEDBOAT"
+            - name: TDG_HOST_SECURE
+              value: "false"
+            - name: TDG_HOST_NAME
+              value: "tdg"
+            - name: TDG_HOST_PORT
+              value: "8080"
+            - name: TDG_DB_HOSTNAME
+              value: "db"
+            - name: TDG_DB_PORT
+              value: "27017"
+            - name: TDG_DB_NAME
+              value: "tdg"
+            - name: TDG_DB_USERNAME
+              value: "admin"
+            - name: TDG_DB_PASSWORD
+              value: "admin"
+          command: [ "echo", "SUCCESS FROM TDG" ]
+
+              

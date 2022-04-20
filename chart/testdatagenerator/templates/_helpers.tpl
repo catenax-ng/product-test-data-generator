@@ -42,11 +42,20 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
+
 {{/*
-Selector labels
+Selector labels backend
 */}}
-{{- define "testdatagenerator.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "testdatagenerator.name" . }}
+{{- define "testdatagenerator.be.selectorLabels" -}}
+app.kubernetes.io/name: be-{{ include "testdatagenerator.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
+Selector labels frontend
+*/}}
+{{- define "testdatagenerator.fe.selectorLabels" -}}
+app.kubernetes.io/name: fe-{{ include "testdatagenerator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 

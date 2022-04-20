@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: testdatagenerator
+spec:
+  tls:
+    - hosts:
+        - tdg.int.demo.catena-x.net
+      secretName: tls-secret
+  rules:
+    - host: tdg.demo.catena-x.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 8080
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 8080

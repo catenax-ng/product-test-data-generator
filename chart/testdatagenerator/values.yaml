@@ -1,0 +1,11 @@
+iam:
+  url: "http://iam:9001/auth"
+
+backend:
+
+frontend:
+
+
+mongo:
+  enabled: true
+

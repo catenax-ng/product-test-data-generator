@@ -1,0 +1,5 @@
+iam:
+  url: "https://<keycloak von portal>:<port>/auth"
+
+mongo:
+  enabled: false
