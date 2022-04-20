@@ -47,6 +47,22 @@ jobs:
     outputs:
       workspace: ${{ steps.setvars.outputs.workspace }}
 
+    steps:
+      - name: Set variables
+        id: setvars
+        run: |
+            if [[ "${{github.repository}}" == catenax/TestDataGenerator ]]; then
+              if [[ "${{github.ref}}" == refs/heads/main ]]; then
+                echo "Determined INTEGRATION"
+                echo "::set-output name=workspace::int"
+              else 
+                echo "Set workspace to DEVELOPMENT. Defaults to landscape dev003 for DB settings."
+                echo "::set-output name=workspace::dev003"
+              fi
+            else
+                echo "Unsupported Repository. Leaving Workspace empty."
+            fi
+          
   #########################################################################################
   # Second job does the deployment of the test data generator to the determined environment
   #########################################################################################
