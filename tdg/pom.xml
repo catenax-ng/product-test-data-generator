@@ -24,8 +24,8 @@
 
 		<graphql-version>17.3</graphql-version>
 
-		<antlr4-version>4.9.3</antlr4-version>
-		<antlr4-maven-plugin-version>4.3</antlr4-maven-plugin-version>
+		<antlr4-version>4.10.1</antlr4-version>
+		<antlr4-maven-plugin-version>4.10.1</antlr4-maven-plugin-version>
 
 		<start-class>com.catenax.tdm.Application</start-class>
 		<failsOnError>true</failsOnError>
@@ -102,7 +102,7 @@
 			<plugin>
 				<groupId>org.antlr</groupId>
 				<artifactId>antlr4-maven-plugin</artifactId>
-				<version>${antlr4-version}</version>
+				<version>${antlr4-maven-plugin-version}</version>
 				<executions>
 					<execution>
 						<id>antlr</id>
