@@ -1,0 +1,83 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.catenax.material_for_recycling_1.1.0_MaterialClass" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.catenax.material_for_recycling_1.1.0_AggregateState" : {
+        "type" : "string",
+        "enum" : [ "solid", "liquid", "gasenous" ]
+      },
+      "urn_bamm_io.catenax.material_for_recycling_1.1.0_Percentage" : {
+        "type" : "number"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_UnitReference" : {
+        "type" : "string",
+        "pattern" : "[a-zA-Z]*:[a-zA-Z]+"
+      },
+      "urn_bamm_io.catenax.material_for_recycling_1.1.0_Value" : {
+        "type" : "number"
+      },
+      "urn_bamm_io.catenax.material_for_recycling_1.1.0_QuantityCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "unit" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_UnitReference"
+          },
+          "value" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_Value"
+          }
+        },
+        "required" : [ "unit", "value" ]
+      },
+      "urn_bamm_io.catenax.material_for_recycling_1.1.0_ComponentCharacteristic" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "aggregateState" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_AggregateState"
+            },
+            "recycledContent" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_Percentage"
+            },
+            "materialAbbreviation" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "materialClass" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_MaterialClass"
+            },
+            "materialName" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+            },
+            "quantity" : {
+              "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_QuantityCharacteristic"
+            }
+          },
+          "required" : [ "materialClass", "materialName" ]
+        },
+        "uniqueItems" : true
+      }
+    }
+  },
+  "properties" : {
+    "materialName" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+    },
+    "materialClass" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_MaterialClass"
+    },
+    "component" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_ComponentCharacteristic"
+    },
+    "recycledContent" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.material_for_recycling_1.1.0_Percentage"
+    }
+  },
+  "required" : [ "component" ]
+}

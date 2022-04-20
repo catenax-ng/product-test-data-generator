@@ -1,0 +1,198 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DateCharacteristic" : {
+        "type" : "string",
+        "format" : "date"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text" : {
+        "type" : "string"
+      },
+      "urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean" : {
+        "type" : "boolean"
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ZipTrait" : {
+        "type" : "string",
+        "maxLength" : 14
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_CountryCodeTrait" : {
+        "type" : "string",
+        "pattern" : "^[A-Z]{2}$"
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Address" : {
+        "type" : "object",
+        "properties" : {
+          "street" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "houseNumber" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "zip" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ZipTrait"
+          },
+          "location" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "name" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "country" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_CountryCodeTrait"
+          }
+        },
+        "required" : [ "street", "houseNumber", "zip", "location", "name", "country" ]
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_VehicleOwnerCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "isVehicleOwnerInformationComplete" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+          },
+          "vehicleOwnerAddress" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Address"
+          },
+          "citizenship" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_CountryCodeTrait"
+          }
+        },
+        "required" : [ "isVehicleOwnerInformationComplete", "vehicleOwnerAddress", "citizenship" ]
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Weight" : {
+        "type" : "number"
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_VehicleCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "isVehicleInformationComplete" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+          },
+          "emptyWeight" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Weight"
+          },
+          "firstRegistration" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "licensePlate" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "licenseAbbreviation" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "identification" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "model" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "brand" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          },
+          "class" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+          }
+        },
+        "required" : [ "isVehicleInformationComplete", "emptyWeight", "firstRegistration", "licensePlate", "licenseAbbreviation", "identification", "model", "brand", "class" ]
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_PhoneTrait" : {
+        "type" : "string",
+        "pattern" : "[+]?[0-9 ]+"
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ContactCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "phone" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_PhoneTrait"
+          },
+          "fax" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_PhoneTrait"
+          }
+        },
+        "required" : [ "phone" ]
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ReceivingCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "isVehicleWithdrawnFromService" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+          },
+          "receiverAuditorAdress" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Address"
+          },
+          "issueDate" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DateCharacteristic"
+          },
+          "expiryDate" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DateCharacteristic"
+          },
+          "receiverContact" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ContactCharacteristic"
+          },
+          "receiverAuditorContact" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ContactCharacteristic"
+          }
+        },
+        "required" : [ "isVehicleWithdrawnFromService", "receiverAuditorAdress", "issueDate", "expiryDate", "receiverContact", "receiverAuditorContact" ]
+      },
+      "urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DismantlerCharacterisitc" : {
+        "type" : "object",
+        "properties" : {
+          "isVehicleWithdrawnFromService" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Boolean"
+          },
+          "dismantlerAdress" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Address"
+          },
+          "governmentAdress" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Address"
+          },
+          "receiverAuditorAdress" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Address"
+          },
+          "issueDate" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DateCharacteristic"
+          },
+          "expiryDate" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DateCharacteristic"
+          },
+          "dismantlerContact" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ContactCharacteristic"
+          },
+          "dismantlerAuditorAddress" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_Address"
+          },
+          "dismantlerAuditorContact" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ContactCharacteristic"
+          }
+        },
+        "required" : [ "isVehicleWithdrawnFromService", "dismantlerAdress", "governmentAdress", "receiverAuditorAdress", "issueDate", "expiryDate", "dismantlerContact", "dismantlerAuditorAddress", "dismantlerAuditorContact" ]
+      }
+    }
+  },
+  "properties" : {
+    "dismantlingDate" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DateCharacteristic"
+    },
+    "serialNumber" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+    },
+    "vehicleOwnerProperties" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_VehicleOwnerCharacteristic"
+    },
+    "vehicleProperties" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_VehicleCharacteristic"
+    },
+    "returnPointProperties" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_ReceivingCharacteristic"
+    },
+    "dismantlerProperties" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.certificate_of_destruction_1.0.0_DismantlerCharacterisitc"
+    },
+    "companyNumber" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.openmanufacturing_characteristic_1.0.0_Text"
+    }
+  },
+  "required" : [ "dismantlingDate", "serialNumber", "vehicleOwnerProperties", "vehicleProperties", "returnPointProperties", "dismantlerProperties", "companyNumber" ]
+}

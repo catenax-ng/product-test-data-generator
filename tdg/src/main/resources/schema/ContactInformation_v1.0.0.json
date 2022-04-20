@@ -1,0 +1,43 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema",
+  "type" : "object",
+  "components" : {
+    "schemas" : {
+      "urn_bamm_io.catenax.shared.contact_information_1.0.0_WebsiteCharacteristic" : {
+        "type" : "string",
+        "format" : "uri"
+      },
+      "urn_bamm_io.catenax.shared.contact_information_1.0.0_PhoneNumberTrait" : {
+        "type" : "string",
+        "pattern" : "^[+]?[0-9 ]+$"
+      },
+      "urn_bamm_io.catenax.shared.contact_information_1.0.0_EMailTrait" : {
+        "type" : "string",
+        "pattern" : "^[a-zA-Z0-9.!#$%&’*+\\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"
+      },
+      "urn_bamm_io.catenax.shared.contact_information_1.0.0_ContactCharacteristic" : {
+        "type" : "object",
+        "properties" : {
+          "website" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.shared.contact_information_1.0.0_WebsiteCharacteristic"
+          },
+          "phoneNumber" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.shared.contact_information_1.0.0_PhoneNumberTrait"
+          },
+          "email" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.shared.contact_information_1.0.0_EMailTrait"
+          },
+          "faxNumber" : {
+            "$ref" : "#/components/schemas/urn_bamm_io.catenax.shared.contact_information_1.0.0_PhoneNumberTrait"
+          }
+        }
+      }
+    }
+  },
+  "properties" : {
+    "contactProperty" : {
+      "$ref" : "#/components/schemas/urn_bamm_io.catenax.shared.contact_information_1.0.0_ContactCharacteristic"
+    }
+  },
+  "required" : [ "contactProperty" ]
+}
