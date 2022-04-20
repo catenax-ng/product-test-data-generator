@@ -52,7 +52,7 @@ jobs:
       - name: Set variables
         id: setvars
         run: |
-            if [[ "${{github.repository}}" == catenax/TestDataGenerator ]]; then
+            if [[ "${{github.repository}}" == catenax-ng/product-test-data-generator ]]; then
               if [[ "${{github.ref}}" == refs/heads/main ]]; then
                 echo "Determined INTEGRATION"
                 echo "::set-output name=workspace::int"
