@@ -36,12 +36,26 @@ public class AppLayoutBasic extends AppLayout {
 	private Map<Tab, Component> tabsToPages = new HashMap<>();
 	private Div content = new Div();
 	private Tabs tabs = null;
+	
+	private String logoutUrl = null;
 
 	public AppLayoutBasic() {
 		this.init();
 	}
 
 	private void init() {
+		this.logoutUrl = SecurityUtils.getLogoutUrl();
+		
+		Anchor logout = new Anchor(logoutUrl, "Logout");
+		
+		if (!SecurityUtils.isUserLoggedIn()) {
+			logout = new Anchor(logoutUrl, "Login");
+			this.setContent(logout);
+			return;
+		}
+		
+		
+		
 		DrawerToggle toggle = new DrawerToggle();
 		content.setSizeFull();
 
@@ -50,14 +64,7 @@ public class AppLayoutBasic extends AppLayout {
 		title.getStyle().set("font-size", "var(--lumo-font-size-l)").set("margin", "0");
 
 		generateTabs();
-		
-		String logoutUrl = Env.get(Env.TDG_IAM_SERVER_URL, null) + "/realms/" + Env.get(Env.TDG_IAM_REALM, null) + 
-				"/protocol/openid-connect/logout?redirect_uri=" +
-				Env.getBaseUrl() + "/tdg-admin"
-				;
-		
-		Anchor logout = new Anchor(logoutUrl, "Logout");
-		
+
 		logout.getStyle().set("margin-left", "auto");
         logout.getStyle().set("padding", "15px");
 		

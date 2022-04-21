@@ -52,25 +52,12 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        /*
-        http.authorizeRequests()        	
-			//.antMatchers("/").permitAll()
-        	.antMatchers("/").permitAll()
-			.antMatchers("/tdg-admin").authenticated().anyRequest().permitAll()
-        	// .antMatchers("/**").authenticated().anyRequest().permitAll()
-        	.and()
-        	.csrf().disable()
-            .exceptionHandling()
-                .accessDeniedPage("/error") ///access-denied")
-                */
         
         http.authorizeRequests()
-            .antMatchers("/tdg-admin").authenticated()
-            .antMatchers("/**").permitAll()
-            .and()
-        	.csrf().disable()
-            ;
-        ;
+        .antMatchers("/tdg*").authenticated()
+        .anyRequest().permitAll()
+        .and()
+        .csrf().disable();
         
     }
 }

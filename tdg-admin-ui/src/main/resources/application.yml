@@ -23,11 +23,11 @@ vaadin:
   productionMode: true
       
 keycloak:
-  public-client: true
+  public-client: false
   confidential-port: 0
   ssl-required: external
   auth-server-url: ${TDG_IAM_SERVER_URL}
   realm: ${TDG_IAM_REALM}
   resource: ${TDG_IAM_RESOURCE}
-
-
+  credentials:
+    secret: ${TDG_IAM_SECRET}

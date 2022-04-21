@@ -249,7 +249,7 @@ public abstract class AbstractEditor<T> extends Div {
 	
 	public void resize() {
 		// TODO dynamic resize
-		log.info("Resize");
+		// log.info("Resize");
 
 		aceEditor.setWidth("95%");
 		aceEditor.setHeight("600px");
