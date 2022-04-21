@@ -21,8 +21,8 @@ frontend:
     name: "localhost"
     external-port: "443"
 
-db:
-  is-managed: true
+mongo:
+  enabled: true
   host:
     name: "localhost"
     port: "27017"

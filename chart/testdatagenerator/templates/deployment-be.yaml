@@ -37,15 +37,15 @@ spec:
             - name: TDG_HOST_PORT
               value: {{ .Values.backend.host.external-port }}
             - name: TDG_DB_HOSTNAME
-              value: {{ .Values.db.host.name }}
+              value: {{ .Values.mongo.host.name }}
             - name: TDG_DB_PORT
-              value: {{ .Values.db.host.port }}
+              value: {{ .Values.mogno.host.port }}
             - name: TDG_DB_NAME
-              value: {{ .Values.db.database }}
+              value: {{ .Values.mongo.database }}
             - name: TDG_DB_USERNAME
-              value: {{ .Values.db.credentials.user }}
+              value: {{ .Values.mongo.credentials.user }}
             - name: TDG_DB_PASSWORD
-              value: {{ .Values.db.credentials.password }}
+              value: {{ .Values.mongo.credentials.password }}
           command: [ "echo", "SUCCESS FROM TDG" ]
 
               

@@ -21,8 +21,8 @@ frontend:
     name: "tdg.catena-x.io"
     external-port: "443"
 
-db:
-  is-managed: true
+mongo:
+  enabled: false
   host:
     name: "tdg-db.catena-x.io"
     port: "27017"

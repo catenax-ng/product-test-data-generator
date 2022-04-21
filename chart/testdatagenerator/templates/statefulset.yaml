@@ -13,7 +13,7 @@ spec:
         app: {{ template "testdatagenerator.fullname" . }}-tdg-app
     spec:
       containers:
-        {{ if eq .Values.db.is-managed false }}
+        {{ if eq .Values.mongo.enabled true }}
         - name: db
           image: mongo:latest
           securityContext:
@@ -29,11 +29,11 @@ spec:
               protocol: TCP
           env:
             - name: MONGO_INITDB_DATABASE
-              value: {{ .Values.backend.db.database }}
+              value: {{ .Values.backend.mongo.database }}
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: {{ .Values.backend.db.credentials.user }}
+              value: {{ .Values.backend.mongo.credentials.user }}
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: {{ .Values.backend.db.credentials.password }}
+              value: {{ .Values.backend.mongo.credentials.password }}
           volumeMounts:
             - containerPath: /db-template
               volume:
