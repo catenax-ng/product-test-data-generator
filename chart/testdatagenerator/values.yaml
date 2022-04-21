@@ -1,11 +1,33 @@
 iam:
-  url: "http://iam:9001/auth"
+  url: "http://localhost:9001/auth"
+  realm: "master"
+  client: "<myclient>"
+  secret: "<mysecret>"
+  local: true
 
 backend:
+  image: "ghcr.io/catenax/product-test-data-generator/tdg"
+  host:
+    secure: "true"
+    name: "localhost"
+    external-port: "443"
+    endpoint: ""
+  api-key: "SPEEDBOAT"
 
 frontend:
+  image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui"
+  host:
+    secure: "true"
+    name: "localhost"
+    external-port: "443"
 
-
-mongo:
-  enabled: true
+db:
+  is-managed: true
+  host:
+    name: "localhost"
+    port: "27017"
+  database: "tdg"
+  credentials:
+    user: "admin"
+    password: "admin"
 

@@ -1,5 +1,32 @@
 iam:
-  url: "https://<keycloak von portal>:<port>/auth"
+  url: "http://iam.catena-x.io:9001/auth"
+  realm: "master"
+  client: "Cl12-CX-TestManager"
+  secret: "<secret>"
+  local: false
 
-mongo:
-  enabled: false
+backend:
+  image: "ghcr.io/catenax/product-test-data-generator/tdg"
+  host:
+    secure: "true"
+    name: "tdg.catena-x.io"
+    external-port: "443"
+    endpoint: "/api"
+  api-key: "SPEEDBOAT"
+
+frontend:
+  image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui"
+  host:
+    secure: "true"
+    name: "tdg.catena-x.io"
+    external-port: "443"
+
+db:
+  is-managed: true
+  host:
+    name: "tdg-db.catena-x.io"
+    port: "27017"
+  database: "tdg"
+  credentials:
+    user: "admin"
+    password: "admin"

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tdg-admin-ui
-          image: ghcr.io/catenax/testdatagenerator/tdg-admin-ui:main
+          image: {{ .Values.frontend.image }}
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -29,25 +29,29 @@ spec:
               protocol: TCP
           env:
             - name: TDG_HOST_SECURE
-              value: "true"
+              value: {{ .Values.frontend.host.secure }}
             - name: TDG_HOST_NAME
-              value: "tdg"
+              value: {{ .Values.frontend.host.name }}
             - name: TDG_HOST_PORT
-              value: "443"
+              value: {{ .Values.backend.host.external-port }}
             - name: TDG_API_KEY
-              value: "SPEEDBOAT"
+              value: {{ .Values.backend.api-key }}
             - name: TDG_API_SECURE
-              value: "false"
+              value: {{ .Values.backend.host.secure }}
             - name: TDG_API_HOST_NAME
-              value: "tdg"
+              value: {{ .Values.backend.host.name }}
             - name: TDG_API_HOST_PORT
-              value: "8080"
+              value: {{ .Values.backend.host.external-port }}
+            - name: TDG_API_ENDPOINT
+              value: {{ .Values.backend.host.endpoint }}
             - name: TDG_IAM_SERVER_URL
               value: {{ .Values.iam.url }}
             - name: TDG_IAM_RESOURCE
-              value: "tdg-ui"
+              value: {{ .Values.iam.client }}
             - name: TDG_IAM_REALM
-              value: "master"
+              value: {{ .Values.iam.realm }}
+            - name: TDG_IAM_SECRET
+              value: {{ .Values.iam.secret }}
           command: [ "echo", "SUCCESS FROM TDG ADMIN UI" ]
 
               

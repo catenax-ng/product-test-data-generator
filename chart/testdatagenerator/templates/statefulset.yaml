@@ -13,6 +13,7 @@ spec:
         app: {{ template "testdatagenerator.fullname" . }}-tdg-app
     spec:
       containers:
+        {{ if eq .Values.db.is-managed false }}
         - name: db
           image: mongo:latest
           securityContext:
@@ -28,9 +29,45 @@ spec:
               protocol: TCP
           env:
             - name: MONGO_INITDB_DATABASE
-              value: tdg
+              value: {{ .Values.backend.db.database }}
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: admin
+              value: {{ .Values.backend.db.credentials.user }}
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: admin
+              value: {{ .Values.backend.db.credentials.password }}
+          volumeMounts:
+            - containerPath: /db-template
+              volume:
+                name: db-template
+                subPath: /db-template
+                readOnly: false
+          {{- /*
+            ToDO: mount script folder & persistent volume for db
+          */ -}}
           command: [ "echo", "SUCCESS FROM DB" ]
+        {{ else }}
+        {{- /*
+          ToDO: as managed service if neccessary
+        */ -}}
+        {{ end }}
+        {{ if eq .Values.iam.local true }}
+        - name: iam
+          image: jboss/keycloak:latest
+          ports:
+            - name: http
+              containerPort: 8080
+              targetPort: 9001
+              protocol: TCP
+          env:
+            - name: HOSTNAME
+              value: localhost
+            - name: KEYCLOAK_USER
+              value: admin
+            - name: KEYCLOAK_PASSWORD
+              value: admin              
+          {{- /*
+          ToDO: finish local configuration
+          */ -}}
+        {{ end }}
+
+          
+          

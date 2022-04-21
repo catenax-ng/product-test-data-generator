@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tdg
-          image: ghcr.io/catenax/testdatagenerator/tdg:main
+          image: {{ .Values.backend.image }}
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -28,29 +28,24 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
-            {{ if .Values.mongo.enabled }}
-              - name: MONGO
-                values: <chartspezifisch>
-            {{ else }}
-            {{ end }}
             - name: TDG_API_KEY
-              value: "SPEEDBOAT"
+              value: {{ .Values.backend.api-key }}
             - name: TDG_HOST_SECURE
-              value: "false"
+              value: {{ .Values.backend.host.secure }}
             - name: TDG_HOST_NAME
-              value: "tdg"
+              value: {{ .Values.backend.host.name }}
             - name: TDG_HOST_PORT
-              value: "8080"
+              value: {{ .Values.backend.host.external-port }}
             - name: TDG_DB_HOSTNAME
-              value: "db"
+              value: {{ .Values.db.host.name }}
             - name: TDG_DB_PORT
-              value: "27017"
+              value: {{ .Values.db.host.port }}
             - name: TDG_DB_NAME
-              value: "tdg"
+              value: {{ .Values.db.database }}
             - name: TDG_DB_USERNAME
-              value: "admin"
+              value: {{ .Values.db.credentials.user }}
             - name: TDG_DB_PASSWORD
-              value: "admin"
+              value: {{ .Values.db.credentials.password }}
           command: [ "echo", "SUCCESS FROM TDG" ]
 
               
