@@ -113,8 +113,7 @@ public class ApiClient {
     	
     	basePath +=
     			Env.get(Env.TDG_API_HOST_NAME, "localhost") + ":" +
-    			Env.get(Env.TDG_API_HOST_PORT, "8080") +
-    			Env.get(Env.TDG_API_ENDPOINT, "");
+    			Env.get(Env.TDG_API_HOST_PORT, "8080") + "/api"
     			;
     	
         httpClient = new OkHttpClient();

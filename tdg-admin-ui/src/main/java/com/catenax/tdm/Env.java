@@ -6,7 +6,6 @@ public class Env {
 	public static final String TDG_API_SECURE = "TDG_API_SECURE";
 	public static final String TDG_API_HOST_NAME = "TDG_API_HOST_NAME";
 	public static final String TDG_API_HOST_PORT = "TDG_API_HOST_PORT";
-	public static final String TDG_API_ENDPOINT = "TDG_API_ENDPOINT";
 	
 	public static final String TDG_HOST_SECURE = "TDG_HOST_SECURE";
 	public static final String TDG_HOST_NAME = "TDG_HOST_NAME";
