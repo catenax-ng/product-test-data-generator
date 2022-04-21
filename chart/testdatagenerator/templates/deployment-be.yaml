@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "testdatagenerator.fullname" . }}-deployment
+  name: be-{{ template "testdatagenerator.fullname" . }}
 spec:
   replicas: 1
   selector:

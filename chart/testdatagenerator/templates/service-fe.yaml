@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "testdatagenerator.fullname" . }}
+  name: fe-{{ include "testdatagenerator.fullname" . }}
   labels:
     {{- include "testdatagenerator.fe.labels" . | nindent 4 }}
 spec:
