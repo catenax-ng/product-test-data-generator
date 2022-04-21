@@ -32,7 +32,7 @@ spec:
             - name: TDG_DB_HOSTNAME
               value: {{ .Values.mongo.host.name }}
             - name: TDG_DB_PORT
-              value: {{ .Values.mogno.host.port }}
+              value: {{ .Values.mongo.host.port }}
             - name: TDG_DB_NAME
               value: {{ .Values.mongo.database }}
             - name: TDG_DB_USERNAME
@@ -52,13 +52,13 @@ spec:
               value: {{ .Values.mongo.credentials.password }}
               {{ end }}
             - name: TDG_API_KEY
-              value: {{ .Values.backend.api-key }}
+              value: {{ .Values.backend.apikey }}
             - name: TDG_HOST_SECURE
               value: {{ .Values.backend.host.secure }}
             - name: TDG_HOST_NAME
               value: {{ .Values.backend.host.name }}
             - name: TDG_HOST_PORT
-              value: {{ .Values.backend.host.external-port }}
+              value: 8080
           command: [ "echo", "SUCCESS FROM TDG" ]
 
               

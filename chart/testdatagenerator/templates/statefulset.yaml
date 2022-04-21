@@ -29,20 +29,17 @@ spec:
               protocol: TCP
           env:
             - name: MONGO_INITDB_DATABASE
-              value: {{ .Values.backend.mongo.database }}
+              value: {{ .Values.mongo.database }}
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: {{ .Values.backend.mongo.credentials.user }}
+              value: {{ .Values.mongo.credentials.user }}
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: {{ .Values.backend.mongo.credentials.password }}
+              value: {{ .Values.mongo.credentials.password }}
           volumeMounts:
             - containerPath: /db-template
               volume:
                 name: db-template
                 subPath: /db-template
                 readOnly: false
-          {{- /*
-            ToDO: mount script folder & persistent volume for db
-          */ -}}
           command: [ "echo", "SUCCESS FROM DB" ]
         {{ else }}
         {{- /*

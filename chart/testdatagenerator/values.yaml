@@ -12,7 +12,7 @@ backend:
     name: "localhost"
     external-port: "443"
     endpoint: ""
-  api-key: "SPEEDBOAT"
+  apikey: "SPEEDBOAT"
 
 frontend:
   image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui"

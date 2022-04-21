@@ -33,15 +33,15 @@ spec:
             - name: TDG_HOST_NAME
               value: {{ .Values.frontend.host.name }}
             - name: TDG_HOST_PORT
-              value: {{ .Values.backend.host.external-port }}
+              value: 8080
             - name: TDG_API_KEY
-              value: {{ .Values.backend.api-key }}
+              value: {{ .Values.backend.apikey }}
             - name: TDG_API_SECURE
               value: {{ .Values.backend.host.secure }}
             - name: TDG_API_HOST_NAME
               value: {{ .Values.backend.host.name }}
             - name: TDG_API_HOST_PORT
-              value: {{ .Values.backend.host.external-port }}
+              value: 443
             - name: TDG_API_ENDPOINT
               value: {{ .Values.backend.host.endpoint }}
             - name: TDG_IAM_SERVER_URL
