@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "testdatagenerator.fullname" . }}-tdg-app
+      {{- include "testdatagenerator.be.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ template "testdatagenerator.fullname" . }}-tdg-app
+        {{- include "testdatagenerator.be.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: tdg
@@ -28,14 +28,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
-            - name: TDG_API_KEY
-              value: {{ .Values.backend.api-key }}
-            - name: TDG_HOST_SECURE
-              value: {{ .Values.backend.host.secure }}
-            - name: TDG_HOST_NAME
-              value: {{ .Values.backend.host.name }}
-            - name: TDG_HOST_PORT
-              value: {{ .Values.backend.host.external-port }}
+              {{ if .Values.mongo.enabled }}
             - name: TDG_DB_HOSTNAME
               value: {{ .Values.mongo.host.name }}
             - name: TDG_DB_PORT
@@ -46,6 +39,26 @@ spec:
               value: {{ .Values.mongo.credentials.user }}
             - name: TDG_DB_PASSWORD
               value: {{ .Values.mongo.credentials.password }}
+              {{ else }}
+            - name: TDG_DB_HOSTNAME
+              value: {{ .Values.mongo.host.name }}
+            - name: TDG_DB_PORT
+              value: {{ .Values.mogno.host.port }}
+            - name: TDG_DB_NAME
+              value: {{ .Values.mongo.database }}
+            - name: TDG_DB_USERNAME
+              value: {{ .Values.mongo.credentials.user }}
+            - name: TDG_DB_PASSWORD
+              value: {{ .Values.mongo.credentials.password }}
+              {{ end }}
+            - name: TDG_API_KEY
+              value: {{ .Values.backend.api-key }}
+            - name: TDG_HOST_SECURE
+              value: {{ .Values.backend.host.secure }}
+            - name: TDG_HOST_NAME
+              value: {{ .Values.backend.host.name }}
+            - name: TDG_HOST_PORT
+              value: {{ .Values.backend.host.external-port }}
           command: [ "echo", "SUCCESS FROM TDG" ]
 
               

@@ -16,6 +16,8 @@ backend:
 
 frontend:
   image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui"
+  ingress:
+    host: "tdg.local"
   host:
     secure: "true"
     name: "localhost"

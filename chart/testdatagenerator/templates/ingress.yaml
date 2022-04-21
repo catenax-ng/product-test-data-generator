@@ -5,10 +5,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - tdg.int.demo.catena-x.net
+        - {{ .Values.frontend.ingress.host }}
       secretName: tls-secret
   rules:
-    - host: tdg.demo.catena-x.net
+    - host: {{ .Values.frontend.ingress.host }}
       http:
         paths:
           - path: /

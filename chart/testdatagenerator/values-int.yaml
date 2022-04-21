@@ -16,6 +16,8 @@ backend:
 
 frontend:
   image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui"
+  ingress:
+    host: "tdg.int.demo.catena-x.net"
   host:
     secure: "true"
     name: "tdg.catena-x.io"

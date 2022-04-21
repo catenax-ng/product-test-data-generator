@@ -33,7 +33,21 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "testdatagenerator.labels" -}}
+{{- define "testdatagenerator.be.labels" -}}
+app.kubernetes.io/name: be-{{ include "testdatagenerator.name" . }}
+helm.sh/chart: {{ include "testdatagenerator.chart" . }}
+{{ include "testdatagenerator.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Common labels
+*/}}
+{{- define "testdatagenerator.fe.labels" -}}
+app.kubernetes.io/name: fe-{{ include "testdatagenerator.name" . }}
 helm.sh/chart: {{ include "testdatagenerator.chart" . }}
 {{ include "testdatagenerator.selectorLabels" . }}
 {{- if .Chart.AppVersion }}

@@ -3,13 +3,12 @@ kind: Service
 metadata:
   name: {{ include "testdatagenerator.fullname" . }}
   labels:
-    {{- include "testdatagenerator.labels" . | nindent 4 }}
+    {{- include "testdatagenerator.fe.labels" . | nindent 4 }}
 spec:
-  type: NodePort
+  selector:
+    {{- include "testdatagenerator.fe.selectorLabels" . | nindent 4 }}
   ports:
     - port: 8080
       targetPort: http
       protocol: TCP
       name: http
-  selector:
-    {{- include "testdatagenerator.fe.selectorLabels" . | nindent 4 }}
