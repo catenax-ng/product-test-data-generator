@@ -43,7 +43,7 @@ spec:
             - name: TDG_DB_HOSTNAME
               value: {{ .Values.mongo.host.name }}
             - name: TDG_DB_PORT
-              value: {{ .Values.mogno.host.port }}
+              value: {{ .Values.mongo.host.port }}
             - name: TDG_DB_NAME
               value: {{ .Values.mongo.database }}
             - name: TDG_DB_USERNAME
