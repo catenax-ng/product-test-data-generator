@@ -52,13 +52,13 @@ spec:
               value: {{ .Values.mongo.credentials.password }}
               {{ end }}
             - name: TDG_API_KEY
-              value: {{ .Values.backend.apikey }}
+              value: "{{ .Values.backend.apikey }}"
             - name: TDG_HOST_SECURE
-              value: {{ .Values.backend.host.secure }}
+              value: "true"
             - name: TDG_HOST_NAME
-              value: {{ .Values.backend.host.name }}
+              value: "{{ .Values.backend.host.name }}"
             - name: TDG_HOST_PORT
-              value: 8080
+              value: "8080"
           command: [ "echo", "SUCCESS FROM TDG" ]
 
               

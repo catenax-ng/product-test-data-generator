@@ -1,5 +1,5 @@
 iam:
-  url: "http://iam.catena-x.io:9001/auth"
+  url: "https://centralidp.demo.catena-x.net/auth"
   realm: "master"
   client: "Cl12-CX-TestManager"
   secret: "<secret>"
@@ -8,8 +8,8 @@ iam:
 backend:
   image: "ghcr.io/catenax/product-test-data-generator/tdg"
   host:
-    secure: "true"
-    name: "tdg.catena-x.io"
+    secure: true
+    name: "tdg.int.demo.catena-x.net"
     endpoint: "/api"
   apikey: "SPEEDBOAT"
 
@@ -18,7 +18,7 @@ frontend:
   ingress:
     host: "tdg.int.demo.catena-x.net"
   host:
-    secure: "true"
+    secure: true
     name: "tdg.catena-x.io"
 
 mongo:
