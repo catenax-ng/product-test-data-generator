@@ -30,26 +30,26 @@ spec:
           env:
               {{ if .Values.mongo.enabled }}
             - name: TDG_DB_HOSTNAME
-              value: {{ .Values.mongo.host.name }}
+              value: "{{ .Values.mongo.host.name }}"
             - name: TDG_DB_PORT
-              value: {{ .Values.mongo.host.port }}
+              value: "{{ .Values.mongo.host.port }}"
             - name: TDG_DB_NAME
-              value: {{ .Values.mongo.database }}
+              value: "{{ .Values.mongo.database }}"
             - name: TDG_DB_USERNAME
-              value: {{ .Values.mongo.credentials.user }}
+              value: "{{ .Values.mongo.credentials.user }}"
             - name: TDG_DB_PASSWORD
-              value: {{ .Values.mongo.credentials.password }}
+              value: "{{ .Values.mongo.credentials.password }}"
               {{ else }}
             - name: TDG_DB_HOSTNAME
-              value: {{ .Values.mongo.host.name }}
+              value: "{{ .Values.mongo.host.name }}"
             - name: TDG_DB_PORT
-              value: {{ .Values.mongo.host.port }}
+              value: "{{ .Values.mongo.host.port }}"
             - name: TDG_DB_NAME
-              value: {{ .Values.mongo.database }}
+              value: "{{ .Values.mongo.database }}"
             - name: TDG_DB_USERNAME
-              value: {{ .Values.mongo.credentials.user }}
+              value: "{{ .Values.mongo.credentials.user }}"
             - name: TDG_DB_PASSWORD
-              value: {{ .Values.mongo.credentials.password }}
+              value: "{{ .Values.mongo.credentials.password }}"
               {{ end }}
             - name: TDG_API_KEY
               value: "{{ .Values.backend.apikey }}"
