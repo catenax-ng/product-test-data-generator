@@ -17,7 +17,7 @@ services:
 
     
   tdg:
-    image: 'ghcr.io/catenax/testdatagenerator/tdg:main'
+    image: 'ghcr.io/catenax-ng/product-test-data-generator/tdg:main'
     build:
       context: .
     container_name: tdg
@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
     
   tdg-admin-ui:
-    image: 'ghcr.io/catenax/testdatagenerator/tdg-admin-ui:main'
+    image: 'ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main'
     build:
       context: .
     container_name: tdg-admin-ui
@@ -51,6 +51,7 @@ services:
       - TDG_IAM_SERVER_URL=${TDG_IAM_SERVER_URL}
       - TDG_IAM_REALM=${TDG_IAM_REALM}
       - TDG_IAM_RESOURCE=${TDG_IAM_RESOURCE}
+      - TDG_IAM_SECRET=${TDG_IAM_SECRET}
     ports:
       - ${TDG_ADMIN_HOST_PORT}:${TDG_ADMIN_HOST_PORT}
     restart: unless-stopped
