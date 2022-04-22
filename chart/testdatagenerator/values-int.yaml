@@ -14,7 +14,7 @@ backend:
   apikey: "SPEEDBOAT"
 
 frontend:
-  image: "ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main"
+  image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui:main"
   ingress:
     host: "tdg.int.demo.catena-x.net"
   host:
