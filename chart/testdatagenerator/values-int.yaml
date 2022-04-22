@@ -6,7 +6,7 @@ iam:
   local: false
 
 backend:
-  image: "ghcr.io/catenax/product-test-data-generator/tdg"
+  image: "ghcr.io/catenax/product-test-data-generator/tdg:main"
   host:
     secure: true
     name: "tdg.int.demo.catena-x.net"
@@ -14,7 +14,7 @@ backend:
   apikey: "SPEEDBOAT"
 
 frontend:
-  image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui"
+  image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui:main"
   ingress:
     host: "tdg.int.demo.catena-x.net"
   host:
@@ -24,7 +24,7 @@ frontend:
 mongo:
   enabled: false
   host:
-    name: "tdg-db.catena-x.io"
+    name: "tdg-db.int.demo.catena-x.io"
     port: "27017"
   database: "tdg"
   credentials:
