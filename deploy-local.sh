@@ -6,28 +6,6 @@ export realm="master"
 export client="tdg-ui"
 export secret="fVs5FcUBoiJ7PJTS0IUpxaYyTWWXW1nR"
 
-cd tdg
-pwd
-
-mvn clean package
-
-image="$repo/tdg:main"
-docker build -f ./src/main/docker/Dockerfile -t $image .
-
-cd ..
-cd tdg-admin-ui
-pwd
-
-mvn clean package
-
-image="$repo/tdg-admin-ui:main"
-docker build -f ./src/main/docker/Dockerfile -t $image .
-
-cd ..
-
-cd local-docker
-pwd
-
 # Database parameters
 export TDG_DB_HOSTNAME="db"
 export TDG_DB_PORT="27017"
@@ -52,11 +30,8 @@ export TDG_IAM_RESOURCE=${client}
 export TDG_IAM_REALM=${realm}
 export TDG_IAM_SECRET=${secret}
 
+cd local-docker
 
 docker-compose up -d # --build --force-recreate --renew-anon-volumes
 
-
 cd ..
-
-
-
