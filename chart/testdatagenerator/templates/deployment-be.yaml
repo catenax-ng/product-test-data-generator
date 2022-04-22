@@ -28,7 +28,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
-              {{ if .Values.mongo.enabled }}
+              {{ if eq .Values.mongo.enabled true }}
             - name: TDG_DB_HOSTNAME
               value: "{{ .Values.mongo.host.name }}"
             - name: TDG_DB_PORT

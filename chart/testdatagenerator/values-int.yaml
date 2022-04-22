@@ -22,7 +22,7 @@ frontend:
     name: "tdg.catena-x.io"
 
 mongo:
-  enabled: false
+  enabled: true
   host:
     name: "tdg-db.int.demo.catena-x.io"
     port: "27017"
@@ -30,3 +30,8 @@ mongo:
   credentials:
     user: "admin"
     password: "admin"
+
+architecture: standalone
+auth:
+  rootUser: "admin"
+  rootPassword: "admin"
