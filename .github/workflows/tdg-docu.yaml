@@ -11,6 +11,11 @@ on:
       - main
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./gitbook
+
 jobs:
   deploy:
     name: Deploy to GitHub Pages
@@ -23,10 +28,8 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        working-directory: ./gitbook
         run: npm ci
       - name: Build website
-        working-directory: ./gitbook
         run: npm run build
 
       # Popular action to deploy to GitHub Pages:
