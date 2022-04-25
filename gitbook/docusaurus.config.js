@@ -10,12 +10,13 @@ const config = {
   tagline: 'Providing Catena-X Testdata generation',
   url: 'https://catena-x.net/',
   baseUrl: '/product-test-data-generator/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'log',
+  onBrokenMarkdownLinks: 'log',
   favicon: 'img/favicon.ico',
   organizationName: 'catenax-ng/product-test-data-generator', // Usually your GitHub org/user name.
   projectName: 'catenax-ng.github.io/product-test-data-generator', // Usually your repo name.
   trailingSlash: false,
+  noIndex: true,
 
   presets: [
     [
@@ -119,7 +120,7 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-    }),
+    })
 };
 
 module.exports = config;
