@@ -26,10 +26,13 @@ jobs:
         with:
           node-version: 16.x
           cache: npm
+          cache-dependency-path: ./gitbook/package-lock.json
 
       - name: Install dependencies
+        working-directory: ./gitbook
         run: npm ci
       - name: Build website
+        working-directory: ./gitbook
         run: npm run build
 
       # Popular action to deploy to GitHub Pages:
