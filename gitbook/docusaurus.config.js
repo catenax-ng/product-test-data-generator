@@ -13,7 +13,7 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'catenax-ng', // Usually your GitHub org/user name.
+  organizationName: 'catenax-ng/product-test-data-generator', // Usually your GitHub org/user name.
   projectName: 'catenax-ng.github.io/product-test-data-generator', // Usually your repo name.
   trailingSlash: false,
 
