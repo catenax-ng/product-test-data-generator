@@ -6,7 +6,7 @@ iam:
   local: true
 
 backend:
-  image: "ghcr.io/catenax/product-test-data-generator/tdg:main"
+  image: "ghcr.io/catenax-ng/product-test-data-generator/tdg:main"
   host:
     secure: "true"
     name: "localhost"
@@ -15,7 +15,7 @@ backend:
   apikey: "SPEEDBOAT"
 
 frontend:
-  image: "ghcr.io/catenax/product-test-data-generator/tdg-admin-ui:main"
+  image: "ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main"
   ingress:
     host: "tdg.local"
   host:
