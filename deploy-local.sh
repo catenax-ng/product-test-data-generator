@@ -18,6 +18,7 @@ export TDG_HOST_SECURE="false"
 export TDG_HOST_NAME="$hostname"
 export TDG_HOST_PORT="8080"
 export TDG_API_KEY="SPEEDBOAT"
+export TDG_API_ENDPOINT="/api"
 
 # Admin parameters
 export TDG_ADMIN_HOST_SECURE="false"
