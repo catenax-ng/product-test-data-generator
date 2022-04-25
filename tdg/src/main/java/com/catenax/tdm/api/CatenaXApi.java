@@ -37,7 +37,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Metamodel Schema", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/metamodel/{model}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel/{model}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.GET)
 	ResponseEntity<String> getModelDescription(
@@ -50,7 +50,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdata/{model}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdata/{model}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.GET)
 	ResponseEntity<String> getTestdata(
@@ -63,7 +63,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.GET)
 	ResponseEntity<List<TestDataScenario>> getTestdataScenario(
@@ -75,7 +75,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			consumes = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.POST)
@@ -88,7 +88,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			consumes = {MediaType.APPLICATION_JSON_VALUE},  
 			method = RequestMethod.PUT)
@@ -101,7 +101,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			consumes = {MediaType.APPLICATION_JSON_VALUE},  
 			method = RequestMethod.PUT)
@@ -118,7 +118,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			consumes = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.DELETE)
@@ -131,7 +131,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}/instance/{name}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}/instance/{name}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.GET)
 	ResponseEntity<String> instantiateTestdataScenario(
@@ -146,7 +146,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/instance/adhoc", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/instance/adhoc", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.POST)
 	ResponseEntity<String> instantiateTestdataScenarioRaw(
@@ -158,7 +158,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}/instance/{name}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}/instance/{name}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.DELETE)
 	ResponseEntity<Boolean> deleteTestdataScenarioInstance(
@@ -171,7 +171,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/instance/list", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/instance/list", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.GET)
 	ResponseEntity<List<TestDataScenarioInstanceStatus>> listTestdataScenarioInstances(
@@ -184,7 +184,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/instance/query", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/instance/query", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.GET)
 	ResponseEntity<String> queryTestdataScenarioInstances(
@@ -198,7 +198,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata Scenario", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}/status/{status}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/testdatascenario/{scenario}/{version}/status/{status}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.GET)
 	ResponseEntity<Boolean> setTestdataScenarioStatus(
@@ -213,7 +213,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Data Template", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/datatemplate/{template}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/datatemplate/{template}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.GET)
 	ResponseEntity<List<DataTemplate>> getDataTemplates(
@@ -225,7 +225,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Data Template", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/datatemplate", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/datatemplate", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.POST)
 	ResponseEntity<DataTemplate> createDataTemplate(
@@ -237,7 +237,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Data Template", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/datatemplate", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/datatemplate", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.PUT)
 	ResponseEntity<DataTemplate> updateDataTemplate(
@@ -249,7 +249,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Data Template", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/datatemplate/{template}/{version}/content", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/datatemplate/{template}/{version}/content", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.PUT)
 	ResponseEntity<DataTemplate> updateDataTemplateContent(
@@ -264,7 +264,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Data Template", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/datatemplate/{template}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/datatemplate/{template}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.DELETE)
 	ResponseEntity<Boolean> deleteDataTemplate(
@@ -278,7 +278,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/metamodel/{name}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel/{name}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.GET)
 	ResponseEntity<List<MetaModel>> getMetaModels(
@@ -290,7 +290,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/metamodel", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.POST)
 	ResponseEntity<MetaModel> createMetaModel(
@@ -302,7 +302,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/metamodel", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.PUT)
 	ResponseEntity<MetaModel> updateMetaModel(
@@ -314,7 +314,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "MetaModel", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/metamodel/{name}/{version}/content", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel/{name}/{version}/content", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.PUT)
 	ResponseEntity<MetaModel> updateMetaModelContent(
@@ -329,7 +329,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Data Template", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/metamodel/{name}/{version}", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/metamodel/{name}/{version}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE},
 			method = RequestMethod.DELETE)
 	ResponseEntity<Boolean> deleteMetaModel(
@@ -342,7 +342,7 @@ public interface CatenaXApi {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Testdata", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))),
 			@ApiResponse(responseCode = "500", description = "Unexpected error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))) })
-	@RequestMapping(value = "/api/catena-x/tdm/1.1/test", 
+	@RequestMapping(value = "/catena-x/tdm/1.1/test", 
 			produces = {MediaType.APPLICATION_JSON_VALUE}, 
 			method = RequestMethod.GET)
 	ResponseEntity<String> test();

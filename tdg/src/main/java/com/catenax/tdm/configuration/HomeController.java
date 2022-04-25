@@ -9,7 +9,7 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public String index() {
 		// System.out.println("/swagger-ui/index.html");
-		String result = "redirect:/swagger-ui/";
+		String result = "redirect:/api/swagger-ui/";
 		return result;
 	}
 

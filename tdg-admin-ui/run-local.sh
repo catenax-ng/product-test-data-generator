@@ -3,6 +3,7 @@
 export TDG_HOST_SECURE=false
 export TDG_HOST_NAME=192.168.1.224
 export TDG_HOST_PORT=8090
+export TDG_API_ENDPOINT=/api
 
 export TDG_API_SECURE=false
 export TDG_API_HOST_NAME=192.168.1.224

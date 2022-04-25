@@ -4,7 +4,7 @@ export repo="ghcr.io/catenax-ng/product-test-data-generator"
 export hostname="192.168.1.224"
 export realm="master"
 export client="tdg-ui"
-export secret="fVs5FcUBoiJ7PJTS0IUpxaYyTWWXW1nR"
+export secret="xpWj3Eb8r7Hs9OZIFR8XAVqFpwuExQvC"
 
 # Database parameters
 export TDG_DB_HOSTNAME="db"

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import springfox.documentation.PathProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -44,6 +45,7 @@ public class SwaggerDocumentationConfig {
                 .apiInfo(apiInfo())
         		.securitySchemes(Collections.singletonList(apiKey()))
         		.securityContexts(Collections.singletonList(securityContext()))
+        		// .pathMapping("/api")
                 ;
     }
 	
@@ -59,8 +61,8 @@ public class SwaggerDocumentationConfig {
 	public OpenAPI openApi() {
 		OpenAPI api = new OpenAPI();
 
-		return api.info(new Info().title(TITLE).description(
-				DISCLAIMER)
+		return api.info(new Info().title(TITLE)				
+				.description(DISCLAIMER)
 				.termsOfService("").version(VERSION)
 				.license(new License().name(LICENSE).url(LICENSE_URL))
 				.contact(new io.swagger.v3.oas.models.info.Contact().email(CONTACT)));
