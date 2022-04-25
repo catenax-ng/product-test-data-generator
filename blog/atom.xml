@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://catena-x.net/blog</id>
+    <title>Catena-X - Test Data Generator Blog</title>
+    <updated>2022-04-25T15:20:06.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://catena-x.net/blog"/>
+    <subtitle>Catena-X - Test Data Generator Blog</subtitle>
+    <icon>https://catena-x.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[InitialRelease]]></title>
+        <id>InitialRelease</id>
+        <link href="https://catena-x.net/blog/InitialRelease"/>
+        <updated>2022-04-25T15:20:06.000Z</updated>
+        <summary type="html"><![CDATA[First official releas of the testdata generator]]></summary>
+        <content type="html"><![CDATA[<p>First official releas of the testdata generator</p>]]></content>
+        <author>
+            <name>Testdata generator</name>
+            <uri>https://github.com/catenax-ng/product-test-data-generator</uri>
+        </author>
+        <category label="news" term="news"/>
+        <category label="officehour" term="officehour"/>
+    </entry>
+</feed>
