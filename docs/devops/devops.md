@@ -1,5 +1,0 @@
----
-slug: /devops
----
-
-# DevOps Documentation

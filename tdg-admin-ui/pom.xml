@@ -133,7 +133,7 @@
 				<version>${javadoc-version}</version>
 				<configuration>
 					<show>private</show>
-					<reportOutputDirectory>${project.reporting.outputDirectory}/../../../documentation/tdg-admin-ui/javadoc</reportOutputDirectory>
+					<reportOutputDirectory>${project.reporting.outputDirectory}/../../../gitbook/static/javadoc/tdg-admin-ui</reportOutputDirectory>
 					<destDir>doc</destDir>
 				</configuration>
 			</plugin>
