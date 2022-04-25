@@ -25,13 +25,13 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/catenax-ng/catenax-ng.github.io/edit/main/',
+          editUrl: 'https://github.com/catenax-ng/product-test-data-generator/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/catenax-ng/catenax-ng.github.io',
+            'https://github.com/catenax-ng/product-test-data-generator',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
