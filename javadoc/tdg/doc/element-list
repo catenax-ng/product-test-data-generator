@@ -1,0 +1,15 @@
+com.catenax.tdm
+com.catenax.tdm.api
+com.catenax.tdm.configuration
+com.catenax.tdm.dao
+com.catenax.tdm.deo
+com.catenax.tdm.http
+com.catenax.tdm.metamodel
+com.catenax.tdm.model
+com.catenax.tdm.resource
+com.catenax.tdm.scenario
+com.catenax.tdm.scripting
+com.catenax.tdm.security
+com.catenax.tdm.testdata
+com.catenax.tdm.testdata.blueprint
+com.catenax.tdm.util

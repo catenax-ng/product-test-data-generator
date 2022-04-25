@@ -1,0 +1,15 @@
+com.catenax.tdm
+com.catenax.tdm.client
+com.catenax.tdm.client.api
+com.catenax.tdm.client.auth
+com.catenax.tdm.client.model
+com.catenax.tdm.configuration
+com.catenax.tdm.rest
+com.catenax.tdm.security
+com.catenax.tdm.ui
+com.catenax.tdm.ui.dialog
+com.catenax.tdm.ui.view
+com.catenax.tdm.ui.view.datatemplate
+com.catenax.tdm.ui.view.testdatascenario
+com.catenax.tdm.ui.view.testdatascenario.instance
+com.catenax.tdm.util
