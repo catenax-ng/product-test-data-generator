@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcatenax_ng=self.webpackChunkcatenax_ng||[]).push([[239],{5759:function(a){a.exports=JSON.parse('{"allTagsPath":"/product-test-data-generator/blog/tags","name":"news","count":1,"permalink":"/product-test-data-generator/blog/tags/news"}')}}]);
