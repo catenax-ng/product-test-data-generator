@@ -6,32 +6,32 @@ iam:
   local: false
 
 backend:
-  image: "ghcr.io/catenax-ng/product-test-data-generator/tdg:main"
+  image: ghcr.io/catenax-ng/product-test-data-generator/tdg:main
   host:
     secure: true
-    name: "tdg.int.demo.catena-x.net"
-    endpoint: "/api"
-  apikey: "SPEEDBOAT"
+    name: tdg.int.demo.catena-x.net
+    endpoint: /api
+  apikey: SPEEDBOAT
 
 frontend:
-  image: "ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main"
+  image: ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main
   ingress:
-    host: "tdg.int.demo.catena-x.net"
+    host: tdg.int.demo.catena-x.net
   host:
     secure: true
-    name: "tdg.catena-x.io"
+    name: tdg.catena-x.io
 
 mongo:
   enabled: true
   host:
-    name: "tdg-db.int.demo.catena-x.io"
-    port: "27017"
-  database: "tdg"
+    name: tdg-db.int.demo.catena-x.io
+    port: 27017
+  database: tdg
   credentials:
-    user: "admin"
-    password: "admin"
+    user: <path:test-data-generator/mongo#username>
+    password: <path:test-data-generator/mongo#password>
 
 architecture: standalone
 auth:
-  rootUser: "admin"
-  rootPassword: "admin"
+  rootUser: <path:test-data-generator/mongo#username>
+  rootPassword: <path:test-data-generator/mongo#password>

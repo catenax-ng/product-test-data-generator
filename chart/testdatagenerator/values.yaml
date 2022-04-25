@@ -1,37 +1,37 @@
 iam:
   url: "http://localhost:9001/auth"
-  realm: "master"
-  client: "<myclient>"
-  secret: "<mysecret>"
+  realm: master
+  client: <myclient>
+  secret: <mysecret>
   local: true
 
 backend:
-  image: "ghcr.io/catenax-ng/product-test-data-generator/tdg:main"
+  image: ghcr.io/catenax-ng/product-test-data-generator/tdg:main
   host:
-    secure: "true"
-    name: "localhost"
-    external-port: "443"
-    endpoint: ""
-  apikey: "SPEEDBOAT"
+    secure: true
+    name: localhost
+    external-port: 443
+    endpoint: /api
+  apikey: SPEEDBOAT
 
 frontend:
-  image: "ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main"
+  image: ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main
   ingress:
-    host: "tdg.local"
+    host: tdg.local
   host:
-    secure: "true"
-    name: "localhost"
-    external-port: "443"
+    secure: true
+    name: localhost
+    external-port: 443
 
 mongo:
   enabled: true
   host:
-    name: "localhost"
-    port: "27017"
-  database: "tdg"
+    name: localhost
+    port: 27017
+  database: tdg
   credentials:
-    user: "admin"
-    password: "admin"
+    user: admin
+    password: admin
 
 
 
