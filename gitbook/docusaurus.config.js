@@ -9,7 +9,7 @@ const config = {
   title: 'Catena-X - Test Data Generator',
   tagline: 'Providing Catena-X Testdata generation',
   url: 'https://catena-x.net/',
-  baseUrl: '/',
+  baseUrl: '/product-test-data-generator/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
