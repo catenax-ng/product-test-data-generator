@@ -1,3 +1,3 @@
 #! /bin/bash
 
-helm template chart/testdatagenerator/ --debug --dry-run --values chart/testdatagenerator/values.yaml
+helm template chart/testdatagenerator/ --debug --dry-run --values chart/testdatagenerator/values.yaml $@

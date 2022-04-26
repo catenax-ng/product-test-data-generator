@@ -80,5 +80,4 @@ keycloak:
     create: true
   autoscaling:
     enabled: false
-  
 
