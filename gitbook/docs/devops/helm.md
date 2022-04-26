@@ -11,8 +11,8 @@ The following helm charts for the product have been created:
     - Is the main chart for the product
     - References all dependencies to the product
 - Values
-    - *values.yaml*: 
-    - *values-int.yaml*: 
+    - *values.yaml*: default values for deployment
+    - *values-int.yaml*: values for deployment on int-env of hotel budapest
 - Deployments
     - *templates/deployment-be.yaml*: Deployment descriptor for backend component
     - *templates/deployment-fe.yaml*: Deployment descriptor for frontend component

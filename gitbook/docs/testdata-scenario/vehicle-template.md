@@ -56,7 +56,7 @@ scenario.setAutoAddTestdata(false);
 // This enables the creation of a test-aas per part from a given aas template version
 scenario.setAutoAddAas("aas", "1.0");
 
-// Thist takes the actual vehicle blueprint template (name, version) and instanciates its content
+// This takes the actual vehicle blueprint template (name, version) and instanciates its content
 scenario.generateFromVehicleTemplate("OEMVehicleTemplate", "2.0");
 
 
