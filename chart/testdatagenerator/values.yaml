@@ -38,9 +38,6 @@ keycloak:
   realm: CX-Central
   client: Cl12-CX-TestManager
   secret: <path:test-data-generator/data/iam#secret>
-  global:
-    namespaceOverride: product-test-data-generator
-  namespaceOverride: product-test-data-generator
   fullnameOverride: tdg-iam
   auth:
     adminUser: test
@@ -53,6 +50,7 @@ keycloak:
   containerPorts:
     http: 8080
     https: 8443
+    management: 9990
   service:
     ports:
       http: 9000
@@ -62,9 +60,25 @@ keycloak:
     enabled: true
     hostname: tdg-iam.int.demo.catena-x.net
     path: /
-    servicePort: https
+    servicePort: http
+    ingressClassName: "nginx"
     tls: true
     selfSigned: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+      nginx.ingress.kubernetes.io/cors-allow-methods: PUT, GET, POST, OPTIONS
+      nginx.ingress.kubernetes.io/cors-allow-origin: https://tdg-iam.int.demo.catena-x.net
+      nginx.ingress.kubernetes.io/enable-cors: "true"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+      nginx.ingress.kubernetes.io/proxy-buffering: "on"
+      nginx.ingress.kubernetes.io/proxy-buffers-number: "20"
+      nginx.ingress.kubernetes.io/use-regex: "true"
   postgresql:
     enabled: true
+  serviceAccount:
+    create: true
+  autoscaling:
+    enabled: false
+  
 
