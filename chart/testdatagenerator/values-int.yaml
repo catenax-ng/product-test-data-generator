@@ -33,6 +33,8 @@ mongo:
 
 mongodb:
   architecture: standalone
+  global:
+    namespaceOverride: product-test-data-generator
   auth:
     rootUser: <path:test-data-generator/mongo#username>
     rootPassword: <path:test-data-generator/mongo#password>
