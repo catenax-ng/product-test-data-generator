@@ -5,21 +5,16 @@ iam:
   secret: <path:test-data-generator/iam#secret>
   local: false
 
+ingress:
+  hostname: tdg.int.demo.catena-x.net
+
 backend:
   image: ghcr.io/catenax-ng/product-test-data-generator/tdg:main
-  host:
-    secure: true
-    name: tdg.int.demo.catena-x.net
-    endpoint: /api
+  endpoint: /api
   apikey: SPEEDBOAT
 
 frontend:
   image: ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main
-  ingress:
-    host: tdg.int.demo.catena-x.net
-  host:
-    secure: true
-    name: tdg.catena-x.io
 
 mongo:
   enabled: true
@@ -39,5 +34,3 @@ mongodb:
     rootUser: <path:test-data-generator/mongo#username>
     rootPassword: <path:test-data-generator/mongo#password>
 
-global:
-    namespaceOverride: product-test-data-generator

@@ -5,10 +5,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - {{ .Values.frontend.ingress.host }}
+        - {{ .Values.ingress.hostname }}
       secretName: tls-secret
   rules:
-    - host: {{ .Values.frontend.ingress.host }}
+    - host: {{ .Values.ingress.hostname }}
       http:
         paths:
           - path: /
@@ -25,7 +25,3 @@ spec:
                 name: be-{{ template "testdatagenerator.fullname" . }}
                 port:
                   number: 8080
-  tls:
-    - hosts:
-        - {{ .Values.frontend.ingress.host }}
-      secretName: test-data-generator:ingress#tls

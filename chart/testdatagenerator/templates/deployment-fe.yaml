@@ -29,9 +29,9 @@ spec:
               protocol: TCP
           env:
             - name: TDG_HOST_SECURE
-              value: "{{ .Values.frontend.host.secure }}"
+              value: "true"
             - name: TDG_HOST_NAME
-              value: "{{ .Values.frontend.host.name }}"
+              value: "{{ .Values.ingress.hostname }}"
             - name: TDG_HOST_PORT
               value: "8080"
             - name: TDG_API_KEY
@@ -39,11 +39,11 @@ spec:
             - name: TDG_API_SECURE
               value: "true"
             - name: TDG_API_HOST_NAME
-              value: "{{ .Values.backend.host.name }}"
+              value: "{{ .Values.ingress.hostname }}"
             - name: TDG_API_HOST_PORT
               value: "443"
             - name: TDG_API_ENDPOINT
-              value: "{{ .Values.backend.host.endpoint }}"
+              value: "{{ .Values.backend.endpoint }}"
             - name: TDG_IAM_SERVER_URL
               value: "{{ .Values.iam.url }}"
             - name: TDG_IAM_RESOURCE
@@ -54,4 +54,3 @@ spec:
               value: "{{ .Values.iam.secret }}"
           command: [ "echo", "SUCCESS FROM TDG ADMIN UI" ]
 
-              
