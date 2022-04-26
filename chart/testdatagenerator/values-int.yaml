@@ -20,6 +20,7 @@ mongodb:
   enabled: true
   hostname: tdg-db.int.demo.catena-x.io
   architecture: standalone
+  fullnameOverride: db-product-test-data-generator
   global:
     namespaceOverride: product-test-data-generator
   auth:
