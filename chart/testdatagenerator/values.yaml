@@ -33,3 +33,5 @@ mongodb:
       - tdg
     databases:
       - tdg
+    hostAliases:
+      - tdg-db.int.demo.catena-x.io
