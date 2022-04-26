@@ -11,6 +11,9 @@ To deploy the testdata-generator with all its components on your local machine y
 * A few gb disc space left
 * Internet connection to download docker images for tdg
 
+## Hint
+Always persist any scenarios and templates locally in case anything gets lost or your local docker or system encounters any errors!
+
 ## Installation Process
 
 1. Create a local keycloak instance with the script under *'local-docker/keycloak.sh'.*
@@ -45,3 +48,5 @@ mongoimport -p "admin" -u "admin" --authenticationDatabase "admin" -d tdg --coll
 mongoimport -p "admin" -u "admin" --authenticationDatabase "admin" -d tdg --collection test_data_template --file /db-template/test_data_template.json
 mongoimport -p "admin" -u "admin" --authenticationDatabase "admin" -d tdg --collection test_meta_model    --file /db-template/test_meta_model.json
 ```
+
+6. If after a reboot the docker instances fail to start, please repeat step 3 to newly set the variables.
