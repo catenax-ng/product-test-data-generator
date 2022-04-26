@@ -28,22 +28,22 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
-              {{ if eq .Values.mongo.enabled true }}
+              {{ if eq .Values.mongodb.enabled true }}
             - name: TDG_DB_HOSTNAME
-              value: "{{ .Values.mongo.host.name }}"
+              value: "{{ .Values.mongodb.hostname }}"
             - name: TDG_DB_PORT
-              value: "{{ .Values.mongo.host.port }}"
+              value: "27017"
             - name: TDG_DB_NAME
-              value: "{{ .Values.mongo.database }}"
+              value: "{{ .Values.mongodb.database }}"
             - name: TDG_DB_USERNAME
               value: "{{ .Values.mongodb.auth.rootUser }}"
             - name: TDG_DB_PASSWORD
               value: "{{ .Values.mongodb.auth.rootPassword }}"
               {{ else }}
             - name: TDG_DB_HOSTNAME
-              value: "{{ .Values.mongo.host.name }}"
+              value: "{{ .Values.mongo.hostname }}"
             - name: TDG_DB_PORT
-              value: "{{ .Values.mongo.host.port }}"
+              value: "27017"
             - name: TDG_DB_NAME
               value: "{{ .Values.mongo.database }}"
             - name: TDG_DB_USERNAME

@@ -19,6 +19,7 @@ frontend:
 mongodb:
   enabled: true
   hostname: tdg-db.int.demo.catena-x.io
+  database: tdg
   architecture: standalone
   fullnameOverride: db-product-test-data-generator
   global:
