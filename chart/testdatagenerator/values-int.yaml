@@ -31,6 +31,6 @@ mongodb:
   global:
     namespaceOverride: product-test-data-generator
   auth:
-    rootUser: <path:test-data-generator/data/mongo#username>
+    rootUser: admin
     rootPassword: <path:test-data-generator/data/mongo#password>
 
