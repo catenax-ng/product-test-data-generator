@@ -20,14 +20,24 @@ The Blueprint has the following properties:
 This describes a parent-child relationship (1:n) between model instances.
 Attributes of this entity:
 - catenaXId: Describes the Catena-X specific uuid, if present (will be generated if nodeType == PARENT)
-- 
+- comment: For important comments / inline documentation
+- count: Number of instances of this item (including children)
+- instanceId: Can be referenced via this id inside inline scripting (see below)
+- modelName: Name of the metamodel to be used
+- modelVersion: Version of the metamodel to be used
+- templateName:  Name of the template to be used
+- templateVersion: Version of the template to be used
 - children (List): list of children, also of type Generation Item
-- code (List): list of javascript code to be executed after this item will be internaly generated (e. g. to manipulate values)
+- values (List): list of values to set after the instance is created (can use inline scripting, see below)
+- code (List): list of inline script javascript code to be executed after this item will be internaly generated and values are set (e. g. to manipulate values)
 
 [Java Doc](https://catenax-ng.github.io/product-test-data-generator/javadoc/tdg/doc/com/catenax/tdm/testdata/blueprint/GenerationItem.html)
 
 ## Inline Scripting
 You can execute javascript and calculate value-assignments programaticaly to any attribute or in the code-section of the blueprint.
+- *'!'* will execute arbitrary javascript
+- *'#'* will reference constances defined in the parent
+- *'$'* will self-reflect and address values of the current item
 
 ## Example
 Thist example demonstrates the quick use of vehicle blueprints
