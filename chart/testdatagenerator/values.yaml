@@ -40,7 +40,7 @@ keycloak:
   global:
     namespaceOverride: product-test-data-generator
   fullnameOverride: iam-tdg
-  enabled: false
+  enabled: true
   auth:
     adminUser: test
     adminPassword: test
