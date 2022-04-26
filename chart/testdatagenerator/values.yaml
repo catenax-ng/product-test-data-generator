@@ -18,7 +18,7 @@ frontend:
 
 mongodb:
   enabled: true
-  hostname: mongodb
+  hostname: db-product-test-data-generator
   database: tdg
   architecture: standalone
   fullnameOverride: db-product-test-data-generator
