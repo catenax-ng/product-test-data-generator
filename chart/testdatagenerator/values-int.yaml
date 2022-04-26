@@ -31,7 +31,8 @@ mongo:
     user: <path:test-data-generator/mongo#username>
     password: <path:test-data-generator/mongo#password>
 
-architecture: standalone
-auth:
-  rootUser: <path:test-data-generator/mongo#username>
-  rootPassword: <path:test-data-generator/mongo#password>
+mongodb:
+  architecture: standalone
+  auth:
+    rootUser: <path:test-data-generator/mongo#username>
+    rootPassword: <path:test-data-generator/mongo#password>
