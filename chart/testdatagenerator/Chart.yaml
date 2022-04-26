@@ -9,5 +9,5 @@ appVersion: "1.0.0"
 dependencies:
   - name: mongodb
     condition: mongodb.enabled
-    version: "11.1.7"
+    version: "11.1.10"
     repository: "https://charts.bitnami.com/bitnami"
