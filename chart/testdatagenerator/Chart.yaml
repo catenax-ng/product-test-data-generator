@@ -11,3 +11,7 @@ dependencies:
     condition: mongodb.enabled
     version: "11.1.10"
     repository: "https://charts.bitnami.com/bitnami"
+  - name: keycloak
+    condition: iam.enabled
+    version: "7.1.17"
+    repository: "https://charts.bitnami.com/bitnami"
