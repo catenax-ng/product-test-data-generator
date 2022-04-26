@@ -4,7 +4,7 @@
         <title>Catena-X - Test Data Generator Blog</title>
         <link>https://catena-x.net/product-test-data-generator/blog</link>
         <description>Catena-X - Test Data Generator Blog</description>
-        <lastBuildDate>Tue, 26 Apr 2022 08:09:35 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 26 Apr 2022 08:25:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -12,7 +12,7 @@
             <title><![CDATA[InitialRelease]]></title>
             <link>https://catena-x.net/product-test-data-generator/blog/InitialRelease</link>
             <guid>InitialRelease</guid>
-            <pubDate>Tue, 26 Apr 2022 08:09:35 GMT</pubDate>
+            <pubDate>Tue, 26 Apr 2022 08:25:37 GMT</pubDate>
             <description><![CDATA[First official releas of the testdata generator]]></description>
             <content:encoded><![CDATA[<p>First official releas of the testdata generator</p>]]></content:encoded>
             <category>news</category>
