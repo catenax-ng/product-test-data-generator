@@ -27,5 +27,5 @@ spec:
                   number: 8080
   tls:
     - hosts:
-        - centralidp.demo.catena-x.net
-      secretName: centralidp.demo.catena-x.net-tls
+        - {{ .Values.frontend.ingress.host }}
+      secretName: {{ .Values.frontend.ingress.host }}-tls
