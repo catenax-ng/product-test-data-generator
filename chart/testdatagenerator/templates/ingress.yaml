@@ -28,4 +28,4 @@ spec:
   tls:
     - hosts:
         - {{ .Values.frontend.ingress.host }}
-      secretName: <path:test-data-generator/ingress#tls>
+      secretName: test-data-generator:ingress#tls
