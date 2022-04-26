@@ -36,9 +36,9 @@ spec:
             - name: TDG_DB_NAME
               value: "{{ .Values.mongo.database }}"
             - name: TDG_DB_USERNAME
-              value: "{{ .Values.mongo.credentials.user }}"
+              value: "{{ .Values.mongodb.auth.rootUser }}"
             - name: TDG_DB_PASSWORD
-              value: "{{ .Values.mongo.credentials.password }}"
+              value: "{{ .Values.mongodb.auth.rootPassword }}"
               {{ else }}
             - name: TDG_DB_HOSTNAME
               value: "{{ .Values.mongo.host.name }}"
@@ -47,9 +47,9 @@ spec:
             - name: TDG_DB_NAME
               value: "{{ .Values.mongo.database }}"
             - name: TDG_DB_USERNAME
-              value: "{{ .Values.mongo.credentials.user }}"
+              value: "{{ .Values.mongodb.auth.rootUser }}"
             - name: TDG_DB_PASSWORD
-              value: "{{ .Values.mongo.credentials.password }}"
+              value: "{{ .Values.mongodb.auth.rootPassword }}"
               {{ end }}
             - name: TDG_API_KEY
               value: "{{ .Values.backend.apikey }}"
