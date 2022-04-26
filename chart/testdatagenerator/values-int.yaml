@@ -1,8 +1,8 @@
 iam:
   url: "https://centralidp.demo.catena-x.net/auth"
-  realm: "master"
-  client: "Cl12-CX-TestManager"
-  secret: "<secret>"
+  realm: CX-Central
+  client: Cl12-CX-TestManager
+  secret: <path:test-data-generator/iam#secret>
   local: false
 
 backend:
