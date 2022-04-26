@@ -37,6 +37,9 @@ mongodb:
 
 keycloak:
   enabled: true
+  fullnameOverride: iam-product-test-data-generator
+  global:
+    namespaceOverride: product-test-data-generator
   auth:
     adminUser: test
     adminPassword: test
