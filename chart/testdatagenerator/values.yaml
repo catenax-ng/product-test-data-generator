@@ -1,11 +1,3 @@
-iam:
-  enabled: true
-  url: "https://centralidp.demo.catena-x.net/auth"
-  realm: CX-Central
-  client: Cl12-CX-TestManager
-  secret: <path:test-data-generator/data/iam#secret>
-  local: false
-
 ingress:
   hostname: tdg.int.demo.catena-x.net
 
@@ -18,10 +10,10 @@ frontend:
   image: ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main
 
 mongodb:
+  enabled: true
   global:
     namespaceOverride: product-test-data-generator
   fullnameOverride: db-product-test-data-generator
-  enabled: true
   hostname: db-product-test-data-generator
   database: tdg
   architecture: standalone
@@ -37,11 +29,14 @@ mongodb:
       - tdg
 
 keycloak:
+  enabled: false
+  url: "https://centralidp.demo.catena-x.net/auth"
+  realm: CX-Central
+  client: Cl12-CX-TestManager
+  secret: <path:test-data-generator/data/iam#secret>
   global:
     namespaceOverride: product-test-data-generator
   fullnameOverride: tdg-iam
-  enabled: true
-  namespace: product-test-data-generator
   auth:
     adminUser: test
     adminPassword: test

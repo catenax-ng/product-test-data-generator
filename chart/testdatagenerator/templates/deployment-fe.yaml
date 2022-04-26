@@ -47,10 +47,10 @@ spec:
             - name: TDG_API_ENDPOINT
               value: "{{ .Values.backend.endpoint }}"
             - name: TDG_IAM_SERVER_URL
-              value: "{{ .Values.iam.url }}"
+              value: "{{ .Values.keycloak.url }}"
             - name: TDG_IAM_RESOURCE
-              value: "{{ .Values.iam.client }}"
+              value: "{{ .Values.keycloak.client }}"
             - name: TDG_IAM_REALM
-              value: "{{ .Values.iam.realm }}"
+              value: "{{ .Values.keycloak.realm }}"
             - name: TDG_IAM_SECRET
-              value: "{{ .Values.iam.secret }}"
+              value: "{{ .Values.keycloak.secret }}"
