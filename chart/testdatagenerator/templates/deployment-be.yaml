@@ -59,6 +59,4 @@ spec:
               value: "{{ .Values.ingress.hostname }}"
             - name: TDG_HOST_PORT
               value: "8080"
-          command: [ "echo", "SUCCESS FROM TDG" ]
-
               

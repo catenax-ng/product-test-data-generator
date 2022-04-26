@@ -52,5 +52,3 @@ spec:
               value: "{{ .Values.iam.realm }}"
             - name: TDG_IAM_SECRET
               value: "{{ .Values.iam.secret }}"
-          command: [ "echo", "SUCCESS FROM TDG ADMIN UI" ]
-
