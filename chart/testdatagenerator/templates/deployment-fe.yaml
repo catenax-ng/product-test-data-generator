@@ -34,6 +34,8 @@ spec:
               value: "{{ .Values.ingress.hostname }}"
             - name: TDG_HOST_PORT
               value: "8080"
+            - name: TDG_HOST_PORT_EXTERNAL
+              value: "443"
             - name: TDG_API_KEY
               value: "{{ .Values.backend.apikey }}"
             - name: TDG_API_SECURE
