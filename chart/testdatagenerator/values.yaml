@@ -11,7 +11,7 @@ ingress:
 backend:
   image: ghcr.io/catenax-ng/product-test-data-generator/tdg:main
   endpoint: /api
-  apikey: SPEEDBOAT
+  apikey: <path:test-data-generator/data/api#key>
 
 frontend:
   image: ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main
