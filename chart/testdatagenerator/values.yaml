@@ -1,3 +1,5 @@
+namespaceOverride: product-test-data-generator
+
 ingress:
   hostname: tdg.int.demo.catena-x.net
 
@@ -31,13 +33,14 @@ mongodb:
     enabled: true
 
 keycloak:
-  enabled: false
+  enabled: true
   url: "https://centralidp.demo.catena-x.net/auth"
   realm: CX-Central
   client: Cl12-CX-TestManager
   secret: <path:test-data-generator/data/iam#secret>
   global:
     namespaceOverride: product-test-data-generator
+  namespaceOverride: product-test-data-generator
   fullnameOverride: tdg-iam
   auth:
     adminUser: test
@@ -54,6 +57,7 @@ keycloak:
     ports:
       http: 9000
       https: 9001
+  proxyAddressForwarding: true
   ingress:
     enabled: true
     hostname: tdg-iam.int.demo.catena-x.net
