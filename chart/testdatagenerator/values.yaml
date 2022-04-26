@@ -19,10 +19,12 @@ frontend:
 mongodb:
   enabled: true
   hostname: localhost
+  database: tdg
   architecture: standalone
   fullnameOverride: db-product-test-data-generator
   global:
     namespaceOverride: product-test-data-generator
   auth:
-    rootUser: admin
-    rootPassword: admin
+    username: admin
+    password: admin
+

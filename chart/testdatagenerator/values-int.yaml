@@ -25,10 +25,6 @@ mongodb:
   global:
     namespaceOverride: product-test-data-generator
   auth:
-    usernames:
-      - admin
-    passwords:
-      - admin
-    databases:
-      - tdg
+    username: admin
+    password: admin
 

@@ -41,11 +41,11 @@ spec:
               value: "{{ .Values.mongodb.auth.rootPassword }}"
               {{ else }}
             - name: TDG_DB_HOSTNAME
-              value: "{{ .Values.mongo.hostname }}"
+              value: "{{ .Values.mongodb.hostname }}"
             - name: TDG_DB_PORT
               value: "27017"
             - name: TDG_DB_NAME
-              value: "{{ .Values.mongo.database }}"
+              value: "{{ .Values.mongodb.database }}"
             - name: TDG_DB_USERNAME
               value: "{{ .Values.mongodb.auth.rootUser }}"
             - name: TDG_DB_PASSWORD
