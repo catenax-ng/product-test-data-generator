@@ -1,8 +1,8 @@
 ---
 slug: /java-doc
+sidebar_position: 1
+title: Source Code Documentation
 ---
-
-# Source Code Documentation
 
 * [Swagger Docu](https://catenax-ng.github.io/product-test-data-generator/javadoc/tdg/swagger/Swagger.html)
 * [TDG (Backend)](https://catenax-ng.github.io/product-test-data-generator/javadoc/tdg/doc/)
