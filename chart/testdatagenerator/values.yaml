@@ -18,13 +18,14 @@ frontend:
   image: ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main
 
 mongodb:
+  global:
+    namespaceOverride: product-test-data-generator
+  fullnameOverride: db-product-test-data-generator
   enabled: true
   hostname: db-product-test-data-generator
   database: tdg
   architecture: standalone
-  fullnameOverride: db-product-test-data-generator
-  global:
-    namespaceOverride: product-test-data-generator
+  useStatefulSet: true
   auth:
     rootUser: admin
     rootPassword: admin
@@ -36,10 +37,10 @@ mongodb:
       - tdg
 
 keycloak:
-  enabled: true
-  fullnameOverride: iam-product-test-data-generator
   global:
     namespaceOverride: product-test-data-generator
+  fullnameOverride: iam-product-test-data-generator
+  enabled: true
   auth:
     adminUser: test
     adminPassword: test
