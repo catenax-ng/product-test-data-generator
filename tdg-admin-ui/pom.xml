@@ -21,6 +21,8 @@
 		<spotbugs-plugin-version>4.2.0</spotbugs-plugin-version>
 		<spotbugs-version>4.4.1</spotbugs-version>
 
+		<keycloak-adapter-version>18.0.0</keycloak-adapter-version>
+
 		<swagger-core-version>2.0.0</swagger-core-version>
 		<okhttp-version>2.7.5</okhttp-version>
 
@@ -65,7 +67,7 @@
 			<dependency>
 	            <groupId>org.keycloak.bom</groupId>
 	            <artifactId>keycloak-adapter-bom</artifactId>
-	            <version>15.0.2</version>
+	            <version>${keycloak-adapter-version}</version>
 	            <type>pom</type>
 	            <scope>import</scope>
 	        </dependency>
@@ -198,34 +200,9 @@
 		<dependency>
 		    <groupId>org.keycloak</groupId>
 		    <artifactId>keycloak-spring-boot-starter</artifactId>
-		    <version>15.0.2</version>
+			<version>${keycloak-adapter-version}</version>
 		</dependency>
-		  <!--  
-		<dependency>
-                <groupId>org.keycloak.bom</groupId>
-                <artifactId>keycloak-adapter-bom</artifactId>
-                <version>15.0.2</version>
-            </dependency>
-            -->
-            <!--  
-            <dependency>
-                <groupId>org.keycloak</groupId>
-                <artifactId>keycloak-spring-security-adapter</artifactId>
-                <version>15.0.2</version>
-            </dependency>
--->
-<!--
-		<dependency>
-			<groupId>org.keycloak</groupId>
-			<artifactId>keycloak-spring-security-adapter</artifactId>
-			<version>16.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.keycloak</groupId>
-			<artifactId>keycloak-spring-boot-adapter</artifactId>
-			<version>16.1.1</version>
-		</dependency>
--->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

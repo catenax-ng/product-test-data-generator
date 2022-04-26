@@ -22,42 +22,45 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
 class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
-        KeycloakAuthenticationProvider keycloakAuthenticationProvider
-          = keycloakAuthenticationProvider();
-        
-        keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(
-          new SimpleAuthorityMapper());
-        
-        auth.authenticationProvider(keycloakAuthenticationProvider);
-    }
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
 
-    @Bean
-    public KeycloakSpringBootConfigResolver KeycloakConfigResolver() {
-    	KeycloakSpringBootConfigResolver result = new KeycloakSpringBootConfigResolver();
-    	
-    	return result;
-    }
+    keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(
+        new SimpleAuthorityMapper());
 
-    @Bean
-    @Override
-    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-    	RegisterSessionAuthenticationStrategy result = new RegisterSessionAuthenticationStrategy(
-          new SessionRegistryImpl());
-    	
-    	return result;
-    }
+    auth.authenticationProvider(keycloakAuthenticationProvider);
+  }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-        
-        http.authorizeRequests()
-        .antMatchers("/tdg*").authenticated()
-        .anyRequest().permitAll()
-        .and()
-        .csrf().disable();
-        
-    }
+  @Bean
+  public KeycloakSpringBootConfigResolver KeycloakConfigResolver() {
+    KeycloakSpringBootConfigResolver result = new KeycloakSpringBootConfigResolver();
+
+    return result;
+  }
+
+  @Bean
+  @Override
+  protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+    RegisterSessionAuthenticationStrategy result = new RegisterSessionAuthenticationStrategy(
+        new SessionRegistryImpl());
+
+    return result;
+  }
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    super.configure(http);
+    /*
+     * http.authorizeRequests()
+     * .antMatchers("/tdg*").authenticated()
+     * .anyRequest().permitAll()
+     * .and()
+     * .csrf().disable();
+     */
+    http
+        .csrf().disable()
+        .authorizeRequests()
+        .antMatchers("/tdg*").authenticated();
+  }
 }

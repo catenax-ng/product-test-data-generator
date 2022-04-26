@@ -14,7 +14,8 @@ spring:
     level.root: INFO
   jackson:
     date-format: com.catenax.tdm.RFC3339DateFormat
-    serialization:      write-dates-as-timestamps: false
+    serialization:
+      write-dates-as-timestamps: false
   mustache:
     check-template-location: false
       
