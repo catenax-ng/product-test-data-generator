@@ -38,3 +38,6 @@ mongodb:
   auth:
     rootUser: <path:test-data-generator/mongo#username>
     rootPassword: <path:test-data-generator/mongo#password>
+
+global:
+    namespaceOverride: product-test-data-generator
