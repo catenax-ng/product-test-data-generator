@@ -16,17 +16,9 @@ backend:
 frontend:
   image: ghcr.io/catenax-ng/product-test-data-generator/tdg-admin-ui:main
 
-mongo:
-  enabled: true
-  host:
-    name: tdg-db.int.demo.catena-x.io
-    port: 27017
-  database: tdg
-  credentials:
-    user: <path:test-data-generator/data/mongo#username>
-    password: <path:test-data-generator/data/mongo#password>
-
 mongodb:
+  enabled: true
+  hostname: tdg-db.int.demo.catena-x.io
   architecture: standalone
   global:
     namespaceOverride: product-test-data-generator
