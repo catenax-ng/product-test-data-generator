@@ -1,5 +1,3 @@
-namespaceOverride: product-test-data-generator
-
 iam:
   enabled: true
   url: "https://centralidp.demo.catena-x.net/auth"
@@ -43,6 +41,7 @@ keycloak:
     namespaceOverride: product-test-data-generator
   fullnameOverride: tdg-iam
   enabled: true
+  namespace: product-test-data-generator
   auth:
     adminUser: test
     adminPassword: test
