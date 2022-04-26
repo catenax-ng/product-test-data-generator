@@ -2,7 +2,7 @@ iam:
   url: "https://centralidp.demo.catena-x.net/auth"
   realm: CX-Central
   client: Cl12-CX-TestManager
-  secret: <path:test-data-generator/iam#secret>
+  secret: <path:test-data-generator/data/iam#secret>
   local: false
 
 ingress:
@@ -23,14 +23,14 @@ mongo:
     port: 27017
   database: tdg
   credentials:
-    user: <path:test-data-generator/mongo#username>
-    password: <path:test-data-generator/mongo#password>
+    user: <path:test-data-generator/data/mongo#username>
+    password: <path:test-data-generator/data/mongo#password>
 
 mongodb:
   architecture: standalone
   global:
     namespaceOverride: product-test-data-generator
   auth:
-    rootUser: <path:test-data-generator/mongo#username>
-    rootPassword: <path:test-data-generator/mongo#password>
+    rootUser: <path:test-data-generator/data/mongo#username>
+    rootPassword: <path:test-data-generator/data/mongo#password>
 
