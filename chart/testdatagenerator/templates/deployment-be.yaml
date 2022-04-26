@@ -34,22 +34,22 @@ spec:
             - name: TDG_DB_PORT
               value: "27017"
             - name: TDG_DB_NAME
-              value: "{{ .Values.mongodb.auth.databases[0] }}"
+              value: "{{ index .Values.mongodb.auth.databases 0 }}"
             - name: TDG_DB_USERNAME
-              value: "{{ .Values.mongodb.auth.usernames[0] }}"
+              value: "{{ index .Values.mongodb.auth.usernames 0 }}"
             - name: TDG_DB_PASSWORD
-              value: "{{ .Values.mongodb.auth.passwords[0] }}"
+              value: "{{ index .Values.mongodb.auth.passwords 0 }}"
               {{ else }}
             - name: TDG_DB_HOSTNAME
               value: "{{ .Values.mongodb.hostname }}"
             - name: TDG_DB_PORT
               value: "27017"
             - name: TDG_DB_NAME
-              value: "{{ .Values.mongodb.auth.databases[0] }}"
+              value: "{{ index .Values.mongodb.auth.databases 0 }}"
             - name: TDG_DB_USERNAME
-              value: "{{ .Values.mongodb.auth.usernames[0] }}"
+              value: "{{ index .Values.mongodb.auth.usernames 0 }}"
             - name: TDG_DB_PASSWORD
-              value: "{{ .Values.mongodb.auth.passwords[0] }}"
+              value: "{{ index .Values.mongodb.auth.passwords 0 }}"
               {{ end }}
             - name: TDG_API_KEY
               value: "{{ .Values.backend.apikey }}"
