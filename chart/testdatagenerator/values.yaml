@@ -50,7 +50,12 @@ keycloak:
       http: 9000
       https: 9001
   ingress:
-    enabled: false
+    enabled: true
+    hostname: tdg-iam.int.demo.catena-x.net
+    path: /
+    servicePort: https
+    tls: true
+    selfSigned: true
   postgresql:
-    enabled: false
+    enabled: true
 
