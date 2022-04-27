@@ -22,8 +22,11 @@ public class SimpleTestDataGenerator implements TestDataGenerator {
 
 	private static final TestDataFactory dataFactory = new TestDataFactory();
 
-	@Autowired
 	private MetaModelResourceRepository metamodelRepository;
+	
+	public SimpleTestDataGenerator(MetaModelResourceRepository metamodelRepository) {
+		this.metamodelRepository = metamodelRepository;
+	}
 
 	@Override
 	public Object generateObject(String name, JSONObject pDefinition, JSONObject jsonSchema) {

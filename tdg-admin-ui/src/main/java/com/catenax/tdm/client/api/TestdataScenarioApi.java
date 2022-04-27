@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.*;
+
 public class TestdataScenarioApi {
     private ApiClient apiClient;
 
@@ -58,7 +60,7 @@ public class TestdataScenarioApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createTestdataScenarioUsingPOSTCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call createTestdataScenarioUsingPOSTCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -84,10 +86,10 @@ public class TestdataScenarioApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -100,9 +102,9 @@ public class TestdataScenarioApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createTestdataScenarioUsingPOSTValidateBeforeCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call createTestdataScenarioUsingPOSTValidateBeforeCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = createTestdataScenarioUsingPOSTCall(body, progressListener, progressRequestListener);
+        Call call = createTestdataScenarioUsingPOSTCall(body, progressListener, progressRequestListener);
         return call;
 
         
@@ -131,7 +133,7 @@ public class TestdataScenarioApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> createTestdataScenarioUsingPOSTWithHttpInfo(TestDataScenario body) throws ApiException {
-        com.squareup.okhttp.Call call = createTestdataScenarioUsingPOSTValidateBeforeCall(body, null, null);
+        Call call = createTestdataScenarioUsingPOSTValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -144,7 +146,7 @@ public class TestdataScenarioApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createTestdataScenarioUsingPOSTAsync(TestDataScenario body, final ApiCallback<Object> callback) throws ApiException {
+    public Call createTestdataScenarioUsingPOSTAsync(TestDataScenario body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -165,7 +167,7 @@ public class TestdataScenarioApi {
             };
         }
 
-        com.squareup.okhttp.Call call = createTestdataScenarioUsingPOSTValidateBeforeCall(body, progressListener, progressRequestListener);
+        Call call = createTestdataScenarioUsingPOSTValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -178,7 +180,7 @@ public class TestdataScenarioApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteTestdataScenarioUsingDELETECall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call deleteTestdataScenarioUsingDELETECall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -204,10 +206,10 @@ public class TestdataScenarioApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -220,9 +222,9 @@ public class TestdataScenarioApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteTestdataScenarioUsingDELETEValidateBeforeCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call deleteTestdataScenarioUsingDELETEValidateBeforeCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = deleteTestdataScenarioUsingDELETECall(body, progressListener, progressRequestListener);
+        Call call = deleteTestdataScenarioUsingDELETECall(body, progressListener, progressRequestListener);
         return call;
 
         
@@ -251,7 +253,7 @@ public class TestdataScenarioApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> deleteTestdataScenarioUsingDELETEWithHttpInfo(TestDataScenario body) throws ApiException {
-        com.squareup.okhttp.Call call = deleteTestdataScenarioUsingDELETEValidateBeforeCall(body, null, null);
+        Call call = deleteTestdataScenarioUsingDELETEValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -264,7 +266,7 @@ public class TestdataScenarioApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteTestdataScenarioUsingDELETEAsync(TestDataScenario body, final ApiCallback<Object> callback) throws ApiException {
+    public Call deleteTestdataScenarioUsingDELETEAsync(TestDataScenario body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -285,7 +287,7 @@ public class TestdataScenarioApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteTestdataScenarioUsingDELETEValidateBeforeCall(body, progressListener, progressRequestListener);
+        Call call = deleteTestdataScenarioUsingDELETEValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -299,7 +301,7 @@ public class TestdataScenarioApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getTestdataScenarioUsingGETCall(String scenario, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getTestdataScenarioUsingGETCall(String scenario, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -327,10 +329,10 @@ public class TestdataScenarioApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -343,7 +345,7 @@ public class TestdataScenarioApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getTestdataScenarioUsingGETValidateBeforeCall(String scenario, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getTestdataScenarioUsingGETValidateBeforeCall(String scenario, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'scenario' is set
         if (scenario == null) {
             throw new ApiException("Missing the required parameter 'scenario' when calling getTestdataScenarioUsingGET(Async)");
@@ -353,7 +355,7 @@ public class TestdataScenarioApi {
             throw new ApiException("Missing the required parameter 'version' when calling getTestdataScenarioUsingGET(Async)");
         }
         
-        com.squareup.okhttp.Call call = getTestdataScenarioUsingGETCall(scenario, version, progressListener, progressRequestListener);
+        Call call = getTestdataScenarioUsingGETCall(scenario, version, progressListener, progressRequestListener);
         return call;
 
         
@@ -384,7 +386,7 @@ public class TestdataScenarioApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> getTestdataScenarioUsingGETWithHttpInfo(String scenario, String version) throws ApiException {
-        com.squareup.okhttp.Call call = getTestdataScenarioUsingGETValidateBeforeCall(scenario, version, null, null);
+        Call call = getTestdataScenarioUsingGETValidateBeforeCall(scenario, version, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -398,7 +400,7 @@ public class TestdataScenarioApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getTestdataScenarioUsingGETAsync(String scenario, String version, final ApiCallback<Object> callback) throws ApiException {
+    public Call getTestdataScenarioUsingGETAsync(String scenario, String version, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -419,7 +421,7 @@ public class TestdataScenarioApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getTestdataScenarioUsingGETValidateBeforeCall(scenario, version, progressListener, progressRequestListener);
+        Call call = getTestdataScenarioUsingGETValidateBeforeCall(scenario, version, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -434,7 +436,7 @@ public class TestdataScenarioApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call setTestdataScenarioStatusUsingGETCall(String scenario, String version, String status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call setTestdataScenarioStatusUsingGETCall(String scenario, String version, String status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -463,10 +465,10 @@ public class TestdataScenarioApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -479,7 +481,7 @@ public class TestdataScenarioApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call setTestdataScenarioStatusUsingGETValidateBeforeCall(String scenario, String version, String status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call setTestdataScenarioStatusUsingGETValidateBeforeCall(String scenario, String version, String status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'scenario' is set
         if (scenario == null) {
             throw new ApiException("Missing the required parameter 'scenario' when calling setTestdataScenarioStatusUsingGET(Async)");
@@ -493,7 +495,7 @@ public class TestdataScenarioApi {
             throw new ApiException("Missing the required parameter 'status' when calling setTestdataScenarioStatusUsingGET(Async)");
         }
         
-        com.squareup.okhttp.Call call = setTestdataScenarioStatusUsingGETCall(scenario, version, status, progressListener, progressRequestListener);
+        Call call = setTestdataScenarioStatusUsingGETCall(scenario, version, status, progressListener, progressRequestListener);
         return call;
 
         
@@ -526,7 +528,7 @@ public class TestdataScenarioApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> setTestdataScenarioStatusUsingGETWithHttpInfo(String scenario, String version, String status) throws ApiException {
-        com.squareup.okhttp.Call call = setTestdataScenarioStatusUsingGETValidateBeforeCall(scenario, version, status, null, null);
+        Call call = setTestdataScenarioStatusUsingGETValidateBeforeCall(scenario, version, status, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -541,7 +543,7 @@ public class TestdataScenarioApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call setTestdataScenarioStatusUsingGETAsync(String scenario, String version, String status, final ApiCallback<Object> callback) throws ApiException {
+    public Call setTestdataScenarioStatusUsingGETAsync(String scenario, String version, String status, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -562,7 +564,7 @@ public class TestdataScenarioApi {
             };
         }
 
-        com.squareup.okhttp.Call call = setTestdataScenarioStatusUsingGETValidateBeforeCall(scenario, version, status, progressListener, progressRequestListener);
+        Call call = setTestdataScenarioStatusUsingGETValidateBeforeCall(scenario, version, status, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -579,7 +581,7 @@ public class TestdataScenarioApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call updateTestdataScenarioContentUsingPUTCall(String scriptType, String scriptStatus, String scenario, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call updateTestdataScenarioContentUsingPUTCall(String scriptType, String scriptStatus, String scenario, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -611,10 +613,10 @@ public class TestdataScenarioApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -627,7 +629,7 @@ public class TestdataScenarioApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call updateTestdataScenarioContentUsingPUTValidateBeforeCall(String scriptType, String scriptStatus, String scenario, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call updateTestdataScenarioContentUsingPUTValidateBeforeCall(String scriptType, String scriptStatus, String scenario, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'scriptType' is set
         if (scriptType == null) {
             throw new ApiException("Missing the required parameter 'scriptType' when calling updateTestdataScenarioContentUsingPUT(Async)");
@@ -645,7 +647,7 @@ public class TestdataScenarioApi {
             throw new ApiException("Missing the required parameter 'version' when calling updateTestdataScenarioContentUsingPUT(Async)");
         }
         
-        com.squareup.okhttp.Call call = updateTestdataScenarioContentUsingPUTCall(scriptType, scriptStatus, scenario, version, body, progressListener, progressRequestListener);
+        Call call = updateTestdataScenarioContentUsingPUTCall(scriptType, scriptStatus, scenario, version, body, progressListener, progressRequestListener);
         return call;
 
         
@@ -682,7 +684,7 @@ public class TestdataScenarioApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> updateTestdataScenarioContentUsingPUTWithHttpInfo(String scriptType, String scriptStatus, String scenario, String version, String body) throws ApiException {
-        com.squareup.okhttp.Call call = updateTestdataScenarioContentUsingPUTValidateBeforeCall(scriptType, scriptStatus, scenario, version, body, null, null);
+        Call call = updateTestdataScenarioContentUsingPUTValidateBeforeCall(scriptType, scriptStatus, scenario, version, body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -699,7 +701,7 @@ public class TestdataScenarioApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateTestdataScenarioContentUsingPUTAsync(String scriptType, String scriptStatus, String scenario, String version, String body, final ApiCallback<Object> callback) throws ApiException {
+    public Call updateTestdataScenarioContentUsingPUTAsync(String scriptType, String scriptStatus, String scenario, String version, String body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -720,7 +722,7 @@ public class TestdataScenarioApi {
             };
         }
 
-        com.squareup.okhttp.Call call = updateTestdataScenarioContentUsingPUTValidateBeforeCall(scriptType, scriptStatus, scenario, version, body, progressListener, progressRequestListener);
+        Call call = updateTestdataScenarioContentUsingPUTValidateBeforeCall(scriptType, scriptStatus, scenario, version, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -733,7 +735,7 @@ public class TestdataScenarioApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call updateTestdataScenarioUsingPUTCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call updateTestdataScenarioUsingPUTCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -759,10 +761,10 @@ public class TestdataScenarioApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -775,9 +777,9 @@ public class TestdataScenarioApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call updateTestdataScenarioUsingPUTValidateBeforeCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call updateTestdataScenarioUsingPUTValidateBeforeCall(TestDataScenario body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = updateTestdataScenarioUsingPUTCall(body, progressListener, progressRequestListener);
+        Call call = updateTestdataScenarioUsingPUTCall(body, progressListener, progressRequestListener);
         return call;
 
         
@@ -806,7 +808,7 @@ public class TestdataScenarioApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> updateTestdataScenarioUsingPUTWithHttpInfo(TestDataScenario body) throws ApiException {
-        com.squareup.okhttp.Call call = updateTestdataScenarioUsingPUTValidateBeforeCall(body, null, null);
+        Call call = updateTestdataScenarioUsingPUTValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -819,7 +821,7 @@ public class TestdataScenarioApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateTestdataScenarioUsingPUTAsync(TestDataScenario body, final ApiCallback<Object> callback) throws ApiException {
+    public Call updateTestdataScenarioUsingPUTAsync(TestDataScenario body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -840,7 +842,7 @@ public class TestdataScenarioApi {
             };
         }
 
-        com.squareup.okhttp.Call call = updateTestdataScenarioUsingPUTValidateBeforeCall(body, progressListener, progressRequestListener);
+        Call call = updateTestdataScenarioUsingPUTValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

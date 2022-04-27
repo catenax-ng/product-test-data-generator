@@ -17,6 +17,9 @@ public class Env {
 	public static final String TDG_IAM_REALM = "TDG_IAM_REALM";
 	public static final String TDG_IAM_SECRET = "TDG_IAM_SECRET";
 
+	// ToDo: disable / remove when infra allows it
+	public static boolean SSL_TRUST_ALWAYS = true;
+
 	public static String get(String key, String defaultValue) {
 		String result = defaultValue;
 

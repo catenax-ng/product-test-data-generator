@@ -30,7 +30,9 @@ import com.catenax.tdm.dao.MetaModelRepository;
 import com.catenax.tdm.dao.TestDataScenarioInstanceRepository;
 import com.catenax.tdm.dao.TestDataScenarioRepository;
 import com.catenax.tdm.deo.TestDataScenarioInstanceStatus;
+import com.catenax.tdm.metamodel.CombinedMetamodelRepository;
 import com.catenax.tdm.metamodel.MetaModelResourceRepository;
+import com.catenax.tdm.metamodel.SemanticMetaModelRepository;
 import com.catenax.tdm.model.DataTemplate;
 import com.catenax.tdm.model.MetaModel;
 import com.catenax.tdm.model.TestDataScenario;
@@ -41,6 +43,7 @@ import com.catenax.tdm.resource.TDMResourceLoader;
 import com.catenax.tdm.scenario.TestDataScenarioExecutor;
 import com.catenax.tdm.scenario.TestDataScenarioService;
 import com.catenax.tdm.scripting.ScriptEngine;
+import com.catenax.tdm.testdata.SimpleTestDataGenerator;
 import com.catenax.tdm.testdata.TestDataGenerator;
 import com.catenax.tdm.util.JsonUtil;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -57,13 +60,10 @@ public class CatenaXApiController implements CatenaXApi {
 
 	private final HttpServletRequest request;
 
-	@Autowired
 	private MetaModelResourceRepository metaModelResourceRepository;
 
-	@Autowired
 	private TestDataGenerator testdataGenerator;
 
-	@Autowired
 	private ScriptEngine scriptEngine;
 
 	@Autowired
@@ -74,7 +74,7 @@ public class CatenaXApiController implements CatenaXApi {
 
 	@Autowired
 	private DataTemplateRepository dataTemplateRepository;
-	
+
 	@Autowired
 	private MetaModelRepository metaModelRepository;
 
@@ -82,13 +82,19 @@ public class CatenaXApiController implements CatenaXApi {
 	public CatenaXApiController(ObjectMapper objectMapper, HttpServletRequest request) {
 		this.objectMapper = objectMapper;
 		this.request = request;
-		
-		// this.request.se
 	}
 
 	@PostConstruct
 	private void init() {
 		log.info("-= Post initialize ApiController ...");
+		this.metaModelResourceRepository = new CombinedMetamodelRepository(
+				metaModelRepository, 
+				new SemanticMetaModelRepository()
+		);
+		this.testdataGenerator = new SimpleTestDataGenerator(metaModelResourceRepository);
+		
+		this.scriptEngine = new ScriptEngine(metaModelResourceRepository, testdataGenerator);
+		
 		this.scriptEngine.setDataTemplateRepository(this.dataTemplateRepository);
 		log.info("-= done =-");
 	}
@@ -520,7 +526,7 @@ public class CatenaXApiController implements CatenaXApi {
 								// .parseScenarioFromResource("scenario/" + scenario + "_v" + version + ".txt");
 								.parseScenarioFromString(tds.getContent());
 
-						executor.setMetamodelRepository(this.metaModelRepository, this.metaModelResourceRepository);
+						executor.setMetamodelRepository(this.metaModelResourceRepository);
 						executor.setTestdataGenerator(testdataGenerator);
 
 						result = executor.execute(this.scriptEngine, includeGraphQL);
@@ -587,25 +593,13 @@ public class CatenaXApiController implements CatenaXApi {
 			tds.setContent(code);
 			
 			log.info("EXECUTE: " + code);
-			/*
-			TestDataScenarioExecutor executor = TestDataScenarioService
-					.parseScenarioFromString(code);
-			
-			executor.setMetamodelRepository(this.metamodelRepository);
-			executor.setTestdataGenerator(testdataGenerator);
 
-			result = executor.execute(this.scriptEngine, false);
-
-			// log.info("RESULT: " + result);
-			
-			return new ResponseEntity<String>(result, HttpStatus.OK);
-			*/
 			if (tds.getScriptType() == TestDataScenarioType.DSL) {
 				TestDataScenarioExecutor executor = TestDataScenarioService
 						// .parseScenarioFromResource("scenario/" + scenario + "_v" + version + ".txt");
 						.parseScenarioFromString(tds.getContent());
 
-				executor.setMetamodelRepository(this.metaModelRepository, this.metaModelResourceRepository);
+				executor.setMetamodelRepository(this.metaModelResourceRepository);
 				executor.setTestdataGenerator(testdataGenerator);
 
 				result = executor.execute(this.scriptEngine, false);
@@ -613,9 +607,7 @@ public class CatenaXApiController implements CatenaXApi {
 				return new ResponseEntity<String>(result, HttpStatus.OK);
 			} else if (tds.getScriptType() == TestDataScenarioType.JavaScript) {
 				result = this._jsonToString(this.scriptEngine.executeScript(code, false));
-				// result = this.saveTestdataScenarioInstance(tds, name, result);
-				
-				// log.info("Result: " + result);
+
 				return new ResponseEntity<String>(result, HttpStatus.OK);
 			}
 		} catch(Exception e) {
@@ -630,8 +622,6 @@ public class CatenaXApiController implements CatenaXApi {
 		try {
 			isUser();
 
-			// Optional<TestDataScenario> tds = this.testDataScenarioRepository.findByNameAndVersion(scenario, version);
-			
 			List<TestDataScenario> scs = this.getTestdataScenario(scenario, version).getBody();
 			
 			if(scs == null || scs.size() != 1) {

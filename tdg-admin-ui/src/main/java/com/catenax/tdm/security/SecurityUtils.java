@@ -22,9 +22,9 @@ public class SecurityUtils {
 
 	public static boolean isUserLoggedIn() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // (1)
-		return authentication != null 
-				&& !(authentication instanceof AnonymousAuthenticationToken) 
-				&& authentication.isAuthenticated() && getUsername() != null; 
+		return authentication != null
+				&& !(authentication instanceof AnonymousAuthenticationToken)
+				&& authentication.isAuthenticated() && getUsername() != null;
 	}
 
 	public static boolean isFrameworkInternalRequest(HttpServletRequest request) {
@@ -50,7 +50,7 @@ public class SecurityUtils {
 
 					result = keycloakSecurityContext.getIdToken().getPreferredUsername();
 					log.info(("PRINCIPAL USER: " + result));
-				} 
+				}
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
@@ -62,12 +62,11 @@ public class SecurityUtils {
 
 		return result;
 	}
-	
+
 	public static String getLogoutUrl() {
-		return Env.get(Env.TDG_IAM_SERVER_URL, null) + "/realms/" + Env.get(Env.TDG_IAM_REALM, null) + 
+		return Env.get(Env.TDG_IAM_SERVER_URL, null) + "/realms/" + Env.get(Env.TDG_IAM_REALM, null) +
 				"/protocol/openid-connect/logout?redirect_uri=" +
-				Env.getBaseUrl() + "/tdg-admin"
-				;
+				Env.getBaseUrl() + "/tdg-admin";
 	}
 
 }

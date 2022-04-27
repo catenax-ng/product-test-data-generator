@@ -30,6 +30,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.*;
+
 public class MetamodelApi {
     private ApiClient apiClient;
 
@@ -58,7 +60,7 @@ public class MetamodelApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getModelDescriptionUsingGETCall(String model, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getModelDescriptionUsingGETCall(String model, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -86,10 +88,10 @@ public class MetamodelApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -102,7 +104,7 @@ public class MetamodelApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getModelDescriptionUsingGETValidateBeforeCall(String model, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getModelDescriptionUsingGETValidateBeforeCall(String model, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'model' is set
         if (model == null) {
             throw new ApiException("Missing the required parameter 'model' when calling getModelDescriptionUsingGET(Async)");
@@ -112,7 +114,7 @@ public class MetamodelApi {
             throw new ApiException("Missing the required parameter 'version' when calling getModelDescriptionUsingGET(Async)");
         }
         
-        com.squareup.okhttp.Call call = getModelDescriptionUsingGETCall(model, version, progressListener, progressRequestListener);
+        Call call = getModelDescriptionUsingGETCall(model, version, progressListener, progressRequestListener);
         return call;
 
         
@@ -143,7 +145,7 @@ public class MetamodelApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> getModelDescriptionUsingGETWithHttpInfo(String model, String version) throws ApiException {
-        com.squareup.okhttp.Call call = getModelDescriptionUsingGETValidateBeforeCall(model, version, null, null);
+        Call call = getModelDescriptionUsingGETValidateBeforeCall(model, version, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -157,7 +159,7 @@ public class MetamodelApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getModelDescriptionUsingGETAsync(String model, String version, final ApiCallback<Object> callback) throws ApiException {
+    public Call getModelDescriptionUsingGETAsync(String model, String version, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -178,7 +180,7 @@ public class MetamodelApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getModelDescriptionUsingGETValidateBeforeCall(model, version, progressListener, progressRequestListener);
+        Call call = getModelDescriptionUsingGETValidateBeforeCall(model, version, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

@@ -91,6 +91,7 @@ public class ScriptEngine {
 			log.info("Execute Script: " + content);
 
 			scenarioFactory.flush();
+
 			engine.eval(content, bindings);
 			return scenarioFactory.getResult(includeGraphQL);
 		} catch (Exception e) {

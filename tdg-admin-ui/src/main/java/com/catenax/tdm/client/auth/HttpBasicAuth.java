@@ -13,7 +13,7 @@
 package com.catenax.tdm.client.auth;
 
 import com.catenax.tdm.client.Pair;
-import com.squareup.okhttp.Credentials;
+import okhttp3.*;
 
 import java.util.Map;
 import java.util.List;

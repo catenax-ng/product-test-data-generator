@@ -21,7 +21,6 @@ import com.catenax.tdm.client.Pair;
 import com.catenax.tdm.client.ProgressRequestBody;
 import com.catenax.tdm.client.ProgressResponseBody;
 import com.catenax.tdm.client.model.DataTemplate;
-import com.catenax.tdm.client.model.ErrorModelNamenamespacejavaLangNameError;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
@@ -30,6 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.*;
 
 public class DataTemplateApi {
     private ApiClient apiClient;
@@ -58,7 +59,7 @@ public class DataTemplateApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createDataTemplateUsingPOSTCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call createDataTemplateUsingPOSTCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -84,10 +85,10 @@ public class DataTemplateApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -100,9 +101,9 @@ public class DataTemplateApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createDataTemplateUsingPOSTValidateBeforeCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call createDataTemplateUsingPOSTValidateBeforeCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = createDataTemplateUsingPOSTCall(body, progressListener, progressRequestListener);
+        Call call = createDataTemplateUsingPOSTCall(body, progressListener, progressRequestListener);
         return call;
 
         
@@ -131,7 +132,7 @@ public class DataTemplateApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> createDataTemplateUsingPOSTWithHttpInfo(DataTemplate body) throws ApiException {
-        com.squareup.okhttp.Call call = createDataTemplateUsingPOSTValidateBeforeCall(body, null, null);
+        Call call = createDataTemplateUsingPOSTValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -144,7 +145,7 @@ public class DataTemplateApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createDataTemplateUsingPOSTAsync(DataTemplate body, final ApiCallback<Object> callback) throws ApiException {
+    public Call createDataTemplateUsingPOSTAsync(DataTemplate body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -165,7 +166,7 @@ public class DataTemplateApi {
             };
         }
 
-        com.squareup.okhttp.Call call = createDataTemplateUsingPOSTValidateBeforeCall(body, progressListener, progressRequestListener);
+        Call call = createDataTemplateUsingPOSTValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -179,7 +180,7 @@ public class DataTemplateApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteDataTemplateUsingDELETECall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call deleteDataTemplateUsingDELETECall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -207,10 +208,10 @@ public class DataTemplateApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -223,7 +224,7 @@ public class DataTemplateApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteDataTemplateUsingDELETEValidateBeforeCall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call deleteDataTemplateUsingDELETEValidateBeforeCall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'template' is set
         if (template == null) {
             throw new ApiException("Missing the required parameter 'template' when calling deleteDataTemplateUsingDELETE(Async)");
@@ -233,7 +234,7 @@ public class DataTemplateApi {
             throw new ApiException("Missing the required parameter 'version' when calling deleteDataTemplateUsingDELETE(Async)");
         }
         
-        com.squareup.okhttp.Call call = deleteDataTemplateUsingDELETECall(template, version, progressListener, progressRequestListener);
+        Call call = deleteDataTemplateUsingDELETECall(template, version, progressListener, progressRequestListener);
         return call;
 
         
@@ -264,7 +265,7 @@ public class DataTemplateApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> deleteDataTemplateUsingDELETEWithHttpInfo(String template, String version) throws ApiException {
-        com.squareup.okhttp.Call call = deleteDataTemplateUsingDELETEValidateBeforeCall(template, version, null, null);
+        Call call = deleteDataTemplateUsingDELETEValidateBeforeCall(template, version, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -278,7 +279,7 @@ public class DataTemplateApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteDataTemplateUsingDELETEAsync(String template, String version, final ApiCallback<Object> callback) throws ApiException {
+    public Call deleteDataTemplateUsingDELETEAsync(String template, String version, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -299,7 +300,7 @@ public class DataTemplateApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteDataTemplateUsingDELETEValidateBeforeCall(template, version, progressListener, progressRequestListener);
+        Call call = deleteDataTemplateUsingDELETEValidateBeforeCall(template, version, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -313,7 +314,7 @@ public class DataTemplateApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getDataTemplatesUsingGETCall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getDataTemplatesUsingGETCall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -341,10 +342,10 @@ public class DataTemplateApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -357,7 +358,7 @@ public class DataTemplateApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getDataTemplatesUsingGETValidateBeforeCall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getDataTemplatesUsingGETValidateBeforeCall(String template, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'template' is set
         if (template == null) {
             throw new ApiException("Missing the required parameter 'template' when calling getDataTemplatesUsingGET(Async)");
@@ -367,7 +368,7 @@ public class DataTemplateApi {
             throw new ApiException("Missing the required parameter 'version' when calling getDataTemplatesUsingGET(Async)");
         }
         
-        com.squareup.okhttp.Call call = getDataTemplatesUsingGETCall(template, version, progressListener, progressRequestListener);
+        Call call = getDataTemplatesUsingGETCall(template, version, progressListener, progressRequestListener);
         return call;
 
         
@@ -398,7 +399,7 @@ public class DataTemplateApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> getDataTemplatesUsingGETWithHttpInfo(String template, String version) throws ApiException {
-        com.squareup.okhttp.Call call = getDataTemplatesUsingGETValidateBeforeCall(template, version, null, null);
+        Call call = getDataTemplatesUsingGETValidateBeforeCall(template, version, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -412,7 +413,7 @@ public class DataTemplateApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getDataTemplatesUsingGETAsync(String template, String version, final ApiCallback<Object> callback) throws ApiException {
+    public Call getDataTemplatesUsingGETAsync(String template, String version, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -433,7 +434,7 @@ public class DataTemplateApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getDataTemplatesUsingGETValidateBeforeCall(template, version, progressListener, progressRequestListener);
+        Call call = getDataTemplatesUsingGETValidateBeforeCall(template, version, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -448,7 +449,7 @@ public class DataTemplateApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call updateDataTemplateContentUsingPUTCall(String template, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call updateDataTemplateContentUsingPUTCall(String template, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -476,10 +477,10 @@ public class DataTemplateApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -492,7 +493,7 @@ public class DataTemplateApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call updateDataTemplateContentUsingPUTValidateBeforeCall(String template, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call updateDataTemplateContentUsingPUTValidateBeforeCall(String template, String version, String body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'template' is set
         if (template == null) {
             throw new ApiException("Missing the required parameter 'template' when calling updateDataTemplateContentUsingPUT(Async)");
@@ -502,7 +503,7 @@ public class DataTemplateApi {
             throw new ApiException("Missing the required parameter 'version' when calling updateDataTemplateContentUsingPUT(Async)");
         }
         
-        com.squareup.okhttp.Call call = updateDataTemplateContentUsingPUTCall(template, version, body, progressListener, progressRequestListener);
+        Call call = updateDataTemplateContentUsingPUTCall(template, version, body, progressListener, progressRequestListener);
         return call;
 
         
@@ -535,7 +536,7 @@ public class DataTemplateApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> updateDataTemplateContentUsingPUTWithHttpInfo(String template, String version, String body) throws ApiException {
-        com.squareup.okhttp.Call call = updateDataTemplateContentUsingPUTValidateBeforeCall(template, version, body, null, null);
+        Call call = updateDataTemplateContentUsingPUTValidateBeforeCall(template, version, body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -550,7 +551,7 @@ public class DataTemplateApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateDataTemplateContentUsingPUTAsync(String template, String version, String body, final ApiCallback<Object> callback) throws ApiException {
+    public Call updateDataTemplateContentUsingPUTAsync(String template, String version, String body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -571,7 +572,7 @@ public class DataTemplateApi {
             };
         }
 
-        com.squareup.okhttp.Call call = updateDataTemplateContentUsingPUTValidateBeforeCall(template, version, body, progressListener, progressRequestListener);
+        Call call = updateDataTemplateContentUsingPUTValidateBeforeCall(template, version, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -584,7 +585,7 @@ public class DataTemplateApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call updateDataTemplateUsingPUTCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call updateDataTemplateUsingPUTCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -610,10 +611,10 @@ public class DataTemplateApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -626,9 +627,9 @@ public class DataTemplateApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call updateDataTemplateUsingPUTValidateBeforeCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call updateDataTemplateUsingPUTValidateBeforeCall(DataTemplate body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = updateDataTemplateUsingPUTCall(body, progressListener, progressRequestListener);
+        Call call = updateDataTemplateUsingPUTCall(body, progressListener, progressRequestListener);
         return call;
 
         
@@ -657,7 +658,7 @@ public class DataTemplateApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> updateDataTemplateUsingPUTWithHttpInfo(DataTemplate body) throws ApiException {
-        com.squareup.okhttp.Call call = updateDataTemplateUsingPUTValidateBeforeCall(body, null, null);
+        Call call = updateDataTemplateUsingPUTValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -670,7 +671,7 @@ public class DataTemplateApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateDataTemplateUsingPUTAsync(DataTemplate body, final ApiCallback<Object> callback) throws ApiException {
+    public Call updateDataTemplateUsingPUTAsync(DataTemplate body, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -691,7 +692,7 @@ public class DataTemplateApi {
             };
         }
 
-        com.squareup.okhttp.Call call = updateDataTemplateUsingPUTValidateBeforeCall(body, progressListener, progressRequestListener);
+        Call call = updateDataTemplateUsingPUTValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

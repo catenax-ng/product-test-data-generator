@@ -30,6 +30,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.*;
+
 public class TestdataApi {
     private ApiClient apiClient;
 
@@ -59,7 +61,7 @@ public class TestdataApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getTestdataUsingGETCall(String model, String version, Integer count, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getTestdataUsingGETCall(String model, String version, Integer count, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -89,10 +91,10 @@ public class TestdataApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -105,7 +107,7 @@ public class TestdataApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getTestdataUsingGETValidateBeforeCall(String model, String version, Integer count, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getTestdataUsingGETValidateBeforeCall(String model, String version, Integer count, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'model' is set
         if (model == null) {
             throw new ApiException("Missing the required parameter 'model' when calling getTestdataUsingGET(Async)");
@@ -119,7 +121,7 @@ public class TestdataApi {
             throw new ApiException("Missing the required parameter 'count' when calling getTestdataUsingGET(Async)");
         }
         
-        com.squareup.okhttp.Call call = getTestdataUsingGETCall(model, version, count, progressListener, progressRequestListener);
+        Call call = getTestdataUsingGETCall(model, version, count, progressListener, progressRequestListener);
         return call;
 
         
@@ -152,7 +154,7 @@ public class TestdataApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Object> getTestdataUsingGETWithHttpInfo(String model, String version, Integer count) throws ApiException {
-        com.squareup.okhttp.Call call = getTestdataUsingGETValidateBeforeCall(model, version, count, null, null);
+        Call call = getTestdataUsingGETValidateBeforeCall(model, version, count, null, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -167,7 +169,7 @@ public class TestdataApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getTestdataUsingGETAsync(String model, String version, Integer count, final ApiCallback<Object> callback) throws ApiException {
+    public Call getTestdataUsingGETAsync(String model, String version, Integer count, final ApiCallback<Object> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -188,7 +190,7 @@ public class TestdataApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getTestdataUsingGETValidateBeforeCall(model, version, count, progressListener, progressRequestListener);
+        Call call = getTestdataUsingGETValidateBeforeCall(model, version, count, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

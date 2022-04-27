@@ -11,6 +11,10 @@ public class SemanticMetaModelRepository extends ResourceMetaModelRepository {
 	private static final Logger log = LoggerFactory.getLogger(SemanticMetaModelRepository.class);
 
 	private ObjectMapper objectMapper = buildObjectMapper();
+	
+	public SemanticMetaModelRepository() {
+		
+	}
 
 	private ObjectMapper buildObjectMapper() {
 		ObjectMapper om = new ObjectMapper();

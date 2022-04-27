@@ -12,8 +12,7 @@
 
 package com.catenax.tdm.client;
 
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
+import okhttp3.*;
 
 import java.io.IOException;
 
