@@ -34,7 +34,7 @@ mongodb:
 
 keycloak:
   enabled: false
-  url: "https://centralidp.demo.catena-x.net/auth"
+  url: "http://centralidp.demo.catena-x.net/auth"
   realm: CX-Central
   client: Cl12-CX-TestManager
   secret: <path:test-data-generator/data/iam#secret>
