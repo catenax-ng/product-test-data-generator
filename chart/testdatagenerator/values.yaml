@@ -31,7 +31,7 @@ mongodb:
       - tdg
   persistence:
     enabled: true
-  initdbScriptsConfigMap: templates/cf-data-scenarios.yaml
+  initdbScriptsConfigMap: cm-dbload-{{ .Values.namespaceOverride }}
 
 keycloak:
   enabled: false
