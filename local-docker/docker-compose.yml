@@ -13,7 +13,7 @@ services:
     ports:
       - '27017-27019:27017-27019'
     volumes:
-      - ../db-template:/db-template
+      - ../chart/testdatagenerator/db-template:/db-template
 
     
   tdg:
@@ -44,7 +44,7 @@ services:
       - TDG_HOST_SECURE=${TDG_ADMIN_HOST_SECURE}
       - TDG_HOST_NAME=${TDG_ADMIN_HOST_NAME}
       - TDG_HOST_PORT=${TDG_ADMIN_HOST_PORT}
-      - TDG_HOST_PORT_EXTERNAL=${TDG_HOST_PORT_EXTERNAL}
+      - TDG_HOST_PORT_EXTERNAL=${TDG_ADMIN_HOST_PORT_EXTERNAL}
       - TDG_API_HOST_SECURE=${TDG_HOST_SECURE}
       - TDG_API_HOST_NAME=${TDG_HOST_NAME}
       - TDG_API_HOST_PORT=${TDG_HOST_PORT}

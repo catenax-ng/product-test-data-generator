@@ -17,7 +17,6 @@ export TDG_DB_PASSWORD="admin"
 export TDG_HOST_SECURE="false"
 export TDG_HOST_NAME="$hostname"
 export TDG_HOST_PORT="8080"
-export TDG_HOST_PORT_EXTERNAL="$TDG_HOST_PORT"
 export TDG_API_KEY="SPEEDBOAT"
 export TDG_API_ENDPOINT="/api"
 
@@ -25,6 +24,7 @@ export TDG_API_ENDPOINT="/api"
 export TDG_ADMIN_HOST_SECURE="false"
 export TDG_ADMIN_HOST_NAME="$hostname"
 export TDG_ADMIN_HOST_PORT="8090"
+export TDG_ADMIN_HOST_PORT_EXTERNAL="$TDG_ADMIN_HOST_PORT"
 
 # Please install keycloak and set values here
 export TDG_IAM_SERVER_URL=http://${hostname}:9001/auth
