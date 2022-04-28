@@ -31,7 +31,7 @@ mongodb:
       - tdg
   persistence:
     enabled: true
-  extraVolumeMounts:
+  extraVolumes:
     - name: db-template
       mountPath: /db-template
       readOnly: true
