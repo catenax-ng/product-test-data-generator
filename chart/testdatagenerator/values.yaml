@@ -31,7 +31,7 @@ mongodb:
       - tdg
   persistence:
     enabled: true
-  initdbScriptsConfigMap: cm-dbload-{{ .Values.namespaceOverride }}
+  initdbScriptsConfigMap: cm-dbload-product-test-data-generator
 
 keycloak:
   enabled: false
