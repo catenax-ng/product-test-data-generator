@@ -4,5 +4,21 @@ metadata:
   name: cm-dbload-{{ .Values.namespaceOverride }}
   namespace: {{ .Values.namespaceOverride }}
 data:
-{{ (.Files.Glob "db-template/*.sh").AsConfig | indent 2 }}
-{{ (.Files.Glob "db-template/*.json").AsConfig | indent 2 }}
+  initdb-metamodel.js: |+
+    db = db.getSiblingDB("tdg");
+    db.test_meta_model.drop();
+    db.test_meta_model.insertMany([
+    {{ (.Files.Get "db-template/test_meta_model.json") | indent 4 }}
+    ]);
+  initdb-templates.js: |+
+    db = db.getSiblingDB("tdg");
+    db.test_data_template.drop();
+    db.test_data_template.insertMany([
+    {{ (.Files.Get "db-template/test_data_template.json") | indent 4 }}
+    ]);
+  initdb-scenarios.js: |+
+    db = db.getSiblingDB("tdg");
+    db.test_data_scenario.drop();
+    db.test_data_scenario.insertMany([
+    {{ (.Files.Get "db-template/test_data_scenario.json") | indent 4 }}
+    ]);

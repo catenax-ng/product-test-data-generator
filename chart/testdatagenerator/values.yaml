@@ -31,19 +31,7 @@ mongodb:
       - tdg
   persistence:
     enabled: true
-  extraVolumes:
-    - name: db-template
-      configMap:
-        name: cm-dbload-{{ .Values.namespaceOverride }}
-        items:
-        - key: import.sh
-          path: import.sh
-        - key: test_data_scenario.json
-          path: test_data_scenario.json
-        - key: test_data_template.json
-          path: test_data_template.json
-        - key: test_meta_model.json
-          path: test_meta_model.json
+  initdbScriptsConfigMap: templates/cf-data-scenarios.yaml
 
 keycloak:
   enabled: false
