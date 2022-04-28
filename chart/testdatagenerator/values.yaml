@@ -33,7 +33,6 @@ mongodb:
     enabled: true
   extraVolumes:
     - name: db-template
-      mountPath: /db-template
       readOnly: true
       configMap:
         name: cm-dbload-{{ .Values.namespaceOverride }}
