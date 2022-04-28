@@ -21,12 +21,12 @@ mongodb:
   architecture: standalone
   useStatefulSet: true
   auth:
-    rootUser: admin
-    rootPassword: admin
+    rootUser: <path:test-data-generator/data/mongodb#adminusername>
+    rootPassword: <path:test-data-generator/data/mongodb#adminpassword>
     usernames: 
-      - tdg
+      - <path:test-data-generator/data/mongodb#tdgusername>
     passwords: 
-      - tdg
+      - <path:test-data-generator/data/mongodb#tdgpassword>
     databases:
       - tdg
   persistence:
