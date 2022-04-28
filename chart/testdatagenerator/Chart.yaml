@@ -14,7 +14,7 @@ dependencies:
     version: 1.13.1
   - name: mongodb
     condition: mongodb.enabled
-    version: "11.1.10"
+    version: "11.2.0"
     repository: "https://charts.bitnami.com/bitnami"
   - name: keycloak
     condition: keycloak.enabled

@@ -4,19 +4,19 @@ metadata:
   name: cm-dbload-{{ .Values.namespaceOverride }}
   namespace: {{ .Values.namespaceOverride }}
 data:
-  initdb-metamodel.js: |-
+  initdb-metamodel.js: |
     db = db.getSiblingDB("tdg");
     db.test_meta_model.drop();
     db.test_meta_model.insertMany([
 {{ (.Files.Get "db-template/test_meta_model.json") | indent 6 }}
     ]);
-  initdb-templates.js: |-
+  initdb-templates.js: |
     db = db.getSiblingDB("tdg");
     db.test_data_template.drop();
     db.test_data_template.insertMany([
 {{ (.Files.Get "db-template/test_data_template.json") | indent 6 }}
     ]);
-  initdb-scenarios.js: |-
+  initdb-scenarios.js: |
     db = db.getSiblingDB("tdg");
     db.test_data_scenario.drop();
     db.test_data_scenario.insertMany([

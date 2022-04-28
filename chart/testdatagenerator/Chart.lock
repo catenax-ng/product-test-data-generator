@@ -4,9 +4,9 @@ dependencies:
   version: 1.13.1
 - name: mongodb
   repository: https://charts.bitnami.com/bitnami
-  version: 11.1.10
+  version: 11.2.0
 - name: keycloak
   repository: https://charts.bitnami.com/bitnami
   version: 7.1.17
-digest: sha256:e78f1d107767bc64b76b42ad8531f0f26c8b01e62856debe9c76eb9268f0230d
-generated: "2022-04-26T20:49:59.7094531+02:00"
+digest: sha256:d0961f08b6cff596ffdc526cbba90c6357ac9e754e8bec777b3c65079219ecf7
+generated: "2022-04-28T12:03:15.4653545+02:00"
