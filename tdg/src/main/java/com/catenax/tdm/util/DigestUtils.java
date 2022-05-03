@@ -33,16 +33,16 @@ public class DigestUtils {
         result.append(hash.substring( 0, 7));
         result.append("-");
 
-        result.append(hash.substring( 8, 11));
+        result.append(hash.substring( 9, 13));
         result.append("-");
 
-        result.append(hash.substring( 12, 15));
+        result.append(hash.substring( 14, 18));
         result.append("-");
 
-        result.append(hash.substring( 16, 19));
+        result.append(hash.substring( 19, 23));
         result.append("-");
 
-        result.append(hash.substring( 20, 31));
+        result.append(hash.substring( 24, 32));
 
         return result.toString();
     }
