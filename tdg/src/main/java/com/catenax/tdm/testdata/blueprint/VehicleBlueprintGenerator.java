@@ -147,7 +147,7 @@ public class VehicleBlueprintGenerator {
 		try {
 			aas = new JSONObject(content);
 			aasDef = new JSONObject();					
-			aasDef.put("$id", "https://catenax.com/schema/AAS/3.0");
+			aasDef.put("$id", "https://catenax.io/schema/AAS/3.0");
 			
 			String descr = gc.getJSONObject("partTypeInformation").getString("nameAtManufacturer");
 			
