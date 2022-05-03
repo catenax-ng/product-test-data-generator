@@ -12,5 +12,5 @@ export TDG_DB_PORT=27017
 export TDG_DB_USERNAME=admin
 export TDG_DB_PASSWORD=admin
 
-mvn clean package spring-boot:run -Dspring-boot.run.jvmArguments="-Xms2048m -Xmx4096m"
+mvn clean package spring-boot:run -Dspring-boot.run.jvmArguments="-Xms2048m -Xmx4096m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 "
 
