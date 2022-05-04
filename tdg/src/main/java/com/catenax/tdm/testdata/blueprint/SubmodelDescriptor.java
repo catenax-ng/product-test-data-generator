@@ -47,14 +47,12 @@ public class SubmodelDescriptor {
 	    // String edc = "edc://offer-trace-" + idShort + "/shells/" + item.getString("catenaXId") + "/aas/" + idShort;
 	    
 	    // Version improved on 09.04.2022
-	    //String bpn = item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value");
+	    String bpn = item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value");
 	    //String model = sidStr;
 	    //String edc = "http://provider.connector:port/" + bpn + "/" + model + "/submodel?content=value&extent=WithBLOBValue";
 
-		// Version improvement on 03.05.2022
-		String bpn = item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value");
-		String model = sidStr;
-		String AASID = "test";
+		// Version improvement on 03.05.2022 by @Johannes Zahn: Request 1 on https://confluence.catena-x.net/x/1_qAAQ
+		String AASID = item.getString("catenaXId");
 		String edc="http://provider.connector:port/" + bpn + "/" + AASID + "-" + DigestUtils.uuidFromHash(sidStr) + "/submodel?content=value&extent=WithBLOBValue";
 
 

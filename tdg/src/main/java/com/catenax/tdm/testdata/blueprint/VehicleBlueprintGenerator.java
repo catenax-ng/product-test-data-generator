@@ -151,14 +151,19 @@ public class VehicleBlueprintGenerator {
 			
 			String descr = gc.getJSONObject("partTypeInformation").getString("nameAtManufacturer");
 			
-			String ident = cxId;
+			// String ident = cxId;
+			// Version improvement on 03.05.2022 by @Johannes Zahn: Request 2 on https://confluence.catena-x.net/x/1_qAAQ
+			String ident = dataFactory.getUuid();
+
 			String ids = descr.toLowerCase().replaceAll(" ", "_") + ".asm";
 			
 			aas.put("identification", ident);
 			aas.put("idShort", ids);
 			
-			String gaId = cxId.replaceAll("urn:uuid:", "urn:twin:com.tsystems#");
-			
+			// String gaId = cxId.replaceAll("urn:uuid:", "urn:twin:com.tsystems#");
+			// Version improvement on 03.05.2022 by @Johannes Zahn: Request 3 on https://confluence.catena-x.net/x/1_qAAQ
+			String gaId = cxId;
+
 			aas.getJSONObject("globalAssetId").remove("value");
 			aas.getJSONObject("globalAssetId").put("value", new JSONArray());
 			aas.getJSONObject("globalAssetId").getJSONArray("value").put(gaId);
@@ -182,7 +187,9 @@ public class VehicleBlueprintGenerator {
 			specificAssets.put(specificAssetTemplate2);
 			
 			aas.put("specificAssetIds", specificAssets);
-			
+
+
+			// TODO: @ChristianKablein is this still needed?
 			JSONObject subModelTemplate = new JSONObject(aas.getJSONArray("submodelDescriptors").get(0).toString());
 			// aas.remove("submodelDescriptors");
 			

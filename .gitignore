@@ -2,3 +2,7 @@
 /**/target
 swagger.*
 /**/generated
+.gitignore
+build-local.sh
+deploy-local.sh
+/**/frontend/index.html
