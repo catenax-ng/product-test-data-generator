@@ -1,10 +1,10 @@
 #!/bin/bash
 
 export repo="ghcr.io/catenax-ng/product-test-data-generator"
-export hostname="192.168.1.224"
+export hostname="192.168.1.115"
 export realm="master"
 export client="tdg-ui"
-export secret="xpWj3Eb8r7Hs9OZIFR8XAVqFpwuExQvC"
+export secret="EnrVFciew6YuNQLsIZZqX58ux8Qa1fHw"
 
 # Database parameters
 export TDG_DB_HOSTNAME="db"
@@ -34,6 +34,6 @@ export TDG_IAM_SECRET=${secret}
 
 cd local-docker
 
-docker-compose up -d # --build --force-recreate --renew-anon-volumes
+docker-compose up -d --force-recreate # --build --force-recreate --renew-anon-volumes
 
 cd ..

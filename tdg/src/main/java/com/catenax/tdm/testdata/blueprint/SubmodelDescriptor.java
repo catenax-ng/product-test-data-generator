@@ -2,6 +2,7 @@ package com.catenax.tdm.testdata.blueprint;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.catenax.tdm.util.DigestUtils;
 
 import org.json.JSONObject;
 
@@ -46,11 +47,18 @@ public class SubmodelDescriptor {
 	    // String edc = "edc://offer-trace-" + idShort + "/shells/" + item.getString("catenaXId") + "/aas/" + idShort;
 	    
 	    // Version improved on 09.04.2022
-	    String bpn = item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value");
-	    String model = sidStr;
-	    String edc = "http://provider.connector:port/" + bpn + "/" + model + "/submodel?content=value&extent=WithBLOBValue";
-	    
-	    pi.setEndpointAddress(edc);
+	    //String bpn = item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value");
+	    //String model = sidStr;
+	    //String edc = "http://provider.connector:port/" + bpn + "/" + model + "/submodel?content=value&extent=WithBLOBValue";
+
+		// Version improvement on 03.05.2022
+		String bpn = item.getJSONArray("localIdentifiers").getJSONObject(0).getString("value");
+		String model = sidStr;
+		String AASID = "test";
+		String edc="http://provider.connector:port/" + bpn + "/" + AASID + "-" + DigestUtils.uuidFromHash(sidStr) + "/submodel?content=value&extent=WithBLOBValue";
+
+
+		pi.setEndpointAddress(edc);
 	    pi.setEndpointProtocol("AAS/SUBMODEL");
 	    pi.setEndpointProtocolVersion("1.0RC02");
 	    
@@ -60,7 +68,7 @@ public class SubmodelDescriptor {
 
 		return result;
 	}
-	
+
 	public class Value {
 		@JsonProperty("value")
 		private String value = null;

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 export repo="ghcr.io/catenax-ng/product-test-data-generator"
-export hostname="192.168.1.224"
+export hostname="192.168.1.115"
 export realm="master"
 export client="tdg-ui"
-export secret="xpWj3Eb8r7Hs9OZIFR8XAVqFpwuExQvC"
+export secret="EnrVFciew6YuNQLsIZZqX58ux8Qa1fHw"
 
 cd tdg
 pwd
