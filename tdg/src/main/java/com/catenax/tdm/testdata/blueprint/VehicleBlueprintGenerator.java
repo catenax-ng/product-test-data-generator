@@ -57,7 +57,7 @@ public class VehicleBlueprintGenerator {
 		Optional<DataTemplate> dt = scenario.getDataTemplateRepository().findByNameAndVersion(name, version);
 		if (dt.isPresent()) {
 			JSONObject definition = new JSONObject();
-			definition.put("$id", "https://catenax.com/schema/VehicleBlueprint/1.0.0");
+			definition.put("$id", "https://catenax.io/schema/VehicleBlueprint/1.0.0");
 
 			ObjectMapper om = new ObjectMapper();
 
@@ -147,7 +147,7 @@ public class VehicleBlueprintGenerator {
 		try {
 			aas = new JSONObject(content);
 			aasDef = new JSONObject();					
-			aasDef.put("$id", "https://catenax.com/schema/AAS/3.0");
+			aasDef.put("$id", "https://catenax.io/schema/AAS/3.0");
 			
 			String descr = gc.getJSONObject("partTypeInformation").getString("nameAtManufacturer");
 			
