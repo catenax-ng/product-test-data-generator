@@ -1,0 +1,16 @@
+{
+  "component" : [ {
+    "materialName" : "",
+    "recycledContent" : 0.0,
+    "materialClass" : "",
+    "aggregateState" : "",
+    "quantity" : {
+      "materialValue" : 0.0,
+      "measurementUnit" : {
+        "lexicalValue" : "kilogram",
+        "datatypeURI" : "urn:bamm:io.openmanufacturing:meta-model:1.0.0#kilogram"
+      }
+    },
+    "materialAbbreviation" : ""
+  } ]
+}
