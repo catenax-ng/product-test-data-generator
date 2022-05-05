@@ -1,0 +1,27 @@
+{
+  "localIdentifiers" : [ {
+    "key" : "ManufacturerID",
+    "value" : "BPN7588787849VQ"
+  }, {
+    "key" : "ManufacturerPartID",
+    "value" : "QX-39"
+  }, {
+    "key" : "PartInstanceID",
+    "value" : "OEM-A-F8LM95T92WJ9KNDD3HA5P"
+  }, {
+    "key" : "VAN",
+    "value" : "OEM-A-F8LM95T92WJ9KNDD3HA5P"
+  } ],
+  "manufacturingInformation" : {
+    "date" : "2022-02-04T14:48:54",
+    "country" : "GER"
+  },
+  "catenaXId" : "580d3adf-1981-44a0-a214-13d6ceed9379",
+  "partTypeInformation" : {
+    "manufacturerPartID" : "QX-39",
+    "customerPartId" : null,
+    "classification" : "product",
+    "nameAtManufacturer" : "Vehicle Model A",
+    "nameAtCustomer" : null
+  }
+}
