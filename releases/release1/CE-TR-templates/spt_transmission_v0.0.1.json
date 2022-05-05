@@ -1,0 +1,24 @@
+{
+  "localIdentifiers" : [ {
+    "value" : "BPNLSUBTIERBZZ",
+    "key" : "ManufacturerID"
+  }, {
+    "value" : "1O222E8-43",
+    "key" : "ManufacturerPartID"
+  }, {
+    "value" : "XXX",
+    "key" : "PartInstanceID"
+  } ],
+  "manufacturingInformation" : {
+    "date" : "2022-02-04T14:48:54",
+    "country" : "DEU"
+  },
+  "catenaXId" : "36b0680c-53a7-4464-926c-fd00082cc672",
+  "partTypeInformation" : {
+    "manufacturerPartID" : "1O222E8-43",
+    "customerPartId" : "1O222E8-43",
+    "classification" : "component",
+    "nameAtManufacturer" : "Transmission",
+    "nameAtCustomer" : "Transmission"
+  }
+}

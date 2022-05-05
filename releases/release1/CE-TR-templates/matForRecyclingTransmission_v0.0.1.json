@@ -1,0 +1,42 @@
+{
+  "component" : [ {
+    "materialName" : "Carbon Steel",
+    "recycledContent" : 0,
+    "materialClass" : "1.1.2",
+    "aggregateState" : "solid",
+    "quantity" : {
+      "materialValue" : 72.843,
+      "measurementUnit" : {
+        "lexicalValue" : "kilogram",
+        "datatypeURI" : "urn:bamm:io.openmanufacturing:meta-model:1.0.0#kilogram"
+      }
+    },
+    "materialAbbreviation" : "CS2"
+  }, {
+    "materialName" : "Oil",
+    "recycledContent" : 0,
+    "materialClass" : "9.2",
+    "aggregateState" : "liquid",
+    "quantity" : {
+      "materialValue" : 6.9,
+      "measurementUnit" : {
+        "lexicalValue" : "kilogram",
+        "datatypeURI" : "urn:bamm:io.openmanufacturing:meta-model:1.0.0#kilogram"
+      }
+    },
+    "materialAbbreviation" : "SAE40"
+  }, {
+    "materialName" : "Copper",
+    "recycledContent" : 0,
+    "materialClass" : "3.1",
+    "aggregateState" : "solid",
+    "quantity" : {
+      "materialValue" : 1.2,
+      "measurementUnit" : {
+        "lexicalValue" : "kilogram",
+        "datatypeURI" : "urn:bamm:io.openmanufacturing:meta-model:1.0.0#kilogram"
+      }
+    },
+    "materialAbbreviation" : "CO7"
+  } ]
+}
