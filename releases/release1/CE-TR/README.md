@@ -3,5 +3,8 @@ ___
 
 Link to [Confluence](https://confluence.catena-x.net/x/Wf2AAQ)
 
-## Structure of files
+## Structure of templates
 ___
+ - Vehiclex
+   - aas v0.1
+   - gdm v.01
